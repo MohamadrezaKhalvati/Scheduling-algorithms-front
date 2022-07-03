@@ -1,5 +1,7 @@
 <template>
-  Project
+  
+    <router-view />
+
 </template>
 
 <style scoped lang="scss">
