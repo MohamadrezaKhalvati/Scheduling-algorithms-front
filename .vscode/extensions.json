@@ -1,0 +1,23 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "octref.vetur",
+    "formulahendry.auto-rename-tag",
+    "eamodio.gitlens",
+    "christian-kohler.npm-intellisense",
+    "sibiraj-s.vscode-scss-formatter",
+    "dariofuzinato.vue-peek",
+    "christian-kohler.path-intellisense",
+    "pkief.material-icon-theme",
+    "zignd.html-css-class-completion",
+    "coenraads.bracket-pair-colorizer",
+    "kisstkondoros.vscode-gutter-preview",
+    "wayou.vscode-todo-highlight",
+    "mrmlnc.vscode-scss"
+  ],
+  "unwantedRecommendations": [
+    "hookyqr.beautify",
+    "dbaeumer.jshint",
+    "ms-vscode.vscode-typescript-tslint-plugin"
+  ]
+}

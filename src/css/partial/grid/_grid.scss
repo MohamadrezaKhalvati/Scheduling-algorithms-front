@@ -1,0 +1,51 @@
+@import "./variables";
+@import "./grid-framework";
+@import "./utilities/flex";
+@import "./utilities/spacing";
+
+// Container widths
+// Set the container width, and override it for fixed navbars in media queries.
+.grid-container {
+  @include make-container();
+}
+
+.gutters {
+  margin-right: ($grid-gutter-width / -2);
+  margin-left: ($grid-gutter-width / -2);
+}
+
+// Row
+// Rows contain and clear the floats of your columns.
+.row {
+  @include make-row();
+}
+
+.row-r {
+  @include make-row();
+  flex-direction: row-reverse;
+}
+
+// Remove the negative margin from default .row, then the horizontal padding
+// from all immediate children columns (to prevent runaway style inheritance).
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+
+  > .col,
+  > [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.no-wrap {
+  flex-wrap: nowrap;
+}
+
+// Columns
+// Common styles for small and large grid columns
+@include make-grid-columns();

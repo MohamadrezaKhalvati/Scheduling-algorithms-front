@@ -1,0 +1,29 @@
+@import "../quasar-variables.scss";
+@import "./grid/variables";
+
+@font-face {
+  font-family: "Vazir";
+  src: url("/fonts/Vazir.woff") format("woff");
+}
+
+html,
+body {
+  font-family: "Vazir", helvetica, sans-serif;
+  * {
+    box-sizing: border-box;
+  };
+}
+
+html,
+body,
+#q-app {
+  direction: rtl;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+}

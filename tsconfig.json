@@ -1,0 +1,56 @@
+{
+  "compilerOptions": {
+    "types": [
+      "node",
+      "vite/client",
+      "vite-plugin-pwa/client"
+    ],
+    "target": "esnext",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "strictPropertyInitialization": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "baseUrl": ".",
+    "lib": [
+      "esnext",
+      "dom",
+      "WebWorker"
+    ],
+    "paths": {
+      "src/*": [
+        "src/*"
+      ],
+      "lib/*": [
+        "lib/*"
+      ],
+      "components/*": [
+        "src/components/*"
+      ],
+      "layouts/*": [
+        "src/layouts/*"
+      ],
+      "pages/*": [
+        "src/pages/*"
+      ],
+    },
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "lib/**/*.ts",
+    "src/**/*.vue"
+  ],
+  "exclude": [
+    "/dist",
+    "node_modules"
+  ]
+}

@@ -1,0 +1,45 @@
+@import "./grid/variables";
+@import "./grid/grid-framework";
+
+@mixin between($min, $max) {
+  @media (min-width: $min) and (max-width: $max) {
+    @content;
+  }
+}
+
+@mixin d-flex() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin d-inline-flex() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: inline-flex;
+}
+
+@mixin make-col($size, $columns: 12) {
+  @if ($size==0) {
+    flex: 1 1 auto;
+    width: 100%;
+  } @else {
+    flex: 0 0 percentage($size / $columns);
+    width: percentage($size / $columns);
+    max-width: percentage($size / $columns);
+  }
+  box-sizing: border-box;
+}
+
+@mixin glutter($size) {
+  padding-right: $gutter-compensation;
+  padding-left: $gutter-compensation;
+}
+
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}

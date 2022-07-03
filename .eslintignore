@@ -1,0 +1,15 @@
+/dist
+/src-bex/www
+/src-capacitor
+/src-cordova
+/.quasar
+/node_modules
+.eslintrc.js
+babel.config.js
+/src-ssr
+/src/client
+# added
+/_templates
+/src/index.template.html
+/src/utils/graphql/graphql-zeus.ts
+/src/boot/fetch-zeus.ts

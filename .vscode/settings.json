@@ -1,0 +1,27 @@
+{
+  // Editor
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.organizeImports": true
+  },
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.formatOnSave": true,
+  // Eslint
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "vue"
+  ],
+  // Vetur
+  "vetur.validation.template": false,
+  "vetur.experimental.templateInterpolationService": true,
+  "vetur.format.defaultFormatter.html": "js-beautify-html",
+  "vetur.format.defaultFormatterOptions": {
+    "js-beautify-html": {
+      "wrap_attributes": "force",
+      "wrap_line_length": 0,
+      "end_with_newline": false
+    }
+  },
+}

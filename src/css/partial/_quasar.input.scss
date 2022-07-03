@@ -1,0 +1,58 @@
+.q-field--outlined, 
+.q-field--borderless  {
+  .q-field__control,
+  .q-field__marginal {
+    min-height: 32px !important;
+    height: 32px;
+  }
+
+  .q-field__control {
+    padding: 0px 6px !important;
+  }
+
+  .q-field__native:not(textarea) {
+    min-height: 32px !important;
+    height: auto;
+    padding: 0px !important;
+  }
+
+  &.q-textarea {
+    .q-field__control,
+    .q-field__marginal {
+      min-height: 32px !important;
+      height: auto;
+    }
+
+    textarea {
+      min-height: 100px !important;
+    }
+  }
+}
+
+.ltr {
+  .q-field--outlined
+  .q-field--borderless {
+    .q-field__prepend.q-field__marginal {
+      padding-left: 0px;
+      padding-right: 4px;
+    }
+  }
+}
+
+.q-color-picker {
+  font-family: Arial;
+  text-align: left;
+  direction: ltr;
+
+  .q-color-picker__tune-tab {
+    padding: 0 10px;
+  }
+}
+
+.q-select {
+  .q-field__control,
+  .q-field__marginal {
+    min-height: 32px !important;
+    height: auto;
+  }
+}

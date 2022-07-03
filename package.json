@@ -1,0 +1,45 @@
+{
+  "name": "shanks",
+  "version": "1.0.23",
+  "scripts": {
+    "dev": "vite",
+    "check": "vue-tsc --noEmit",
+    "build": "vite build",
+    "preview": "vite preview",
+    "script": "npx ts-node -T -P scripts/tsconfig.json",
+    "type": "npm run script -- scripts/generate-api.ts",
+    "deploy": "npm run build && npm run send",
+    "send": "sh send.sh"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.13.5",
+    "@quasar/vite-plugin": "^1.0.9",
+    "@vitejs/plugin-vue": "^2.3.1",
+    "core-js": "^3.22.2",
+    "portal-vue": "3.0.0-beta.0",
+    "postcss": "^8.4.12",
+    "postcss-rtlcss": "^3.6.3",
+    "quasar": "^2.6.6",
+    "rxjs": "^7.5.5",
+    "sass": "1.32.13",
+    "unplugin-vue-components": "0.19.3",
+    "vite": "2.9.5",
+    "vite-plugin-imagemin": "^0.6.1",
+    "vite-plugin-pwa": "^0.12.0",
+    "vite-tsconfig-paths": "^3.4.1",
+    "vue": "^3.2.33",
+    "vue-router": "^4.0.14"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.28",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
+    "eslint": "^8.14.0",
+    "eslint-plugin-vue": "^8.7.1",
+    "rollup-plugin-visualizer": "^5.6.0",
+    "swagger-typescript-api": "^9.3.1",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3",
+    "vue-tsc": "^0.34.10"
+  }
+}
