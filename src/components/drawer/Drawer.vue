@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="root">
       <q-drawer
         v-model="drawer"
         show-if-above
@@ -12,10 +12,20 @@
         class="drawer"
         @click.capture="drawerClick"
       >
+
+        <div class="drawer-header">
+          <span v-if="!miniState" class="shanks-header-label">
+            Shanks
+          </span> 
+
+          <q-icon :style="[!miniState ? {'transform': 'rotate(180deg)' } : null]" name="arrow_back_ios" class="arrow-icon" @click="miniState = true" />
+        </div>
+
         <q-scroll-area class="fit">
           <q-list padding>
 
-          <q-item v-ripple clickable>
+         <div>
+            <q-item v-ripple clickable>
               <q-item-section avatar>
                 <q-icon name="dashboard" color="white" />
               </q-item-section>
@@ -24,8 +34,10 @@
                 صفحه اصلی
               </q-item-section>
           </q-item>
+         </div>
 
-          <q-item v-ripple clickable>
+          <div>
+            <q-item v-ripple clickable>
               <q-item-section avatar>
                 <q-icon name="pending_actions" color="white" />
               </q-item-section>
@@ -34,8 +46,17 @@
                 گزارش
               </q-item-section>
           </q-item>
+          </div>
 
-          <q-item v-ripple clickable>
+          <p v-if="miniState" class="dot-line">
+            . . . 
+          </p>
+          <p v-if="!miniState" class="category-label">
+            تسک ها
+          </p>
+          
+          <div>
+            <q-item v-ripple clickable>
               <q-item-section avatar>
                 <q-icon name="task_alt" color="white" />
               </q-item-section>
@@ -44,8 +65,10 @@
                  تسک ها
               </q-item-section>
           </q-item>
+          </div>
 
-          <q-item v-ripple clickable>
+          <div>
+            <q-item v-ripple clickable>
               <q-item-section avatar>
                 <q-icon name="sell" color="white" />
               </q-item-section>
@@ -54,18 +77,30 @@
                  تگ ها
               </q-item-section>
           </q-item>
+          </div>
 
-          <q-item v-ripple clickable>
-              <q-item-section avatar>
-                <q-icon name="work" color="white" />
-              </q-item-section>
+          <p v-if="miniState" class="dot-line">
+            . . . 
+          </p>
+          <p v-if="!miniState" class="category-label">
+            پروژه ها
+          </p>
 
-              <q-item-section class="section-name">
-                  پروژه ها
-              </q-item-section>
-          </q-item>
+          <div>
+            <q-item v-ripple clickable>
+                <q-item-section avatar>
+                  <q-icon name="work" color="white" />
+                </q-item-section>
 
-          <q-item v-ripple clickable>
+                <q-item-section class="section-name">
+                    پروژه ها
+                </q-item-section>
+            </q-item>
+          </div>
+          
+
+          <div>
+            <q-item v-ripple clickable>
               <q-item-section avatar>
                 <q-icon name="sell" color="white" />
               </q-item-section>
@@ -74,22 +109,17 @@
                  تگ ها
               </q-item-section>
           </q-item>
+          </div>
 
+          <p v-if="!miniState" class="category-label">
+              مدیریت
+          </p>
 
 
           </q-list>
         </q-scroll-area>
 
-        <!-- <div class="q-mini-drawer-hide absolute" style="top: 15px; right: -17px">
-          <q-btn
-            dense
-            round
-            unelevated
-            color="accent"
-            icon="chevron_left"
-            @click="miniState = true"
-          />
-        </div> -->
+
       </q-drawer>
   
 </div>
@@ -99,12 +129,64 @@
 
 <style>
 
+
+
+@font-face {
+    font-family: 'Vazir';
+    src: url("../../../public/fonts/Vazir.woff") format('woff');
+}
+
+.root{
+  display: flex;
+}
 .drawer{
   background-color: #282f46 ;
 }
 
 
 .section-name{
-  color: #fff;
+  color: #d0d2d6;
+  font-size: 15px;
+  font-family: 'vazir';
+  
 }
+
+.drawer-header{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  color:#d0d2d6;
+  margin:15px 15px 10px 0px;
+}
+
+.shanks-header-label{
+  font-size: 1.8rem;
+}
+
+.arrow-icon{
+  margin:10px 1px 4px 10px;
+}
+
+.dot-line{
+  color : #d0d2d6;
+  margin: 2px 15px 2px 3px;
+}
+
+.category-label{
+  margin:auto;
+  display: flex;
+  justify-content: center;
+  color: #A6a4b0;
+  font-size: 13px;
+
+}
+
+.scroll {
+  overflow: hidden;
+}
+
+.q-drawer{
+  background: #282f46;
+}
+
 </style>

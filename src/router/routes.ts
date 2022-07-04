@@ -8,7 +8,7 @@ const routes: RouteRecordRaw[] = [
     redirect: "/main"
   }, {
     path: "/main",
-    component: () => import("src/layouts/home.vue")
+    component: () => import("src/layouts/home.vue"),
   }
 ]
 

@@ -1,9 +1,11 @@
 <template>
 
-    <div class="home">
-  <q-layout view="lHh lpr lff">
-    <Drawer />
-
+    <div class="home ">
+  <q-layout view="lHr LpR lfr" class="full-layout-container">
+    <Header />
+   <PortalTarget name="layout-right-drawer">
+      <Drawer />
+    </PortalTarget>
     
   </q-layout>
 
