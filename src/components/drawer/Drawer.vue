@@ -1,5 +1,5 @@
 <template>
-  <div class="root">
+  <div class="root .col-1">
       <q-drawer
         v-model="drawer"
         show-if-above
@@ -49,7 +49,7 @@
           </div>
 
           <p v-if="miniState" class="dot-line">
-            . . . 
+            . . . .
           </p>
           <p v-if="!miniState" class="category-label">
             تسک ها
@@ -80,7 +80,7 @@
           </div>
 
           <p v-if="miniState" class="dot-line">
-            . . . 
+            . . . .
           </p>
           <p v-if="!miniState" class="category-label">
             پروژه ها

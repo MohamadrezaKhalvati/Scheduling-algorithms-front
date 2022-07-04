@@ -1,18 +1,19 @@
 <template>
-
-    <div class="home ">
   <q-layout view="lHr LpR lfr" class="full-layout-container">
-    <Header />
-   <PortalTarget name="layout-right-drawer">
-      <Drawer />
-    </PortalTarget>
     
+    <Header />
+
+    <Drawer />
+
+    <q-page-container>
+      <WorkStatus />
+    </q-page-container>
   </q-layout>
 
-    </div>
 </template>
 
 <script src="./home.ts">
+import WorkStatus from "../components/workStatus/WorkStatus.vue"
 
 </script>
 
