@@ -1,25 +1,27 @@
 <template>
-  <q-layout view="lHr LpR lfr" class="full-layout-container">
-    
+  <q-layout view="lHr LpR lfr"
+    class="full-layout-container home">
+
     <Header />
 
     <Drawer />
 
     <q-page-container>
-      <WorkStatus />
+      <div class="row">
+        <WorkStatus class="col-6" />
+        <WorkProgress class="col-3" />
+      </div>
     </q-page-container>
+
   </q-layout>
 
 </template>
 
 <script src="./home.ts">
-import WorkStatus from "../components/workStatus/WorkStatus.vue"
-
 </script>
 
 <style>
-
-.home{
-    background-color: black;
+.home {
+  background-color: #1d1f20;
 }
 </style>

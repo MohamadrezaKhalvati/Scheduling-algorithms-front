@@ -5,9 +5,9 @@
   "1 info pnpm": {
     "err": {
       "name": "Error",
-      "message": "not found: pi",
+      "message": "not found: ii",
       "code": "ENOENT",
-      "stack": "Error: not found: pi\n    at getNotFoundError (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:41585:51)\n    at Function.whichSync [as sync] (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:41662:13)\n    at getCommandAbsolutePathSync (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:43227:44)\n    at default_1 (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:43236:32)\n    at /usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:178156:39"
+      "stack": "Error: not found: ii\n    at getNotFoundError (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:41585:51)\n    at Function.whichSync [as sync] (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:41662:13)\n    at getCommandAbsolutePathSync (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:43227:44)\n    at default_1 (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:43236:32)\n    at /usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:178156:39"
     }
   },
   "2 error pnpm": {
@@ -15,9 +15,9 @@
     "prefix": "/home/alireza/Desktop/shanksMainPage",
     "err": {
       "name": "pnpm",
-      "message": "not found: pi",
+      "message": "not found: ii",
       "code": "ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL",
-      "stack": "Error: not found: pi\n    at getNotFoundError (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:41585:51)\n    at Function.whichSync [as sync] (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:41662:13)\n    at getCommandAbsolutePathSync (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:43227:44)\n    at default_1 (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:43236:32)\n    at /usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:178156:39"
+      "stack": "Error: not found: ii\n    at getNotFoundError (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:41585:51)\n    at Function.whichSync [as sync] (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:41662:13)\n    at getCommandAbsolutePathSync (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:43227:44)\n    at default_1 (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:43236:32)\n    at /usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:178156:39"
     }
   }
 }
