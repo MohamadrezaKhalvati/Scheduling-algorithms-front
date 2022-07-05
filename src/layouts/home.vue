@@ -11,6 +11,7 @@
         <WorkStatus class="col-6" />
         <WorkProgress class="col-3" />
       </div>
+      <OkrProgress class="col-6" />
     </q-page-container>
 
   </q-layout>
@@ -18,6 +19,7 @@
 </template>
 
 <script src="./home.ts">
+import OkrProgress from "src/components/okrProgress/OkrProgress.vue";
 </script>
 
 <style>

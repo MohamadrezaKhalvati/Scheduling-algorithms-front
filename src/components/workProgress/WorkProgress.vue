@@ -29,6 +29,7 @@
   margin-right: 0.5rem;
   color: #d0d2d6;
   width: 100%;
+  font-weight: bold;
 }
 
 .arrow-box {
