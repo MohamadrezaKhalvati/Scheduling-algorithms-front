@@ -5,7 +5,7 @@
     </div>
     <div class="linear-chart">
       <apexchart type="line"
-        height="200"
+        height="180"
         :options="chartOptions"
         :series="series" />
 
@@ -18,6 +18,7 @@
 
 <style>
 .linear-chart {
+  height: 233px;
   display: flex;
   flex-direction: column;
   border-radius: 8px;

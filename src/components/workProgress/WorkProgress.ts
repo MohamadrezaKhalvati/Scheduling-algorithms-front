@@ -12,11 +12,11 @@ export default defineComponent({
 
             series: [{
                 name: "series1",
-                data: [100, 25, 250, 65]
+                data: [100, 0, 450, 25]
             }],
             chartOptions: {
                 chart: {
-                    height: 200,
+                    height: 20,
                     type: "area",
                     zoom: {
                         enabled: false
@@ -103,10 +103,6 @@ export default defineComponent({
                 },
                 grid: {
                     show: false,
-                    left: "5px",
-                    right: "5px",
-                    bottom: "5px",
-                    top: "5px",
                 },
 
             },

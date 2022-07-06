@@ -5,8 +5,8 @@
     </div>
     <div class="okr-chart">
       <div class="chart-wrapper row mid center">
-        <VueApexCharts id="chart"
-          height="100%"
+        <apexchart id="chart"
+          height="160px"
           width="100%"
           class="chart"
           type="radialBar"
@@ -34,7 +34,13 @@
 </script>
 
 <style scoped>
+.chart {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+}
 .okr-progress {
+  height: 233px;
   display: flex;
   flex-direction: column;
   border-radius: 8px;
@@ -50,7 +56,6 @@
 }
 
 .detail {
-  height: 100px;
   display: flex;
   flex-direction: row;
   color: #d0d2d6;

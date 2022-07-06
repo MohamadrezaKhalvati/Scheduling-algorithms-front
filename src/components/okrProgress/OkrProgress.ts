@@ -8,61 +8,51 @@ export default defineComponent({
     },
     setup() {
         const options = {
-            series: [75],
+            series: [72],
             chart: {
-                height: 350,
+                height: 130,
                 type: "radialBar",
                 toolbar: {
-                    show: true
+                    show: false
                 }
             },
             plotOptions: {
                 radialBar: {
                     startAngle: -135,
-                    endAngle: 225,
+                    endAngle: 135,
                     hollow: {
                         margin: 0,
-                        size: "70%",
-                        background: "#fff",
+                        size: "67%",
+                        background: "#282f46",
                         image: undefined,
-                        imageOffsetX: 0,
                         imageOffsetY: 0,
+                        imageOffsetX: 0,
                         position: "front",
                         dropShadow: {
-                            enabled: true,
-                            top: 3,
-                            left: 0,
-                            blur: 4,
-                            opacity: 0.24
+                            enabled: false,
                         }
                     },
                     track: {
                         background: "#fff",
                         strokeWidth: "67%",
-                        margin: 0, // margin is in pixels
+                        margin: 1, // margin is in pixels
                         dropShadow: {
-                            enabled: true,
-                            top: -3,
-                            left: 0,
-                            blur: 4,
-                            opacity: 0.35
+                            enabled: false,
                         }
                     },
 
                     dataLabels: {
                         show: true,
                         name: {
-                            offsetY: -10,
-                            show: true,
-                            color: "#888",
-                            fontSize: "17px"
+                            show: false,
                         },
+
                         value: {
                             formatter: function (val) {
                                 return parseInt(val)
                             },
-                            color: "#111",
-                            fontSize: "36px",
+                            color: "#d0d2d6",
+                            fontSize: "23px",
                             show: true,
                         }
                     }
@@ -74,29 +64,21 @@ export default defineComponent({
                     shade: "dark",
                     type: "horizontal",
                     shadeIntensity: 0.5,
-                    gradientToColors: ["#ABE5A1"],
+                    gradientToColors: ["blue"],
                     inverseColors: true,
                     opacityFrom: 1,
                     opacityTo: 1,
-                    stops: [0, 100]
+                    stops: [0, 30]
                 }
             },
             stroke: {
                 lineCap: "round"
             },
-            labels: ["Percent"],
+            labels: ["%"],
         }
-        // const chart = new ApexCharts(document.getElementById("chart"), options)
-        // chart.render()
-        //     .then(() => {
-        //         console.log("rendered")
-        //     })
-        //     .catch((err) => {
-        //         console.log("error is " + err)
-        //     })
+
         return {
             options,
-            // chart
         }
     }
 })

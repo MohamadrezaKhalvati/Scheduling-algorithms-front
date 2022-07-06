@@ -1,5 +1,5 @@
 <template>
-  <div class="work-status ">
+  <div class="work-status">
     <div class="work-status-title">
       <span>وضعیت کاری</span>
     </div>
@@ -46,6 +46,7 @@
 
 <style>
 .work-status {
+  height: 233px;
   display: flex;
   flex-direction: column;
   border-radius: 8px;

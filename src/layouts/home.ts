@@ -1,3 +1,4 @@
+import ActiveTasksTable from "src/components/activeTasksTable/ActiveTasksTable.vue"
 import Drawer from "src/components/drawer/Drawer.vue"
 import Header from "src/components/header/Header.vue"
 import OkrProgress from "src/components/okrProgress/OkrProgress.vue"
@@ -10,6 +11,7 @@ export default defineComponent({
         Header,
         WorkStatus,
         WorkProgress,
-        OkrProgress
+        OkrProgress,
+        ActiveTasksTable
     }
 })
