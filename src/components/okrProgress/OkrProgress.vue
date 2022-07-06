@@ -6,7 +6,7 @@
     <div class="okr-chart">
       <div class="chart-wrapper row mid center">
         <apexchart id="chart"
-          height="160px"
+          height="140px"
           width="100%"
           class="chart"
           type="radialBar"
@@ -48,8 +48,7 @@
 }
 
 .okr-progress-title {
-  margin-top: 0.5rem;
-  margin-right: 0.5rem;
+  padding: 13px;
   color: #d0d2d6;
   width: 100%;
   font-weight: bold;

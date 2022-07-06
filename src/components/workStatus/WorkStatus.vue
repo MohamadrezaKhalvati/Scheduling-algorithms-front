@@ -54,8 +54,7 @@
 }
 
 .work-status-title {
-  margin-top: 0.5rem;
-  margin-right: 0.5rem;
+  padding: 13px;
   color: #d0d2d6;
   width: 100%;
   font-weight: bold;
@@ -68,17 +67,25 @@
 }
 
 .bolt-img {
-  font-size: 30px;
+  background-color: #ea54551f;
+  border-radius: 50%;
+  font-size: 40px;
+  width: 100;
+  height: 100;
   color: #ea5455;
 }
 
 .timeline-img {
+  background-color: #00cfe81f;
+  border-radius: 50%;
   color: #00cde8;
-  font-size: 30px;
+  font-size: 40px;
 }
 
 .join-right-img {
-  font-size: 30px;
+  background-color: #7367f01f;
+  border-radius: 50%;
+  font-size: 40px;
   color: #7367f0;
 }
 .detail {

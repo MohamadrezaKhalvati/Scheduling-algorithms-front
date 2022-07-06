@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHr LpR lfr"
-    class="full-layout-container home">
+    class="full-layout-container ">
 
     <Header />
 
@@ -18,7 +18,11 @@
           <OkrProgress />
         </div>
       </div>
-
+      <div class="row">
+        <div class="col-12">
+          <ActiveTasksTable />
+        </div>
+      </div>
     </q-page-container>
 
   </q-layout>
@@ -29,7 +33,4 @@
 </script>
 
 <style>
-.home {
-  background-color: #1d1f20;
-}
 </style>

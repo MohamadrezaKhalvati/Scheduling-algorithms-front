@@ -5,7 +5,7 @@
     </div>
     <div class="linear-chart">
       <apexchart type="line"
-        height="180"
+        height="169"
         :options="chartOptions"
         :series="series" />
 
@@ -26,8 +26,7 @@
 }
 
 .title {
-  margin-top: 0.5rem;
-  margin-right: 0.5rem;
+  padding: 13px;
   color: #d0d2d6;
   width: 100%;
   font-weight: bold;
