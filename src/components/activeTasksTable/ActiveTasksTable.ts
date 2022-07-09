@@ -4,7 +4,7 @@ export default defineComponent({
     setup() {
         const columns = [
             { name: "number", align: "center", label: "شماره", field: "number" },
-            { name: "task name", required: true, label: "نام تسک", align: "left", field: "taskName", format: val => `${val}`, sortable: true },
+            { name: "taskName", required: true, label: "نام تسک", align: "left", field: "taskName", format: val => `${val}`, sortable: true },
             { name: "deadline", label: "مهلت پایانی", field: "deadline", sortable: true },
             { name: "situation", label: "وضعیت", field: "situation", sortable: true },
             { name: "project", label: "پروژه", field: "project" },

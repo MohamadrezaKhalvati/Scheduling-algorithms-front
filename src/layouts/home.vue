@@ -7,6 +7,12 @@
     <Drawer />
 
     <q-page-container>
+      <div class="home-button">
+        <q-icon name="dashboard"
+          color="white" />
+        <span>خانه</span>
+      </div>
+
       <div class="row">
         <div class="col-6">
           <WorkStatus />
@@ -18,11 +24,17 @@
           <OkrProgress />
         </div>
       </div>
+
       <div class="row">
         <div class="col-12">
           <ActiveTasksTable />
         </div>
       </div>
+
+      <div class="row">
+        <DailyWorkActivity class="col-6" />
+      </div>
+
     </q-page-container>
 
   </q-layout>
@@ -33,4 +45,9 @@
 </script>
 
 <style>
+.home-button {
+  padding-right: 10px;
+  padding-bottom: 5px;
+  color: white;
+}
 </style>

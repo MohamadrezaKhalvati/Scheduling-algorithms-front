@@ -6,22 +6,57 @@
         class="img" />
     </div>
 
-    <div>
-      <div class="q-pa-md">
-        <q-table :rows="rows"
-          class="table-text no-shadow"
-          card-class="table"
-          :columns="columns"
-          row-key="name" />
-      </div>
+    <div class="q-pa-md">
+      <q-table :rows="rows"
+        class="table-text no-shadow"
+        card-class="table"
+        :columns="columns"
+        row-key="name">
+
+        <template #body="props">
+
+          <q-td key="number">
+            {{ props.row.number }}
+          </q-td>
+
+          <q-td key="taskName">
+            {{ props.row.taskName }}
+          </q-td>
+
+          <q-td key="deadline">
+            <q-badge class="bg-green-8">
+              {{ props.row.deadline }}
+            </q-badge>
+          </q-td>
+
+          <q-td key="situation">
+            <q-badge class="situation-element-style">
+              {{ props.row.situation }}
+            </q-badge>
+          </q-td>
+
+          <q-td key="project">
+            {{ props.row.project }}
+          </q-td>
+
+          <q-td key="category">
+            <q-badge class="category-element-style">
+              {{ props.row.category }}
+            </q-badge>
+          </q-td>
+
+        </template>
+
+      </q-table>
     </div>
+
   </div>
 </template>
 
 <script src="./ActiveTasksTable.ts">
 </script>
 
-<style scoped lang="scss">
+<style  lang="scss">
 .active-tasks {
   margin-top: 13px;
   display: flex;
@@ -55,5 +90,20 @@
 
 .table-text {
   color: #d0d2d6;
+}
+[dir="rtl"] .text-center {
+  text-align: right;
+}
+
+.situation-element-style {
+  border-color: rgb(120, 73, 2);
+  color: rgb(120, 73, 2);
+  background-color: rgb(252, 201, 125);
+}
+
+.category-element-style {
+  border-color: rgb(32, 87, 91);
+  color: rgb(32, 87, 91);
+  background-color: rgb(157, 216, 221);
 }
 </style>
