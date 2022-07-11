@@ -34,7 +34,6 @@
 <style lang="scss" >
 .daily-work-activity {
   margin-top: 13px;
-  margin-right: 9px;
   display: flex;
   height: 500px !important;
   background-color: #282f46;

@@ -32,7 +32,12 @@
       </div>
 
       <div class="row">
-        <DailyWorkActivity class="col-6" />
+        <div class="col-6">
+          <DailyWorkActivity />
+        </div>
+        <div class="col-6">
+          <ReportChart />
+        </div>
       </div>
 
     </q-page-container>

@@ -54,7 +54,7 @@ export default defineComponent({
                     }
                 },
                 tooltip: {
-                    enabled: true,
+                    enabled: false,
                     enabledOnSeries: undefined,
                     shared: true,
                     followCursor: true,
