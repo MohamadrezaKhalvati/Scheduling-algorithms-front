@@ -1,8 +1,9 @@
 <template>
-  <div class="active-tasks">
-    <div class="active-tasks-table-header">
-      <span>جدول تسک های فعال</span>
+  <div class="active-tasks ">
+    <div class="p-2 text-primary huge-title between">
+      <span style="color : #d0d4d6">جدول تسک های فعال</span>
       <q-icon name="search"
+        style="color : #d0d4d6"
         class="img"
         @click="filter = true" />
     </div>
@@ -128,7 +129,7 @@
               </div>
 
               <div class="body-part2">
-                <div class="q-field row no-wrap items-start q-field--outlined q-input q-field--dense q-field--dark q-field--with-bottom column ">
+                <div class=" col-md-4 col-xs-12 px-1 q-field  no-wrap items-start q-field--outlined q-input q-field--dense q-field--dark q-field--with-bottom column ">
                   <span style="padding-bottom:4px">تاریخ نهایی از</span>
                   <q-input v-model="dateFrom"
                     outlined
@@ -140,7 +141,7 @@
                         <q-popup-proxy cover
                           transition-show="scale"
                           transition-hide="scale">
-                          <q-date v-model="date">
+                          <q-date v-model="dateFrom">
                             <div class="row items-center justify-end">
                               <q-btn v-close-popup
                                 label="Close"
@@ -154,7 +155,7 @@
                   </q-input>
                 </div>
 
-                <div class="q-field row no-wrap items-start q-field--outlined q-input q-field--dense q-field--dark q-field--with-bottom column ">
+                <div class=" col-md-4 col-xs-12 px-1 q-field  no-wrap items-start q-field--outlined q-input q-field--dense q-field--dark q-field--with-bottom column ">
                   <span style="padding-bottom:4px">تاریخ نهایی تا</span>
                   <q-input v-model="dateFrom"
                     outlined
@@ -208,9 +209,7 @@
   background-color: #282f46;
 }
 .active-tasks {
-  margin-top: 13px;
   display: flex;
-  height: 500px !important;
   background-color: #282f46;
   border-radius: 8px;
   flex-direction: column;
@@ -219,7 +218,7 @@
 .button-div {
   display: flex;
   justify-content: center;
-  padding: auto;
+  // padding: auto;
 }
 
 .button {
@@ -230,7 +229,6 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 13px;
   color: #d0d2d6;
   font-weight: bold;
 
@@ -240,9 +238,7 @@
 }
 
 .table {
-  padding: 0px;
   background-color: #282f46;
-  height: 420px;
 }
 
 .table-header-class {

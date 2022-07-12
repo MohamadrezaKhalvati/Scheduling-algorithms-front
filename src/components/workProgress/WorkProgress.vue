@@ -1,24 +1,22 @@
 <template>
-  <div class="linear-chart">
-    <div class="title">
-      <span>پیشرفت کار</span>
+  <q-card class="linear-chart ">
+    <div class="p-2 text-primary huge-title">
+      <span style="color: #d0d2d6">پیشرفت کار</span>
     </div>
     <div class="linear-chart">
       <apexchart type="line"
         height="169"
         :options="chartOptions"
         :series="series" />
-
     </div>
-  </div>
+  </q-card>
 </template>
 
 <script src="./WorkProgress.ts">
 </script>
 
-<style>
+<style scoped>
 .linear-chart {
-  height: 233px;
   display: flex;
   flex-direction: column;
   border-radius: 8px;

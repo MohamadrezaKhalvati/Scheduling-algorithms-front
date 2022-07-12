@@ -1,14 +1,14 @@
 <template>
-  <div class="okr-progress">
-    <div class="okr-progress-title">
-      <span>پیشرفت OKR</span>
+  <q-card class="okr-progress ">
+    <div class="p-2 text-primary huge-title ">
+      <span style="color: #d0d2d6">پیشرفت OKR</span>
     </div>
-    <div class="okr-chart">
+    <div class="okr-chart ">
       <div class="chart-wrapper row mid center">
         <apexchart id="chart"
           height="140px"
           width="100%"
-          class="chart"
+          class="row"
           type="radialBar"
           :options="options"
           :series="options.series" />
@@ -25,7 +25,7 @@
       </div>
 
     </div>
-  </div>
+  </q-card>
 </template>
 
 
@@ -34,13 +34,7 @@
 </script>
 
 <style scoped>
-.chart {
-  margin: auto;
-  display: flex;
-  flex-direction: row;
-}
 .okr-progress {
-  height: 233px;
   display: flex;
   flex-direction: column;
   border-radius: 8px;

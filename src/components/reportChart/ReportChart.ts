@@ -9,10 +9,10 @@ export default defineComponent({
         const apexChartOptions = {
             series: [{
                 name: "جلسات",
-                data: [44, 55, 41, 67, 22, 43]
+                data: [44, 55, 41, 67, 22, 43, 51]
             }, {
                 name: "آموزش",
-                data: [13, 23, 20, 8, 13, 27]
+                data: [13, 23, 20, 8, 13, 27, 20]
             },],
             chart: {
                 type: "bar",

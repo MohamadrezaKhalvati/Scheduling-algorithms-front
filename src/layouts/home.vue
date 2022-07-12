@@ -15,28 +15,28 @@
       </div>
 
       <div class="row">
-        <div class="col-6">
-          <WorkStatus />
+        <div class="col-lg-6 col-md-12 col-xs-12 mb-2 ">
+          <WorkStatus class="full-height" />
         </div>
-        <div class="col-3">
-          <WorkProgress />
+        <div class="col-lg-3 col-md-6 col-xs-12 mb-2 ">
+          <WorkProgress class="full-height" />
         </div>
-        <div class="col-3">
-          <OkrProgress />
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-12">
-          <ActiveTasksTable />
+        <div class="col-lg-3 col-md-6 col-xs-12 mb-2 ">
+          <OkrProgress class="full-height" />
         </div>
       </div>
 
       <div class="row">
-        <div class="col-6">
-          <DailyWorkActivity />
+        <div class=" col-lg-12 col-xs-12 mb-2">
+          <ActiveTasksTable class="full-height" />
         </div>
-        <div class="col-6">
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6 col-xs-12 mb-2">
+          <DailyWorkActivity class="full-height" />
+        </div>
+        <div class="col-lg-6 col-xs-12 mb-2">
           <ReportChart />
         </div>
       </div>
@@ -50,7 +50,7 @@
 <script src="./home.ts">
 </script>
 
-<style>
+<style scoped>
 .home-button {
   padding-right: 10px;
   padding-bottom: 5px;

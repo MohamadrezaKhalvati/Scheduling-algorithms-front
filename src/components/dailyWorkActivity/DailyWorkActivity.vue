@@ -1,9 +1,10 @@
 <template>
   <div class="daily-work-activity">
 
-    <div class="header">
-      <span>جدول گزارش روزانه</span>
+    <div class="p-2 text-primary huge-title between">
+      <span style="color: #d0d2d6">جدول گزارش روزانه</span>
       <q-icon name="search"
+        style="color: #d0d2d6"
         class="img"
         @click="filter = true" />
     </div>
@@ -43,11 +44,11 @@
             dense />
         </q-card-section>
 
-        <q-card-section class="column set-font ">
+        <q-card-section class="column set-font">
 
           <div class="row">
 
-            <div class="col-md-6 col-xs-12 px-1 field column">
+            <div class="column col-md-6 col-xs-12 px-1 field ">
               <span style="padding-bottom:4px">تاریخ گزارش از</span>
               <q-input v-model="dateFrom"
                 outlined
@@ -73,7 +74,7 @@
               </q-input>
             </div>
 
-            <div class="col-md-6 col-xs-12 px-1 field column">
+            <div class="column col-md-6 col-xs-12 px-1 field ">
               <span style="padding-bottom:4px">تاریخ گزارش تا</span>
               <q-input v-model="dateTo"
                 outlined
@@ -100,13 +101,13 @@
             </div>
 
           </div>
-
-          <div class="body-part2 center">
-            <q-btn class="button">
-              جستجو
-            </q-btn>
-          </div>
         </q-card-section>
+
+        <div class="body-part2 center">
+          <q-btn class="button">
+            جستجو
+          </q-btn>
+        </div>
 
       </q-card>
 
@@ -134,7 +135,6 @@
   color: #d0d2d6;
 }
 .daily-work-activity {
-  margin-top: 13px;
   display: flex;
   height: 500px !important;
   background-color: #282f46;

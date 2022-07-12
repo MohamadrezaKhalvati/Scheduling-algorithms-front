@@ -1,11 +1,10 @@
 <template>
-  <div class="work-status">
-    <div class="work-status-title">
-      <span>وضعیت کاری</span>
+  <q-card class="work-status ">
+    <div class="p-2 text-primary huge-title">
+      <span style="color: #d0d2d6">وضعیت کاری</span>
     </div>
-    <div class="chart">
-
-      <div class="base">
+    <div class="row-md between mt-2">
+      <div class="row m-3">
         <div class="weekly-avg-img">
           <q-icon name="bolt"
             class="bolt-img" />
@@ -16,7 +15,7 @@
         </div>
       </div>
 
-      <div class="base">
+      <div class="row m-3">
         <div class="monthly-avg-img">
           <q-icon name="timeline"
             class="timeline-img" />
@@ -27,7 +26,7 @@
         </div>
       </div>
 
-      <div class="base">
+      <div class="row m-3">
         <div class="task-number-img">
           <q-icon name="join_right"
             class="join-right-img" />
@@ -39,39 +38,21 @@
       </div>
     </div>
 
-  </div>
+  </q-card>
 </template>
 <script src="./WorkStatus.ts">
 </script>
 
-<style>
+
+<style scoped>
 .work-status {
-  height: 233px;
-  display: flex;
-  flex-direction: column;
   border-radius: 8px;
   background-color: #282f46;
 }
 
-.work-status-title {
-  padding: 13px;
-  color: #d0d2d6;
-  width: 100%;
-  font-weight: bold;
-}
-.chart {
-  margin: 55px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
 .bolt-img {
-  background-color: #ea54551f;
   border-radius: 50%;
   font-size: 40px;
-  width: 100;
-  height: 100;
   color: #ea5455;
 }
 
@@ -94,10 +75,5 @@
   color: #d0d2d6;
   font-size: 13px;
   margin-right: 1rem;
-}
-
-.base {
-  display: flex;
-  flex-direction: row;
 }
 </style>

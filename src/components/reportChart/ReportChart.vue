@@ -1,9 +1,9 @@
 <template>
 
   <div class="report-chart">
-    <div class="header">
+    <div class="p-2 text-primary huge-title between">
       <div>
-        <span>نمودار گزارش</span>
+        <span style="color: #d0d2d6">نمودار گزارش</span>
       </div>
 
       <div class="header-button">
@@ -61,6 +61,7 @@
               <q-icon name="donut_small"
                 color="white"
                 @click.stop.prevent />
+
             </template>
           </q-select>
         </div>
@@ -89,7 +90,6 @@
 
 <style lang="scss" scoped>
 .report-chart {
-  margin-top: 13px;
   display: flex;
   height: 500px !important;
   background-color: #282f46;
