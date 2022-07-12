@@ -55,6 +55,9 @@
 }
 
 .detail {
+  margin: auto;
+  padding-top: 5px;
+  width: 100%;
   display: flex;
   flex-direction: row;
   color: #d0d2d6;
@@ -62,20 +65,30 @@
 }
 
 .remaining-item {
+  width: 50%;
   padding: 15px;
   font-size: 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-width: 1px;
+  border-color: black;
 }
 
 .done-item {
+  width: 50%;
   font-size: 15px;
   padding: 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  border-top-style: solid;
+  border-left-style: solid;
+  border-color: black;
+  border-width: 1px;
 }
 </style>

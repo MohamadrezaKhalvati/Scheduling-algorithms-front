@@ -7,6 +7,7 @@
     <Drawer />
 
     <q-page-container>
+
       <div class="home-button">
         <q-icon name="dashboard"
           color="white" />
