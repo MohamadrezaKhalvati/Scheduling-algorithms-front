@@ -130,7 +130,7 @@
               <div class="body-part2">
                 <div class="q-field row no-wrap items-start q-field--outlined q-input q-field--dense q-field--dark q-field--with-bottom column ">
                   <span style="padding-bottom:4px">تاریخ نهایی از</span>
-                  <q-input v-model="date"
+                  <q-input v-model="dateFrom"
                     outlined
                     mask="date"
                     :rules="['date']">
@@ -156,7 +156,7 @@
 
                 <div class="q-field row no-wrap items-start q-field--outlined q-input q-field--dense q-field--dark q-field--with-bottom column ">
                   <span style="padding-bottom:4px">تاریخ نهایی تا</span>
-                  <q-input v-model="date"
+                  <q-input v-model="dateFrom"
                     outlined
                     mask="date"
                     :rules="['date']">
@@ -166,7 +166,7 @@
                         <q-popup-proxy cover
                           transition-show="scale"
                           transition-hide="scale">
-                          <q-date v-model="date">
+                          <q-date v-model="dateTo">
                             <div class="row items-center justify-end">
                               <q-btn v-close-popup
                                 label="Close"
@@ -204,9 +204,6 @@
 </script>
 
 <style  lang="scss" scoped>
-.searching-form {
-  background-color: #282f46;
-}
 .searching-form {
   background-color: #282f46;
 }

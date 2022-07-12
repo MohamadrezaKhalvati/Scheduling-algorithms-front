@@ -1,8 +1,13 @@
-import { defineComponent } from "vue"
+import { defineComponent, ref } from "vue"
 
 
 export default defineComponent({
     setup() {
+
+        const filter = ref(false)
+        const dateFrom = ref("")
+        const dateTo = ref("")
+
         const columns = [
             { name: "number", align: "center", label: "شماره", field: "number" },
             { name: "reportDate", required: true, label: "تاریخ گزارش", align: "left", field: "reportDate", format: val => `${val}`, sortable: true },
@@ -56,7 +61,10 @@ export default defineComponent({
 
         return {
             columns,
-            rows
+            rows,
+            filter,
+            dateFrom,
+            dateTo
         }
     }
 }) 

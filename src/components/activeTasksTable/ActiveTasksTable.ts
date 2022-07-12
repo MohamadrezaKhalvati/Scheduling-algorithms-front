@@ -7,7 +7,8 @@ export default defineComponent({
         const categoryModel = ref(null)
         const providedModel = ref(null)
         const denseOpts = ref(false)
-        const date = ref("")
+        const dateFrom = ref("")
+        const dateTo = ref("")
         const columns = [
             { name: "number", align: "center", label: "شماره", field: "number" },
             { name: "taskName", required: true, label: "نام تسک", align: "left", field: "taskName", format: val => `${val}`, sortable: true },
@@ -60,7 +61,8 @@ export default defineComponent({
             filter,
             dense,
             providedModel,
-            date
+            dateFrom,
+            dateTo
         }
     }
 })

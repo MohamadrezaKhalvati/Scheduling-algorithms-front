@@ -4,7 +4,8 @@
     <div class="header">
       <span>جدول گزارش روزانه</span>
       <q-icon name="search"
-        class="img" />
+        class="img"
+        @click="filter = true" />
     </div>
 
     <div class="q-pa-md">
@@ -25,6 +26,91 @@
       </q-table>
     </div>
 
+    <q-dialog v-model="filter">
+      <q-card class="searching-form disable-scroll">
+
+        <q-card-section class="row items-center q-pb-none header ">
+          <div class="text-h6"
+            style="padding-bottom: 13px;">
+            فرم جستجو
+          </div>
+          <q-space />
+          <q-btn v-close-popup
+            style="padding-bottom: 13px; font-size:13px"
+            icon="close"
+            flat
+            round
+            dense />
+        </q-card-section>
+
+        <q-card-section class="column set-font ">
+
+          <div class="row">
+
+            <div class="col-md-6 col-xs-12 px-1 field column">
+              <span style="padding-bottom:4px">تاریخ گزارش از</span>
+              <q-input v-model="dateFrom"
+                outlined
+                mask="date"
+                :rules="['date']">
+                <template #append>
+                  <q-icon name="event"
+                    class="cursor-pointer">
+                    <q-popup-proxy cover
+                      transition-show="scale"
+                      transition-hide="scale">
+                      <q-date v-model="dateFrom">
+                        <div class="row items-center justify-end">
+                          <q-btn v-close-popup
+                            label="Close"
+                            color="primary"
+                            flat />
+                        </div>
+                      </q-date>
+                    </q-popup-proxy>
+                  </q-icon>
+                </template>
+              </q-input>
+            </div>
+
+            <div class="col-md-6 col-xs-12 px-1 field column">
+              <span style="padding-bottom:4px">تاریخ گزارش تا</span>
+              <q-input v-model="dateTo"
+                outlined
+                mask="date"
+                :rules="['date']">
+                <template #append>
+                  <q-icon name="event"
+                    class="cursor-pointer">
+                    <q-popup-proxy cover
+                      transition-show="scale"
+                      transition-hide="scale">
+                      <q-date v-model="dateTo">
+                        <div class="row items-center justify-end">
+                          <q-btn v-close-popup
+                            label="Close"
+                            color="primary"
+                            flat />
+                        </div>
+                      </q-date>
+                    </q-popup-proxy>
+                  </q-icon>
+                </template>
+              </q-input>
+            </div>
+
+          </div>
+
+          <div class="body-part2 center">
+            <q-btn class="button">
+              جستجو
+            </q-btn>
+          </div>
+        </q-card-section>
+
+      </q-card>
+
+    </q-dialog>
   </div>
 
 </template>
@@ -32,6 +118,21 @@
 </script>
 
 <style lang="scss" >
+.set-font {
+  font-size: 13px;
+}
+
+.header {
+  border-bottom-style: solid;
+  border-color: #d0d2d6;
+  border-width: 1px;
+  height: 50px;
+}
+
+.searching-form {
+  background-color: #282f46;
+  color: #d0d2d6;
+}
 .daily-work-activity {
   margin-top: 13px;
   display: flex;
@@ -39,6 +140,10 @@
   background-color: #282f46;
   border-radius: 8px;
   flex-direction: column;
+}
+.button {
+  background-color: $purple-4;
+  font-size: 14px;
 }
 
 .header {
