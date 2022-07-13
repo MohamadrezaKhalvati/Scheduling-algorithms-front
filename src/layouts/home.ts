@@ -7,6 +7,7 @@ import OkrProgress from "src/components/okrProgress/OkrProgress.vue"
 import ReportChart from "src/components/reportChart/ReportChart.vue"
 import WorkProgress from "src/components/workProgress/WorkProgress.vue"
 import WorkStatus from "src/components/workStatus/WorkStatus.vue"
+import { userInformation } from "src/composition/useUserInformation"
 import { defineComponent } from "vue"
 export default defineComponent({
     components: {
@@ -22,6 +23,11 @@ export default defineComponent({
     setup() {
         const $q = useQuasar()
         $q.dark.set(true)
+
+        const { setUserJwt, getUserData } = userInformation()
+
+        setUserJwt()
+        getUserData()
 
     }
 })

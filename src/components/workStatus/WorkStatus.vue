@@ -32,7 +32,7 @@
             class="join-right-img" />
         </div>
         <div class="detail">
-          <span>۱ عدد</span>
+          <span>{{ activeTask }} عدد</span>
           <span>تعداد تسک فعال</span>
         </div>
       </div>

@@ -12,7 +12,9 @@
           <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
         </q-avatar>
 
-        <q-toolbar-title>Alireza Khalvati</q-toolbar-title>
+        <q-toolbar-title style="font-size : 15px">
+          {{ user.fullname }}
+        </q-toolbar-title>
       </q-toolbar>
     </q-header>
 

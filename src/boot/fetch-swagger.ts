@@ -1,6 +1,6 @@
 import { Notify } from "quasar"
 import config from "src/utils/config.json"
-import { notifyConfig } from "src/utils/default"
+// import { notifyConfig } from "src/utils/default"
 import { Api } from "src/utils/swagger/Api"
 
 class Fetch {
@@ -70,7 +70,7 @@ class Fetch {
   private onError(errMessage: string = null, errInstance: Error = null) {
     if (this.errorFilter(errInstance)) {
       Notify.create({
-        ...notifyConfig.err,
+        // ...notifyConfig.err,
         message: errMessage,
       })
     }
@@ -88,7 +88,7 @@ class Fetch {
 
   private createMessage(message: string) {
     Notify.create({
-      ...notifyConfig.err,
+      // ...notifyConfig.err,
       message,
     })
   }

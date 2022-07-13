@@ -424,18 +424,18 @@ export interface ActivityModel {
   actorId: string;
   operation: "Create" | "Update" | "Delete";
   fieldName:
-    | "Title"
-    | "Status"
-    | "Deadline"
-    | "Description"
-    | "CategoryId"
-    | "AssigneeId"
-    | "ResponsibleId"
-    | "EstimatedTime"
-    | "Tags"
-    | "Sprint"
-    | "Priority"
-    | "EpicId";
+  | "Title"
+  | "Status"
+  | "Deadline"
+  | "Description"
+  | "CategoryId"
+  | "AssigneeId"
+  | "ResponsibleId"
+  | "EstimatedTime"
+  | "Tags"
+  | "Sprint"
+  | "Priority"
+  | "EpicId";
   oldValue: string;
   newValue: string;
   taskId: string;
@@ -1052,16 +1052,16 @@ export interface TaskActivityModel {
   actorId: string;
   operation: "Create" | "Update" | "Delete";
   fieldName:
-    | "Title"
-    | "Status"
-    | "Deadline"
-    | "Description"
-    | "CategoryId"
-    | "AssigneeId"
-    | "ResponsibleId"
-    | "EstimatedTime"
-    | "Tags"
-    | "Sprint";
+  | "Title"
+  | "Status"
+  | "Deadline"
+  | "Description"
+  | "CategoryId"
+  | "AssigneeId"
+  | "ResponsibleId"
+  | "EstimatedTime"
+  | "Tags"
+  | "Sprint";
   oldValue: object;
   newValue: object;
   taskId: string;
@@ -1499,8 +1499,8 @@ export class HttpClient<SecurityDataType = unknown> {
           property instanceof Blob
             ? property
             : typeof property === "object" && property !== null
-            ? JSON.stringify(property)
-            : `${property}`,
+              ? JSON.stringify(property)
+              : `${property}`,
         );
         return formData;
       }, new FormData()),
@@ -1580,18 +1580,18 @@ export class HttpClient<SecurityDataType = unknown> {
       const data = !responseFormat
         ? r
         : await response[responseFormat]()
-            .then((data) => {
-              if (r.ok) {
-                r.data = data;
-              } else {
-                r.error = data;
-              }
-              return r;
-            })
-            .catch((e) => {
-              r.error = e;
-              return r;
-            });
+          .then((data) => {
+            if (r.ok) {
+              r.data = data;
+            } else {
+              r.error = data;
+            }
+            return r;
+          })
+          .catch((e) => {
+            r.error = e;
+            return r;
+          });
 
       if (cancelToken) {
         this.abortControllers.delete(cancelToken);
