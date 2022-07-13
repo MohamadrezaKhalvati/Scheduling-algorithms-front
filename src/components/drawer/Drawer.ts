@@ -1,28 +1,18 @@
-import { defineComponent, ref } from "vue"
+import { useDrawer } from "src/composition/useDrawer"
+import { defineComponent } from "vue"
 
 export default defineComponent({
 
 
     setup() {
-        const miniState = ref(false)
+        const { changeMiniStateValue, miniState, drawer } = useDrawer()
 
         return {
-            drawer: ref(false),
+            changeMiniStateValue,
             miniState,
-
-            drawerClick(e) {
-                // if in "mini" state and user
-                // click on drawer, we switch it to "normal" mode
-                if (miniState.value) {
-                    miniState.value = false
-
-                    // notice we have registered an event with capture flag;
-                    // we need to stop further propagation as this click is
-                    // intended for switching drawer to "normal" mode only
-                    e.stopPropagation()
-                }
-            }
+            drawer
         }
     }
+
 })
 
