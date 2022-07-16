@@ -10,7 +10,7 @@
             class="bolt-img" />
         </div>
         <div class="detail">
-          <span>۲.۷۵ ساعت</span>
+          <span>{{ workStatusData .weekly }} ساعت</span>
           <span>میانگین ساعت هفتگی</span>
         </div>
       </div>
@@ -21,7 +21,7 @@
             class="timeline-img" />
         </div>
         <div class="detail">
-          <span>۰.۹۴</span>
+          <span>{{ workStatusData.monthly }}</span>
           <span>میانگین ساعت ماهانه</span>
         </div>
       </div>
@@ -32,7 +32,7 @@
             class="join-right-img" />
         </div>
         <div class="detail">
-          <span>{{ activeTask }} عدد</span>
+          <span> {{ workStatusData.activeTasksCount }} عدد </span>
           <span>تعداد تسک فعال</span>
         </div>
       </div>

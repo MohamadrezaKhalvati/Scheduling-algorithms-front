@@ -15,7 +15,7 @@ const user = ref({
 
 
 function setUserJwt() {
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFsaXJlemEiLCJ1c2VySWQiOiJmZjVjOTA2My0xYjgzLTQ3ZGEtOGMxNy1iZDk0YjU1Y2RlM2IiLCJpc0FjdGl2ZSI6dHJ1ZSwicm9sZSI6Ik1lbWJlciIsImlhdCI6MTY1NzY5NzM2NCwiZXhwIjoxNjU3ODcwMTY0fQ.jLTIc6sO3RwyFND0cx8lb5wWG1fQiD8AKLO5XgtZiK0"
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFsaXJlemEiLCJ1c2VySWQiOiJmZjVjOTA2My0xYjgzLTQ3ZGEtOGMxNy1iZDk0YjU1Y2RlM2IiLCJpc0FjdGl2ZSI6dHJ1ZSwicm9sZSI6Ik1lbWJlciIsImlhdCI6MTY1Nzk0MzY2MiwiZXhwIjoxNjU4MTE2NDYyfQ.RGGluh8VGteEdtI1EhjjTFZ-XuI7K7jTSgSqmeHBVII"
     localStorage.setItem("token", token)
 }
 

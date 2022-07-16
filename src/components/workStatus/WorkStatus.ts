@@ -1,18 +1,22 @@
-import { useTasks } from "src/composition/useTasks"
+import { useReport, WorkStatusDataType } from "src/composition/useReport"
 import { userInformation } from "src/composition/useUserInformation"
-import { defineComponent, watch } from "vue"
-
+import { defineComponent, ref, watch } from "vue"
 export default defineComponent({
 
     setup() {
-        const { readTask } = useTasks()
+        const { getWorkStatusData } = useReport()
         const { user } = userInformation()
-        let activeTask
+        const workStatusData = ref<WorkStatusDataType>({
+            activeTasksCount: 0,
+            monthly: 0,
+            weekly: 0
+        })
         watch(() => user.value.profileId, async () => {
-            activeTask = await readTask()
+            workStatusData.value = await getWorkStatusData()
+            console.log(workStatusData.value)
         })
         return {
-            activeTask
+            workStatusData
         }
     }
 })
