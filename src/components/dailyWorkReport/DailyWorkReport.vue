@@ -115,7 +115,7 @@
   </div>
 
 </template>
-<script src="./DailyWorkActivity.ts">
+<script src="./DailyWorkReport.ts">
 </script>
 
 <style lang="scss" >

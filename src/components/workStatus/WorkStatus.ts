@@ -8,12 +8,11 @@ export default defineComponent({
         const { user } = userInformation()
         const workStatusData = ref<WorkStatusDataType>({
             activeTasksCount: 0,
-            monthly: 0,
-            weekly: 0
+            monthly: "0",
+            weekly: "0"
         })
         watch(() => user.value.profileId, async () => {
             workStatusData.value = await getWorkStatusData()
-            console.log(workStatusData.value)
         })
         return {
             workStatusData

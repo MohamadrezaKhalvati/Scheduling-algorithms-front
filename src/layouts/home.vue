@@ -34,7 +34,7 @@
 
       <div class="row">
         <div class="col-lg-6 col-xs-12 mb-2">
-          <DailyWorkActivity class="full-height" />
+          <DailyWorkReport />
         </div>
         <div class="col-lg-6 col-xs-12 mb-2">
           <ReportChart />
@@ -48,6 +48,7 @@
 </template>
 
 <script src="./home.ts">
+import DailyWorkReport from "src/components/dailyWorkReport/DailyWorkReport.vue";
 </script>
 
 <style scoped>

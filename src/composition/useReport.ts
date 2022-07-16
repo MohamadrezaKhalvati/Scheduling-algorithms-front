@@ -4,9 +4,9 @@ import { convertMomentToDateString } from "src/utils/util"
 import { userInformation } from "./useUserInformation"
 
 export type WorkStatusDataType = {
-    weekly: number
-    monthly: number
-    activeTasksCount
+    weekly: string
+    monthly: string
+    activeTasksCount: number
 
 }
 

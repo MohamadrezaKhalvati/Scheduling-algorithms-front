@@ -1,6 +1,6 @@
 <template>
   <q-card class="okr-progress ">
-    <div class="p-2 text-primary huge-title ">
+    <div class="p-2 text-primary huge-title  ">
       <span style="color: #d0d2d6">پیشرفت OKR</span>
     </div>
     <div class="okr-chart ">

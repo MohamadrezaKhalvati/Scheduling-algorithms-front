@@ -1,6 +1,6 @@
 import { useQuasar } from "quasar"
 import ActiveTasksTable from "src/components/activeTasksTable/ActiveTasksTable.vue"
-import DailyWorkActivity from "src/components/dailyWorkActivity/DailyWorkActivity.vue"
+import DailyWorkReport from "src/components/dailyWorkReport/DailyWorkReport.vue"
 import Drawer from "src/components/drawer/Drawer.vue"
 import Header from "src/components/header/Header.vue"
 import OkrProgress from "src/components/okrProgress/OkrProgress.vue"
@@ -17,8 +17,8 @@ export default defineComponent({
         WorkProgress,
         OkrProgress,
         ActiveTasksTable,
-        DailyWorkActivity,
-        ReportChart
+        ReportChart,
+        DailyWorkReport
     },
     setup() {
         const $q = useQuasar()

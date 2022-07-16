@@ -1,7 +1,10 @@
-import { defineComponent, ref } from "vue"
-
+import { readTask } from "src/composition/useTasks"
+import { userInformation } from "src/composition/useUserInformation"
+import { defineComponent, ref, watch } from "vue"
 export default defineComponent({
     setup() {
+        const { getReadTaskData } = readTask()
+        const { user } = userInformation()
         const filter = ref(false)
         const dense = ref(false)
         const categoryModel = ref(null)
@@ -17,7 +20,6 @@ export default defineComponent({
             { name: "project", label: "پروژه", field: "project" },
             { name: "category", label: "دسته بندی", field: "category", sortable: true },
         ]
-
         const rows = [
             {
                 number: "#1",
@@ -29,7 +31,6 @@ export default defineComponent({
             },
 
         ]
-
         const categoryOptions = [
             "آموزش",
             "برگزاری دوره آموزشی",
@@ -43,7 +44,6 @@ export default defineComponent({
             "مظالعه دوره",
             "کارآموزان",
         ]
-
         const providedOptions = [
             "asdasd",
             "asdad",
@@ -52,6 +52,11 @@ export default defineComponent({
             "asdasaaaaaaaaaaaad",
 
         ]
+
+        watch(() => user.value.userId, async () => {
+            const readTaskData = await getReadTaskData()
+            console.log(readTaskData.data)
+        })
         return {
             categoryOptions,
             categoryModel,
