@@ -1,10 +1,10 @@
-import { useReport, WorkStatusDataType } from "src/composition/useReport"
+import { useStatus, WorkStatusDataType } from "src/composition/useStatus"
 import { userInformation } from "src/composition/useUserInformation"
 import { defineComponent, ref, watch } from "vue"
 export default defineComponent({
 
     setup() {
-        const { getWorkStatusData } = useReport()
+        const { getWorkStatusData } = useStatus()
         const { user } = userInformation()
         const workStatusData = ref<WorkStatusDataType>({
             activeTasksCount: 0,

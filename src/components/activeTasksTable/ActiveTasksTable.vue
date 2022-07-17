@@ -9,43 +9,47 @@
     </div>
 
     <div class="q-pa-md">
-      <q-table :rows="rows"
-        class="table-text no-shadow"
+
+      <q-table :rows="activityTask"
+        class="table-text no-shadow  text-right"
         card-class="table"
         :columns="columns"
         row-key="name">
 
         <template #body="props">
+          <q-tr :props="props">
+            <q-td key="number"
+              :props="props">
+              #{{ props.row.number }}
+            </q-td>
+            <q-td key="title"
+              :props="props">
+              {{ props.row.title }}
+            </q-td>
+            <q-td key="deadline"
+              :props="props">
+              <q-badge>
+                {{ props.row.deadline }}
+              </q-badge>
+            </q-td>
+            <q-td key="status"
+              :props="props">
+              <span :style="'background-color: ' + props.row.statusColor +'color:' +props.row.statusColor">
+                {{ props.row.status }}
+              </span>
+            </q-td>
+            <q-td key="project"
+              :props="props">
+              {{ props.row.project }}
+            </q-td>
+            <q-td key="category"
+              :props="props">
+              <span :style="'background-color: ' + props.row.categoryColor">
+                {{ props.row.category }}
+              </span>
+            </q-td>
 
-          <q-td key="number">
-            {{ props.row.number }}
-          </q-td>
-
-          <q-td key="taskName">
-            {{ props.row.taskName }}
-          </q-td>
-
-          <q-td key="deadline">
-            <q-badge class="bg-green-8">
-              {{ props.row.deadline }}
-            </q-badge>
-          </q-td>
-
-          <q-td key="situation">
-            <q-badge class="situation-element-style">
-              {{ props.row.situation }}
-            </q-badge>
-          </q-td>
-
-          <q-td key="project">
-            {{ props.row.project }}
-          </q-td>
-
-          <q-td key="category">
-            <q-badge class="category-element-style">
-              {{ props.row.category }}
-            </q-badge>
-          </q-td>
+          </q-tr>
 
         </template>
 
@@ -115,7 +119,7 @@
                     class="q-field__control relative-position row no-wrap select-field"
                     outlined
                     bottom-slots
-                    :options="providedModel"
+                    :options="providedOptions"
                     :dense="dense"
                     :options-dense="denseOpts">
                     <template #prepend>
@@ -218,7 +222,6 @@
 .button-div {
   display: flex;
   justify-content: center;
-  // padding: auto;
 }
 
 .button {
@@ -250,9 +253,6 @@
 }
 .disable-scroll {
   overflow-y: hidden;
-}
-[dir="rtl"] .text-center {
-  text-align: right;
 }
 
 .situation-element-style {

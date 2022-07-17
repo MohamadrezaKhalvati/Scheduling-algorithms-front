@@ -10,7 +10,7 @@
             class="bolt-img" />
         </div>
         <div class="detail">
-          <span>{{ workStatusData .weekly }} ساعت</span>
+          <span>{{ workStatusData.weekly }} ساعت</span>
           <span>میانگین ساعت هفتگی</span>
         </div>
       </div>

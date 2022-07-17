@@ -10,18 +10,42 @@
     </div>
 
     <div class="q-pa-md">
-      <q-table :rows="rows"
+      <q-table :rows="reportOptions"
         class="table-text no-shadow"
         card-class="table"
         :columns="columns"
         row-key="name">
 
-        <template #body-cell-totalHour="props">
-          <q-td key="totalHour">
-            <q-badge class="element-style">
-              {{ props.row.totalHour }}
-            </q-badge>
-          </q-td>
+        <template #body="props">
+          <q-tr :props="props">
+            <q-td key="number"
+              :props="props">
+              #{{ props.row.number }}
+            </q-td>
+            <q-td key="reportDate"
+              :props="props">
+              {{ props.row.date }}
+            </q-td>
+            <q-td key="createReportDate"
+              :props="props">
+              {{ props.row.createDate }}
+            </q-td>
+            <q-td key="totalHour"
+              :props="props">
+              <q-badge class="totalHours">
+                {{ props.row.totalHours }}
+              </q-badge>
+            </q-td>
+            <q-td key="validity"
+              :props="props">
+              <q-icon :v-if="props.row.isvalid == true"
+                name="done" />
+              <q-icon :v-if="props.row.isvalid == false"
+                name="false" />
+            </q-td>
+
+          </q-tr>
+
         </template>
 
       </q-table>
@@ -122,7 +146,9 @@
 .set-font {
   font-size: 13px;
 }
-
+.done-style {
+  font-size: 25px;
+}
 .header {
   border-bottom-style: solid;
   border-color: #d0d2d6;
@@ -190,7 +216,7 @@
   text-align: right;
 }
 
-.element-style {
+.totalHours {
   border-color: rgb(179, 57, 0);
   color: rgb(179, 57, 0);
   background-color: rgb(255, 203, 179);

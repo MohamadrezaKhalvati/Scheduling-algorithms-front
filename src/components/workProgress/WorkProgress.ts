@@ -1,4 +1,6 @@
-import { defineComponent } from "vue"
+import { readReport } from "src/composition/useReport"
+import { userInformation } from "src/composition/useUserInformation"
+import { defineComponent, ref, watch } from "vue"
 import VueApexCharts from "vue3-apexcharts"
 
 export default defineComponent({
@@ -7,110 +9,119 @@ export default defineComponent({
     components: {
         apexchart: VueApexCharts,
     },
-    data: function () {
-        return {
 
-            series: [{
-                name: "series1",
-                data: [100, 0, 450, 25]
-            }],
-            chartOptions: {
-                chart: {
-                    height: 20,
-                    type: "area",
-                    zoom: {
-                        enabled: false
-                    },
-                    toolbar: {
-                        tools: {
-                            download: false
-                        },
-                    }
+    setup() {
+
+        const { getReportWorkHours } = readReport()
+        const { user } = userInformation()
+        const chartLabelData = ref([])
+        const series = ref([{
+            name: "series1",
+            data: []
+        }])
+
+        const chartOptions = ref({
+            chart: {
+                type: "line",
+                zoom: {
+                    enabled: false
                 },
-                dataLabels: {
-                    enabled: false,
+                toolbar: {
+                    show: false
+                }
+            },
+            colors: ["#5470c6"],
+            stroke: {
+                curve: "smooth",
+                width: 3
+            },
+            grid: {
+                show: false
+            },
+            xaxis: {
+                categories: ["هفته اول", "هفته دوم", "هفته سوم", "هفته چهارم"],
+                axisBorder: {
+                    show: false
                 },
-                stroke: {
+                crosshairs: {
                     show: true,
-                    curve: "smooth",
-                },
-                xaxis: {
-                    type: "category",
-                    data: ["هفته اول", "هفته دوم", "هفته سوم", "هفته چهارم"],
-                    axisBorder: {
-                        show: false
-                    },
-                    axisTicks: {
-                        show: false,
-                    },
-                    labels: {
-                        show: false
-                    },
-
-                },
-                yaxis: {
-                    labels: {
-                        show: false
-                    }
-                },
-                tooltip: {
-                    enabled: false,
-                    enabledOnSeries: undefined,
-                    shared: true,
-                    followCursor: true,
-                    intersect: false,
-                    inverseOrder: false,
-                    custom: function ({ series, seriesIndex, dataPointIndex, w }) {
-                        return `
-                        <div class="arrow-box">
-                        <span></span>
-                        </div>
-                        `
-                    },
-                    fillSeriesColor: false,
-                    theme: false,
-                    style: {
-                        fontSize: "15px",
-                        fontFamily: "vazir"
-                    },
-                    onDatasetHover: {
-                        highlightDataSeries: false,
-                    },
-                    x: {
-                        show: true,
-                        format: "dd MMM",
-                        formatter: undefined,
-                    },
-                    y: {
-                        formatter: undefined,
-                        title: {
-                            formatter: (seriesName) => seriesName,
-                        },
-                    },
-                    z: {
-                        formatter: undefined,
-                        title: "Size: "
-                    },
-                    marker: {
-                        show: true,
-                    },
-                    fixed: {
-                        enabled: false,
-                        position: "topRight",
-                        offsetX: 0,
-                        offsetY: 0,
+                    position: "front",
+                    stroke: {
+                        color: "#b6b6b6",
+                        width: 1,
+                        dashArray: 1,
                     },
                 },
-                grid: {
+                //  |-------|--------\----
+                axisTicks: {
                     show: false,
                 },
+                // x row tip
+                tooltip: {
+                    enabled: false,
+                    color: "red"
+                },
 
+                labels: {
+                    show: false,
+                },
             },
+            tooltip: {
+                followCursor: true,
+                enabled: true,
+                custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+                    const category = w.globals.categoryLabels[dataPointIndex]
+                    const rawData = series[seriesIndex][dataPointIndex]
+                    const data = toHoursAndMinutes(rawData)
+
+                    return "<div class=\"arrow_box\" style=\"width:190px; background-color: white; height: 50px; color: black; display: flex; justify-content: space-between; align-items: center;\">" +
+                        "<div class=\"p-1\"  style=\"display:flex; align-items: center;\">" +
+                        "<span style=\"display:inline-block;margin-right:4px;border-radius:10px;width:10px;height:10px;background-color:#5470c6;\"> </span>" +
+                        "<p style=\"padding: 5px;\">" + category + "</p>" +
+                        "</div>" +
+                        "<div class=\"p-1\"> <p style=\"padding: 5px;\">" +
+                        data + "  ساعت" +
+                        "</p> </div>" +
+                        "</div>"
+                },
+            },
+            yaxis: {
+                show: false,
+            },
+            markers: {
+                size: 1,
+            },
+        })
 
 
+        function toHoursAndMinutes(totalMinutes) {
+            const minutes = totalMinutes % 60
+            const hours = Math.round(totalMinutes / 60)
+
+            return `${hours}:${padTo2Digits(minutes)}`
         }
-    },
+
+        function padTo2Digits(num) {
+            return num.toString().padStart(2, "0")
+        }
+
+        watch(() => user.value.userId, async () => {
+            const { returnReportData, chartLabelTimeData } = await getReportWorkHours()
+            series.value[0].data = returnReportData
+            chartLabelData.value = chartLabelTimeData
+        })
+
+        return {
+            series,
+            chartOptions
+        }
+
+    }
+
 
 
 
 })
+
+
+

@@ -1,58 +1,108 @@
 import moment from "jalali-moment"
 import { fetchService } from "src/boot/fetch-swagger"
-import { convertMomentToDateString } from "src/utils/util"
+import { readTask } from "./useTasks"
 import { userInformation } from "./useUserInformation"
 
-export type WorkStatusDataType = {
-    weekly: string
-    monthly: string
-    activeTasksCount: number
+const { user } = userInformation()
+const { convertDate } = readTask()
+export type ReportType = {
+    number: number,
+    createDate: string,
+    date: string,
+    isvalid: boolean,
+    totalHours: string
+}
+
+export type ReportTimeAvgType = {
+    number: number,
+    time: number
+}
+async function getReportData() {
+    const returnReport = []
+
+    const { data: reportData } = await fetchService.report.readReport({
+        where: {
+            userId: user.value.userId
+        },
+        pagination: {
+            skip: 0,
+            take: 6
+        },
+        sortBy: {
+            descending: true,
+            field: "date"
+        }
+    })
+
+
+    let counter = 1
+    reportData.data.filter(report => {
+
+        const obj: ReportType = {
+            number: counter,
+            createDate: report.createdDate,
+            date: report.date,
+            isvalid: report.isValid,
+            totalHours: "0"
+        }
+
+        obj.createDate = convertDate(obj.createDate)
+        obj.date = convertDate(obj.date)
+        obj.totalHours = getReportTotalHours(report)
+        counter++
+
+        returnReport.push(obj)
+    })
+
+    return returnReport
+
 
 }
 
-const { user } = userInformation()
+function getReportTotalHours(report) {
+    let totalHoursPerMinuts = 0
+    for (const item of report.itemList) {
+        totalHoursPerMinuts += item.spentTime
+    }
 
-async function getWorkStatusData() {
+    return `${Math.floor(totalHoursPerMinuts / 60)}:${totalHoursPerMinuts % 60}`
 
-    const { data: monthRes } = await fetchService.report.getWorkHoursReport({
+}
+
+async function getReportWorkHours() {
+
+    const returnReportData = []
+    const chartLabelTimeData = []
+    const endDate = moment().add(-2, "days").format("YYYY-MM-DD")
+    const startDate = moment().add(1, "days").add(-1, "months").format("YYYY-MM-DD")
+
+    const { data: reportWorkHoursData } = await fetchService.report.getWorkHoursReport({
         where: {
-            duration: {
-                startDate: convertMomentToDateString(moment().subtract(1, "months")),
-                endDate: convertMomentToDateString(moment())
-            },
-            operation: "avg",
-            unit: 30,
             userId: user.value.userId,
-        }
-    })
-
-    const { data: weekRes } = await fetchService.report.getWorkHoursReport({
-        where: {
-            duration: {
-                startDate: convertMomentToDateString(moment().subtract(1, "weeks")),
-                endDate: convertMomentToDateString(moment())
-            },
             operation: "avg",
             unit: 7,
-            userId: user.value.userId
+            duration: {
+                startDate: startDate,
+                endDate: endDate
+            }
         }
     })
+    const counter = 1
+    reportWorkHoursData.data.filter(report => {
 
-    const { data: activeTasks } = await fetchService.task.readTask({
-        where: {
-            assigneeId: user.value.userId,
-            isFinished: false
-        }
+
+        returnReportData.push(Math.round(report.value))
+        chartLabelTimeData.push((Math.round(report.value) / 60).toFixed(2))
     })
     return {
-        weekly: (weekRes.data[0].value / 60).toFixed(2),
-        monthly: (monthRes.data[0].value / 60).toFixed(2),
-        activeTasksCount: activeTasks.count
+        returnReportData,
+        chartLabelTimeData
     }
 }
 
-export function useReport() {
+export function readReport() {
     return {
-        getWorkStatusData
+        getReportData,
+        getReportWorkHours
     }
 }
