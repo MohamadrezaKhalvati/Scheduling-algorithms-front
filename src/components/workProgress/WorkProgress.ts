@@ -71,8 +71,8 @@ export default defineComponent({
                 enabled: true,
                 custom: function ({ series, seriesIndex, dataPointIndex, w }) {
                     const category = w.globals.categoryLabels[dataPointIndex]
-                    const rawData = series[seriesIndex][dataPointIndex]
-                    const data = toHoursAndMinutes(rawData)
+                    const data = series[seriesIndex][dataPointIndex]
+
 
                     return "<div class=\"arrow_box\" style=\"width:190px; background-color: white; height: 50px; color: black; display: flex; justify-content: space-between; align-items: center;\">" +
                         "<div class=\"p-1\"  style=\"display:flex; align-items: center;\">" +
@@ -107,8 +107,8 @@ export default defineComponent({
 
         watch(() => user.value.userId, async () => {
             const { returnReportData, chartLabelTimeData } = await getReportWorkHours()
-            series.value[0].data = returnReportData
-            chartLabelData.value = chartLabelTimeData
+            series.value[0].data = chartLabelTimeData
+
         })
 
         return {

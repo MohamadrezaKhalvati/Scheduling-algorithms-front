@@ -3,7 +3,7 @@
     <div class="p-2 text-primary huge-title">
       <span style="color: #d0d2d6">پیشرفت کار</span>
     </div>
-    <div class="linear-chart">
+    <div class="chart">
       <apexchart type="line"
         height="169"
         :options="chartOptions"
@@ -21,6 +21,10 @@
   flex-direction: column;
   border-radius: 8px;
   background-color: #282f46;
+}
+
+.chart {
+  padding: 0px 10px 0px 10px;
 }
 
 .title {
