@@ -51,7 +51,7 @@
 import DailyWorkReport from "src/components/dailyWorkReport/DailyWorkReport.vue";
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .home-button {
   padding-right: 10px;
   padding-bottom: 5px;

@@ -44,7 +44,7 @@
 </script>
 
 
-<style scoped>
+<style lang="scss" scoped>
 .work-status {
   border-radius: 8px;
   background-color: #282f46;

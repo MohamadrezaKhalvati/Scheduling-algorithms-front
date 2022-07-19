@@ -11,7 +11,7 @@
 
     <div class="q-pa-md">
       <q-table :rows="reportOptions"
-        class="table-text no-shadow"
+        class=" no-shadow"
         card-class="table"
         :columns="columns"
         row-key="name">
@@ -37,11 +37,12 @@
               </q-badge>
             </q-td>
             <q-td key="validity"
-              :props="props">
-              <q-icon :v-if="props.row.isvalid == true"
+              :props="props"
+              class="validity">
+              <q-icon :v-if="props.row.isvalid"
                 name="done" />
-              <q-icon :v-if="props.row.isvalid == false"
-                name="false" />
+              <!-- <q-icon :v-else="props.row.isvalid"
+                name="false" /> -->
             </q-td>
 
           </q-tr>
@@ -142,7 +143,7 @@
 <script src="./DailyWorkReport.ts">
 </script>
 
-<style lang="scss" >
+<style lang="scss" scoped  >
 .set-font {
   font-size: 13px;
 }
@@ -170,6 +171,19 @@
 .button {
   background-color: $purple-4;
   font-size: 14px;
+}
+.validity {
+  .q-icon {
+    border-radius: 50%;
+    background-color: green;
+    font-size: 32px;
+    line-height: 32px;
+    text-decoration-line: none solid rgb(255, 255, 255);
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    word-spacing: 0px;
+  }
 }
 
 .header {
@@ -210,10 +224,6 @@
 .q-table td,
 .q-table th {
   border-color: #fafafa33;
-}
-
-[dir="rtl"] .text-right {
-  text-align: right;
 }
 
 .totalHours {

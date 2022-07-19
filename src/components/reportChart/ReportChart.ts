@@ -1,4 +1,6 @@
-import { defineComponent, ref } from "vue"
+import { readReport } from "src/composition/useReport"
+import { userInformation } from "src/composition/useUserInformation"
+import { defineComponent, ref, watch } from "vue"
 import VueApexCharts from "vue3-apexcharts"
 export default defineComponent({
     el: "#app",
@@ -6,6 +8,8 @@ export default defineComponent({
         apexchart: VueApexCharts,
     },
     setup() {
+        const { getWorkHoursClassifiedReport } = readReport()
+        const { user } = userInformation()
         const apexChartOptions = {
             series: [{
                 name: "جلسات",
@@ -77,7 +81,6 @@ export default defineComponent({
                 }
             },
         }
-
         const categoryOptions = [
             "دسته بندی", "پروژه"
         ]
@@ -86,6 +89,10 @@ export default defineComponent({
             "۷",
             "۳۰"
         ]
+
+        watch(() => user.value.userId, async () => {
+            await getWorkHoursClassifiedReport()
+        })
         return {
 
             dayOptions,

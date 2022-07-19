@@ -13,6 +13,18 @@ export type ReportType = {
     totalHours: string
 }
 
+export type ReportTimeDataClassified = {
+    startDate: string,
+    endDate: string,
+    value: number,
+    category: string
+
+}
+
+export type ReportChartSeries = {
+    name: string,
+    data: []
+}
 export type ReportTimeAvgType = {
     number: number,
     time: number
@@ -100,9 +112,57 @@ async function getReportWorkHours() {
     }
 }
 
+
+async function getWorkHoursClassifiedReport() {
+    const returnedData: ReportChartSeries = []
+    const endDate = moment().add(-1, "days").format("YYYY-MM-DD")
+    const startDate = moment().add(-7, "days").format("YYYY-MM-DD")
+
+    const { data: reportWorkHoursDataClassified } = await fetchService.report.getWorkHoursClassifiedReport({
+        where: {
+            mode: "Category",
+            unit: 1,
+            operation: "avg",
+            userId: user.value.userId,
+            duration: {
+                startDate: startDate,
+                endDate: endDate
+            }
+        }
+    })
+
+    const { data: categoryNames } = await fetchService.category.readCategory({})
+
+    reportWorkHoursDataClassified.data.forEach(report => {
+
+        const obj: ReportTimeDataClassified = {
+            startDate: convertDate(report.startDate),
+            endDate: convertDate(report.endDate),
+            value: parseFloat((report.value / 60).toFixed(2)),
+            category: report.category
+        }
+
+        for (const categoryName of categoryNames.data) {
+            if (categoryName.id == report.category) {
+                obj.category = categoryName.title
+            }
+        }
+
+
+        // for(const item of returnedData.data){
+        //     if(returnedData.name == obj.category){
+
+        //     }
+        // }
+
+        // console.table(obj)
+    })
+}
+
 export function readReport() {
     return {
         getReportData,
-        getReportWorkHours
+        getReportWorkHours,
+        getWorkHoursClassifiedReport
     }
 }

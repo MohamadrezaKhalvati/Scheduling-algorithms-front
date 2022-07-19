@@ -13,11 +13,11 @@ export default defineComponent({
         const dateTo = ref("")
 
         const columns = [
-            { name: "number", align: "center", label: "شماره", field: "number" },
+            { name: "number", align: "left", label: "شماره", field: "number" },
             { name: "reportDate", required: true, label: "تاریخ گزارش", align: "left", field: "reportDate", format: val => `${val}`, sortable: true },
-            { name: "createReportDate", label: "تاریخ ثبت گزارش", field: "createReportDate" },
-            { name: "totalHour", label: "مجموعه ساعت", field: "totalHour" },
-            { name: "validity", label: "اعتبار", field: "validity" },
+            { name: "createReportDate", label: "تاریخ ثبت گزارش", field: "createReportDate", align: "left" },
+            { name: "totalHour", label: "مجموعه ساعت", field: "totalHour", align: "left" },
+            { name: "validity", label: "اعتبار", field: "validity", align: "left" },
         ]
 
         const reportOptions = ref<ReportType[]>([])

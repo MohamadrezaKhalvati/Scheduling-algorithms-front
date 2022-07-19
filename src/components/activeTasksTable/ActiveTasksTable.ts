@@ -18,12 +18,12 @@ export default defineComponent({
 
 
         const columns = [
-            { name: "number", align: "center", label: "شماره", field: "number" },
+            { name: "number", align: "left", label: "شماره", field: "number" },
             { name: "title", required: true, label: "نام تسک", align: "left", field: "title", format: val => `${val}`, sortable: true },
-            { name: "deadline", label: "مهلت پایانی", field: "deadline", sortable: true },
-            { name: "status", label: "وضعیت", field: "status", sortable: true },
-            { name: "project", label: "پروژه", field: "project" },
-            { name: "category", label: "دسته بندی", field: "category", sortable: true },
+            { name: "deadline", label: "مهلت پایانی", align: "left", field: "deadline", sortable: true },
+            { name: "status", label: "وضعیت", field: "status", sortable: true, align: "left" },
+            { name: "project", label: "پروژه", field: "project", align: "left" },
+            { name: "category", label: "دسته بندی", field: "category", sortable: true, align: "left" },
         ]
         const categoryOptions = ref([])
         const providedOptions = ref([])

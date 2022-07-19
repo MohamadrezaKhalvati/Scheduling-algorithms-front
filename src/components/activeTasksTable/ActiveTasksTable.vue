@@ -11,7 +11,7 @@
     <div class="q-pa-md">
 
       <q-table :rows="activityTask"
-        class="table-text no-shadow  text-right"
+        class="table-text no-shadow  text-align"
         card-class="table"
         :columns="columns"
         row-key="name">
@@ -33,8 +33,9 @@
               </q-badge>
             </q-td>
             <q-td key="status"
-              :props="props">
-              <span :style="'background-color: ' + props.row.statusColor +'color:' +props.row.statusColor">
+              :props="props"
+              class="badge   status">
+              <span :style="'background-color: ' + props.row.statusColor">
                 {{ props.row.status }}
               </span>
             </q-td>
@@ -43,7 +44,8 @@
               {{ props.row.project }}
             </q-td>
             <q-td key="category"
-              :props="props">
+              :props="props"
+              class="category">
               <span :style="'background-color: ' + props.row.categoryColor">
                 {{ props.row.category }}
               </span>
@@ -209,6 +211,9 @@
 </script>
 
 <style  lang="scss" scoped>
+.text-align {
+  text-align: right;
+}
 .searching-form {
   background-color: #282f46;
 }
@@ -228,6 +233,16 @@
   background-color: $purple-4;
   font-size: 14px;
 }
+
+.status {
+  color: rgb(120, 73, 2);
+  .span {
+    background-color: rgb(252, 201, 125);
+    border-style: solid;
+    border-radius: 5rem;
+  }
+}
+
 .active-tasks-table-header {
   display: flex;
   flex-direction: row;
@@ -250,6 +265,8 @@
 
 .table-text {
   color: #d0d2d6;
+  display: flex;
+  justify-content: flex-start;
 }
 .disable-scroll {
   overflow-y: hidden;
@@ -261,10 +278,9 @@
   background-color: rgb(252, 201, 125);
 }
 
-.category-element-style {
+.category {
   border-color: rgb(32, 87, 91);
-  color: rgb(32, 87, 91);
-  background-color: rgb(157, 216, 221);
+  color: #20575b;
 }
 
 .searching-form {

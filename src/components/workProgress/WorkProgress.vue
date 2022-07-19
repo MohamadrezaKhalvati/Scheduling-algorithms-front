@@ -15,7 +15,7 @@
 <script src="./WorkProgress.ts">
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .linear-chart {
   display: flex;
   flex-direction: column;

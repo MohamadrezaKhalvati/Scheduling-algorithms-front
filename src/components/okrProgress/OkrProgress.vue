@@ -33,7 +33,7 @@
 <script src="./OkrProgress.ts">
 </script>
 
-<style scoped>
+<style lang="scss" scoped >
 .okr-progress {
   display: flex;
   flex-direction: column;
