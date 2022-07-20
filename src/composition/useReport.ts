@@ -14,7 +14,7 @@ export type ReportType = {
 }
 
 
-export type ReportTimeDataClassified = {
+export type rawReportTimeDataClassified = {
     startDate: string,
     endDate: string,
     value: number,
@@ -22,6 +22,10 @@ export type ReportTimeDataClassified = {
 
 }
 
+export type ReportTimeDataClassified = {
+    name: string,
+    data: []
+}
 export type ReportChartSeries = {
     name: string,
     data: []
@@ -139,7 +143,9 @@ async function getReportWorkHours() {
 
 
 async function getWorkHoursClassifiedReport() {
-    const returnedData: ReportChartSeries = []
+    const returnedData: ReportChartSeries[] = []
+    const series = []
+    const dataa = []
     const endDate = moment().add(-1, "days").format("YYYY-MM-DD")
     const startDate = moment().add(-7, "days").format("YYYY-MM-DD")
 
@@ -157,10 +163,9 @@ async function getWorkHoursClassifiedReport() {
     })
 
     const { data: categoryNames } = await fetchService.category.readCategory({})
-
     reportWorkHoursDataClassified.data.forEach(report => {
 
-        const obj: ReportTimeDataClassified = {
+        const rawObj: rawReportTimeDataClassified = {
             startDate: convertDate(report.startDate),
             endDate: convertDate(report.endDate),
             value: parseFloat((report.value / 60).toFixed(2)),
@@ -169,19 +174,40 @@ async function getWorkHoursClassifiedReport() {
 
         for (const categoryName of categoryNames.data) {
             if (categoryName.id == report.category) {
-                obj.category = categoryName.title
+                rawObj.category = categoryName.title
             }
         }
-
-        o
-        // for(const item of returnedData.data){
-        //     if(returnedData.name == obj.category){
-
-        //     }
-        // }
-
-        // console.table(obj)
+        dataa.push(rawObj)
     })
+
+    for (const obj of dataa) {
+        const b = series.find(element => element.name == obj.category)
+        if (!b)
+            series.push({
+                name: obj.category,
+                data: []
+            })
+    }
+
+
+    for (const element of series) {
+        let tempDate = moment(startDate)
+
+        while (tempDate.diff(moment(endDate)) <= 0) {
+
+            const obj = dataa.find((a) => (element.name == a.category && a.startDate == tempDate.locale("fa").format("YYYY-MM-DD")))
+            if (obj) {
+                element.data.push(obj.value)
+            }
+            else {
+                element.data.push(0)
+            }
+            tempDate = moment(tempDate).add(1, "day")
+        }
+    }
+
+    return series
+
 }
 
 export function readReport() {

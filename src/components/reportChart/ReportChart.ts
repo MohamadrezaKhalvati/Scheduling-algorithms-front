@@ -10,18 +10,13 @@ export default defineComponent({
     setup() {
         const { getWorkHoursClassifiedReport } = readReport()
         const { user } = userInformation()
-        const apexChartOptions = {
-            series: [{
-                name: "جلسات",
-                data: [44, 55, 41, 67, 22, 43, 51]
-            }, {
-                name: "آموزش",
-                data: [13, 23, 20, 8, 13, 27, 20]
-            },],
+
+        const apexChartOptions = ref({
+            series: [],
             chart: {
                 id: "chartId",
                 type: "bar",
-                height: 350,
+                height: 250,
                 stacked: true,
                 toolbar: {
                     show: false,
@@ -81,7 +76,7 @@ export default defineComponent({
                     show: false,
                 }
             },
-        }
+        })
         const categoryOptions = [
             "دسته بندی", "پروژه"
         ]
@@ -92,16 +87,18 @@ export default defineComponent({
         ]
 
         watch(() => user.value.userId, async () => {
-            await getWorkHoursClassifiedReport()
+            apexChartOptions.value.series = await getWorkHoursClassifiedReport()
+            window["ApexCharts"].exec("chartId", "updateOptions", apexChartOptions.value)
+
+
         })
         return {
-
             dayOptions,
             apexChartOptions,
             categoryOptions,
             model: ref(null),
             dense: ref(false),
-            denseOpts: ref(false)
+            denseOpts: ref(false),
         }
     }
 
