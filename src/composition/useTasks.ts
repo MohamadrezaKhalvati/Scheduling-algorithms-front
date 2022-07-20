@@ -12,6 +12,14 @@ export type TaskType = {
     categoryColor: string,
     statusColor: string
 }
+export type rawFilterTaskType = {
+    dateFromInGeorgian?: string,
+    dateToInGeorgian?: string,
+    categoryName?: string,
+    providedName?: string,
+    title?: string,
+
+}
 
 const { user } = userInformation()
 
@@ -63,9 +71,70 @@ async function getReadTaskData() {
     return returnData
 }
 
+async function getReadTaskDataByFilter(data: rawFilterTaskType) {
+
+
+    const categoryId = await convertCagetoryNameToCategoryId(data)
+    const responsibeId = await convertProfileNameToProfileId(data)
+    const startDate = data.dateFromInGeorgian
+    const endDate = data.dateToInGeorgian
+
+    console.log(categoryId)
+    console.log(responsibeId)
+    console.log(data.title)
+    console.log(startDate)
+    console.log(endDate)
+
+    const { data: readTaskData } = await fetchService.task.readTask({
+        where: {
+            title: data.title,
+            assigneeId: user.value.userId,
+            responsibleId: responsibeId,
+            categoryId: categoryId,
+            isFinished: false,
+            dateRange: {
+                startDate: data.dateFromInGeorgian,
+                endDate: data.dateToInGeorgian
+            },
+        },
+        pagination: {
+            skip: 0,
+            take: 7
+        },
+        sortBy: {
+            field: "deadline",
+            descending: false
+        }
+    })
+    console.log(readTaskData)
+}
+
+async function convertCagetoryNameToCategoryId(rawData: rawFilterTaskType) {
+    const { data: categoryNames } = await fetchService.category.readCategory({})
+    let categortId = ""
+
+    for (const category of categoryNames.data) {
+        if (rawData.categoryName == category.title) {
+            categortId = category.id
+        }
+    }
+    return categortId
+}
+
+async function convertProfileNameToProfileId(rawData: rawFilterTaskType) {
+    const { data: profileNames } = await fetchService.profile.readProfile({})
+    let profileId = ""
+    for (const profile of profileNames.data) {
+        if (rawData.providedName == profile.fullname) {
+            profileId = profile.id
+        }
+    }
+    return profileId
+}
 function convertDate(date) {
     return moment(date, "YYYY/MM/DD").locale("fa").format("YYYY-MM-DD")
 }
+
 function transalteStatus(obj: TaskType) {
     if (obj.status == "Doing") {
         obj.status = "در حال انجام"
@@ -89,8 +158,8 @@ function transalteStatus(obj: TaskType) {
 async function getCategoryName() {
     const { data: categoryNames } = await fetchService.category.readCategory({})
     const obj = []
-    for (const categoryName of categoryNames.data) {
-        obj.push(categoryName.title)
+    for (const category of categoryNames.data) {
+        obj.push(category.title)
     }
     return obj
 }
@@ -99,8 +168,8 @@ async function getCategoryName() {
 async function getProfileName() {
     const { data: profileNames } = await fetchService.profile.readProfile({})
     const obj = []
-    for (const profileName of profileNames.data) {
-        obj.push(profileName.fullname)
+    for (const profile of profileNames.data) {
+        obj.push(profile.fullname)
     }
     return obj
 }
@@ -109,7 +178,8 @@ export function readTask() {
         getReadTaskData,
         getCategoryName,
         getProfileName,
-        convertDate
+        convertDate,
+        getReadTaskDataByFilter
     }
 }
 

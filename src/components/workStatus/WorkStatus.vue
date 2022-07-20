@@ -63,6 +63,12 @@
   font-size: 40px;
 }
 
+.bolt-img {
+  background-color: #ea54551f;
+  border-radius: 50%;
+  color: #ea5455;
+  font-size: 40px;
+}
 .join-right-img {
   background-color: #7367f01f;
   border-radius: 50%;

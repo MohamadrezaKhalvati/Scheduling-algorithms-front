@@ -13,6 +13,7 @@ export type ReportType = {
     totalHours: string
 }
 
+
 export type ReportTimeDataClassified = {
     startDate: string,
     endDate: string,
@@ -30,11 +31,10 @@ export type ReportTimeAvgType = {
     time: number
 }
 async function getReportData() {
-    const returnReport = []
 
     const { data: reportData } = await fetchService.report.readReport({
         where: {
-            userId: user.value.userId
+            userId: user.value.userId,
         },
         pagination: {
             skip: 0,
@@ -45,7 +45,16 @@ async function getReportData() {
             field: "date"
         }
     })
+    const returnReport = createReportType(reportData)
 
+
+    return returnReport
+
+
+}
+
+function createReportType(reportData) {
+    const returnReport = []
 
     let counter = 1
     reportData.data.filter(report => {
@@ -65,12 +74,28 @@ async function getReportData() {
 
         returnReport.push(obj)
     })
-
     return returnReport
+}
+async function getReportDataByFilter(startData: string, endDate: string) {
 
+    const { data: reportData } = await fetchService.report.readReport({
+        where: {
+            userId: user.value.userId,
+            date: {
+                startDate: startData,
+                endDate: endDate
+            }
+        },
+        sortBy: {
+            descending: true,
+            field: "date"
+        }
+    })
+
+    const returnData = createReportType(reportData)
+    return returnData
 
 }
-
 function getReportTotalHours(report) {
     let totalHoursPerMinuts = 0
     for (const item of report.itemList) {
@@ -148,7 +173,7 @@ async function getWorkHoursClassifiedReport() {
             }
         }
 
-
+        o
         // for(const item of returnedData.data){
         //     if(returnedData.name == obj.category){
 
@@ -163,6 +188,7 @@ export function readReport() {
     return {
         getReportData,
         getReportWorkHours,
-        getWorkHoursClassifiedReport
+        getWorkHoursClassifiedReport,
+        getReportDataByFilter
     }
 }

@@ -39,10 +39,13 @@
             <q-td key="validity"
               :props="props"
               class="validity">
-              <q-icon :v-if="props.row.isvalid"
-                name="done" />
-              <!-- <q-icon :v-else="props.row.isvalid"
-                name="false" /> -->
+              <div v-if="props.row.isvalid">
+                <q-icon name="done" />
+              </div>
+              <div v-else>
+                <q-icon name="close"
+                  style="background-color: #F44336" />
+              </div>
             </q-td>
 
           </q-tr>
@@ -73,7 +76,7 @@
 
           <div class="row">
 
-            <div class="column col-md-6 col-xs-12 px-1 field ">
+            <div class="column col-md-6 col-xs-12 px-1 field">
               <span style="padding-bottom:4px">تاریخ گزارش از</span>
               <q-input v-model="dateFrom"
                 outlined
@@ -85,11 +88,12 @@
                     <q-popup-proxy cover
                       transition-show="scale"
                       transition-hide="scale">
-                      <q-date v-model="dateFrom">
+                      <q-date v-model="dateFrom"
+                        calendar="persian">
                         <div class="row items-center justify-end">
                           <q-btn v-close-popup
                             label="Close"
-                            color="primary"
+                            color="#282f46"
                             flat />
                         </div>
                       </q-date>
@@ -111,11 +115,12 @@
                     <q-popup-proxy cover
                       transition-show="scale"
                       transition-hide="scale">
-                      <q-date v-model="dateTo">
+                      <q-date v-model="dateTo"
+                        calendar="persian">
                         <div class="row items-center justify-end">
                           <q-btn v-close-popup
                             label="Close"
-                            color="primary"
+                            color="#282f46"
                             flat />
                         </div>
                       </q-date>
@@ -129,7 +134,8 @@
         </q-card-section>
 
         <div class="body-part2 center">
-          <q-btn class="button">
+          <q-btn class="button"
+            @click="getReportDataByFilterr">
             جستجو
           </q-btn>
         </div>
@@ -175,7 +181,7 @@
 .validity {
   .q-icon {
     border-radius: 50%;
-    background-color: green;
+    background-color: #4caf50;
     font-size: 32px;
     line-height: 32px;
     text-decoration-line: none solid rgb(255, 255, 255);

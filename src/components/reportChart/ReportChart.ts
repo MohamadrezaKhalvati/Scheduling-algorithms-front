@@ -19,6 +19,7 @@ export default defineComponent({
                 data: [13, 23, 20, 8, 13, 27, 20]
             },],
             chart: {
+                id: "chartId",
                 type: "bar",
                 height: 350,
                 stacked: true,

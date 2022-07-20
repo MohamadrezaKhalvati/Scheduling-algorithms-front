@@ -1,3 +1,4 @@
+import moment from "jalali-moment"
 import { readReport, ReportType } from "src/composition/useReport"
 import { userInformation } from "src/composition/useUserInformation"
 import { defineComponent, ref, watch } from "vue"
@@ -6,7 +7,7 @@ import { defineComponent, ref, watch } from "vue"
 export default defineComponent({
     setup() {
 
-        const { getReportData } = readReport()
+        const { getReportData, getReportDataByFilter } = readReport()
         const { user } = userInformation()
         const filter = ref(false)
         const dateFrom = ref("")
@@ -22,16 +23,25 @@ export default defineComponent({
 
         const reportOptions = ref<ReportType[]>([])
 
+        async function getReportDataByFilterr() {
+            const dateToInGeorgian = moment.from(dateTo.value, "fa", "YYYY/MM/DD").add(1, "days").format("YYYY/MM/DD")
+            const dateFromInGeorgian = moment.from(dateFrom.value, "fa", "YYYY/MM/DD").add(1, "days").format("YYYY/MM/DD")
+
+            const data = await getReportDataByFilter(dateFromInGeorgian, dateToInGeorgian)
+            console.log(data)
+        }
         watch(() => user.value.userId, async () => {
             reportOptions.value = await getReportData()
         })
+
 
         return {
             columns,
             reportOptions,
             filter,
             dateFrom,
-            dateTo
+            dateTo,
+            getReportDataByFilterr
         }
     }
 }) 

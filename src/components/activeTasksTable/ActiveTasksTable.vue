@@ -10,7 +10,8 @@
 
     <div class="q-pa-md">
 
-      <q-table :rows="activityTask"
+      <q-table v-model:pagination="pagination"
+        :rows="activityTask"
         class="table-text no-shadow  text-align"
         card-class="table"
         :columns="columns"
@@ -86,16 +87,17 @@
 
                 <div class="col-md-4 col-xs-12 px-1 field normalize">
                   <span style="padding-bottom:4px">نام تسک</span>
-                  <q-field outlined
+                  <q-input v-model="taskName"
+                    color="teal"
+                    class="self-center full-width no-outline"
+                    outlined=""
                     stack-label>
-                    <template #control>
-                      <div class="self-center full-width no-outline"
-                        tabindex="0" />
-                      <q-icon name="local_offer"
-                        style="font-size : 23px " />
+                    <template #prepend>
+                      <q-icon name="event"
+                        color="white"
+                        style="font-size : 23px" />
                     </template>
-                  </q-field>
-
+                  </q-input>
                 </div>
 
                 <div class="col-md-4 col-xs-12 px-1 field normalize">
@@ -147,7 +149,8 @@
                         <q-popup-proxy cover
                           transition-show="scale"
                           transition-hide="scale">
-                          <q-date v-model="dateFrom">
+                          <q-date v-model="dateFrom"
+                            calendar="persian">
                             <div class="row items-center justify-end">
                               <q-btn v-close-popup
                                 label="Close"
@@ -163,7 +166,7 @@
 
                 <div class=" col-md-4 col-xs-12 px-1 q-field  no-wrap items-start q-field--outlined q-input q-field--dense q-field--dark q-field--with-bottom column ">
                   <span style="padding-bottom:4px">تاریخ نهایی تا</span>
-                  <q-input v-model="dateFrom"
+                  <q-input v-model="dateTo"
                     outlined
                     mask="date"
                     :rules="['date']">
@@ -173,7 +176,8 @@
                         <q-popup-proxy cover
                           transition-show="scale"
                           transition-hide="scale">
-                          <q-date v-model="dateTo">
+                          <q-date v-model="dateTo"
+                            calendar="persian">
                             <div class="row items-center justify-end">
                               <q-btn v-close-popup
                                 label="Close"
@@ -190,7 +194,8 @@
               </div>
 
               <div class="button-div">
-                <q-btn class="button">
+                <q-btn class="button"
+                  @click="getTaskDaTaByfilterr">
                   جستجو
                 </q-btn>
               </div>
@@ -249,12 +254,11 @@
   justify-content: space-between;
   color: #d0d2d6;
   font-weight: bold;
-
-  .img {
-    font-size: 22.28px;
-  }
 }
 
+.img {
+  font-size: 22.28px;
+}
 .table {
   background-color: #282f46;
 }
