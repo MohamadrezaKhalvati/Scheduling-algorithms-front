@@ -11,8 +11,8 @@ export default defineComponent({
         const filter = ref(false)
         const dense = ref(false)
         const denseOpts = ref(false)
-        const categoryModel = ref("")
-        const providedModel = ref("")
+        const categoryModel = ref(null)
+        const providedModel = ref(null)
         const dateFrom = ref(null)
         const dateTo = ref(null)
         const taskName = ref("")
@@ -41,6 +41,9 @@ export default defineComponent({
             }
 
             const taskDataByFilter = await getReadTaskDataByFilter({ dateFromInGeorgian, dateToInGeorgian, categoryName, providedName, title })
+            activityTask.value = taskDataByFilter
+            filter.value = false
+
         }
         const pagination = ref({
             sortBy: "desc",

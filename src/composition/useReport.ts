@@ -4,7 +4,7 @@ import { readTask } from "./useTasks"
 import { userInformation } from "./useUserInformation"
 
 const { user } = userInformation()
-const { convertDate } = readTask()
+const { convertDateToJalali } = readTask()
 export type ReportType = {
     number: number,
     createDate: string,
@@ -71,8 +71,8 @@ function createReportType(reportData) {
             totalHours: "0"
         }
 
-        obj.createDate = convertDate(obj.createDate)
-        obj.date = convertDate(obj.date)
+        obj.createDate = convertDateToJalali(obj.createDate)
+        obj.date = convertDateToJalali(obj.date)
         obj.totalHours = getReportTotalHours(report)
         counter++
 
@@ -166,8 +166,8 @@ async function getWorkHoursClassifiedReport() {
     reportWorkHoursDataClassified.data.forEach(report => {
 
         const rawObj: rawReportTimeDataClassified = {
-            startDate: convertDate(report.startDate),
-            endDate: convertDate(report.endDate),
+            startDate: convertDateToJalali(report.startDate),
+            endDate: convertDateToJalali(report.endDate),
             value: parseFloat((report.value / 60).toFixed(2)),
             category: report.category
         }

@@ -8,6 +8,7 @@ specifiers:
   '@typescript-eslint/parser': ^5.20.0
   '@vitejs/plugin-vue': ^2.3.1
   apexcharts: ^3.35.3
+  clean-deep: ^3.4.0
   core-js: ^3.22.2
   eslint: ^8.14.0
   eslint-plugin-vue: ^8.7.1
@@ -37,6 +38,7 @@ dependencies:
   '@quasar/vite-plugin': 1.0.9_3b6db529e7116f6a5752ef639af5eecf
   '@vitejs/plugin-vue': 2.3.2_vite@2.9.5+vue@3.2.33
   apexcharts: 3.35.3
+  clean-deep: 3.4.0
   core-js: 3.22.4
   jalali-moment: 3.3.11
   portal-vue: 3.0.0-beta.0_vue@3.2.33
@@ -2189,6 +2191,15 @@ packages:
       fsevents: 2.3.2
     dev: false
 
+  /clean-deep/3.4.0:
+    resolution: {integrity: sha512-Lo78NV5ItJL/jl+B5w0BycAisaieJGXK1qYi/9m4SjR8zbqmrUtO7Yhro40wEShGmmxs/aJLI/A+jNhdkXK8mw==}
+    engines: {node: '>=4'}
+    dependencies:
+      lodash.isempty: 4.4.0
+      lodash.isplainobject: 4.0.6
+      lodash.transform: 4.6.0
+    dev: false
+
   /cli-cursor/3.1.0:
     resolution: {integrity: sha512-I/zHAwsKf9FqGoXM4WWRACob9+SNukZTd94DWF57E4toouRulbCxcUh6RKUEOQlYTHJnzkPMySvPNaaSLNfLZw==}
     engines: {node: '>=8'}
@@ -4227,12 +4238,24 @@ packages:
     resolution: {integrity: sha1-gteb/zCmfEAF/9XiUVMArZyk168=}
     dev: false
 
+  /lodash.isempty/4.4.0:
+    resolution: {integrity: sha512-oKMuF3xEeqDltrGMfDxAPGIVMSSRv8tbRSODbrs4KGsRRLEhrW8N8Rd4DRgB2+621hY8A8XwwrTVhXWpxFvMzg==}
+    dev: false
+
+  /lodash.isplainobject/4.0.6:
+    resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
+    dev: false
+
   /lodash.merge/4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: true
 
   /lodash.sortby/4.7.0:
     resolution: {integrity: sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=}
+    dev: false
+
+  /lodash.transform/4.6.0:
+    resolution: {integrity: sha512-LO37ZnhmBVx0GvOU/caQuipEh4GN82TcWv3yHlebGDgOxbxiwwzW5Pcx2AcvpIv2WmvmSMoC492yQFNhy/l/UQ==}
     dev: false
 
   /lodash/4.17.21:
