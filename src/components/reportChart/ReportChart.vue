@@ -25,21 +25,21 @@
         <span>نوع دسته بندی</span>
 
         <div>
-          <q-select v-model="model"
+          <q-input v-model="model"
             class="q-field__control relative-position row no-wrap select-field"
             outlined
+            dense
             bottom-slots
             :options="categoryOptions"
             label-color="white"
             label="دسته بندی"
-            :dense="dense"
             :options-dense="denseOpts">
             <template #prepend>
               <q-icon name="category"
                 color="white"
                 @click.stop.prevent />
             </template>
-          </q-select>
+          </q-input>
         </div>
 
       </div>
@@ -48,14 +48,14 @@
         <span>واحد (روز)</span>
 
         <div>
-          <q-select v-model="model"
+          <q-input v-model="model"
             class="q-field__control relative-position row no-wrap"
             outlined
             bottom-slots
             :options="dayOptions"
             label-color="white"
             label="۱"
-            :dense="dense"
+            dense
             :options-dense="denseOpts">
             <template #prepend>
               <q-icon name="donut_small"
@@ -63,7 +63,7 @@
                 @click.stop.prevent />
 
             </template>
-          </q-select>
+          </q-input>
         </div>
 
       </div>
@@ -78,7 +78,8 @@
     </div>
 
     <div class="button-div">
-      <q-btn class="button">
+      <q-btn class="button px-2"
+        dense>
         ثبت
       </q-btn>
     </div>

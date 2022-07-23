@@ -161,7 +161,7 @@ async function convertProfileNameToProfileId(rawData: rawFilterTaskType) {
     }
     return profileId
 }
-function convertDateToJalali(date) {
+function convertDateToJalali(date: string) {
     return moment(date, "YYYY/MM/DD").locale("fa").format("YYYY-MM-DD")
 }
 

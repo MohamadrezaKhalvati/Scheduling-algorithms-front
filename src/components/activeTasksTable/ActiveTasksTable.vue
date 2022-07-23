@@ -1,5 +1,5 @@
 <template>
-  <div class="active-tasks ">
+  <q-card class="active-tasks ">
     <div class="p-2 text-primary huge-title between">
       <span style="color : #d0d4d6">جدول تسک های فعال</span>
       <q-icon name="search"
@@ -29,16 +29,18 @@
             </q-td>
             <q-td key="deadline"
               :props="props">
-              <q-badge>
+              <q-badge class="p-1"
+                rounded>
                 {{ props.row.deadline }}
               </q-badge>
             </q-td>
             <q-td key="status"
               :props="props"
-              class="badge   status">
-              <span :style="'background-color: ' + props.row.statusColor">
+              class="status ">
+              <q-badge :style="'background-color: ' + props.row.statusColor"
+                class="p-1">
                 {{ props.row.status }}
-              </span>
+              </q-badge>
             </q-td>
             <q-td key="project"
               :props="props">
@@ -47,9 +49,10 @@
             <q-td key="category"
               :props="props"
               class="category">
-              <span :style="'background-color: ' + props.row.categoryColor">
+              <q-badge class="p-1"
+                :style="'background-color: ' + props.row.categoryColor">
                 {{ props.row.category }}
-              </span>
+              </q-badge>
             </q-td>
 
           </q-tr>
@@ -208,7 +211,7 @@
       </q-dialog>
     </div>
 
-  </div>
+  </q-card>
 
 </template>
 
@@ -243,8 +246,6 @@
   color: rgb(120, 73, 2);
   .span {
     background-color: rgb(252, 201, 125);
-    border-style: solid;
-    border-radius: 5rem;
   }
 }
 

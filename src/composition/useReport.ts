@@ -21,6 +21,10 @@ export type rawReportTimeDataClassified = {
     category: string
 
 }
+export type GetWorkHoursClassifiedReportByFIlterType = {
+    startDate: string,
+    endDate: string
+}
 
 export type ReportTimeDataClassified = {
     name: string,
@@ -34,6 +38,7 @@ export type ReportTimeAvgType = {
     number: number,
     time: number
 }
+
 async function getReportData() {
 
     const { data: reportData } = await fetchService.report.readReport({
@@ -215,6 +220,6 @@ export function readReport() {
         getReportData,
         getReportWorkHours,
         getWorkHoursClassifiedReport,
-        getReportDataByFilter
+        getReportDataByFilter,
     }
 }

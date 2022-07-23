@@ -32,13 +32,13 @@
             </q-td>
             <q-td key="totalHour"
               :props="props">
-              <q-badge class="totalHours">
+              <q-badge class="totalHours p-1">
                 {{ props.row.totalHours }}
               </q-badge>
             </q-td>
             <q-td key="validity"
               :props="props"
-              class="validity">
+              class="">
               <div v-if="props.row.isvalid">
                 <q-icon name="done" />
               </div>

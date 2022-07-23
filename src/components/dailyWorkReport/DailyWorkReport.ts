@@ -26,9 +26,10 @@ export default defineComponent({
         async function getReportDataByFilterr() {
             const dateToInGeorgian = moment.from(dateTo.value, "fa", "YYYY/MM/DD").add(1, "days").format("YYYY/MM/DD")
             const dateFromInGeorgian = moment.from(dateFrom.value, "fa", "YYYY/MM/DD").add(1, "days").format("YYYY/MM/DD")
-
             const data = await getReportDataByFilter(dateFromInGeorgian, dateToInGeorgian)
-            console.log(data)
+            reportOptions.value = data
+            filter.value = false
+
         }
         watch(() => user.value.userId, async () => {
             reportOptions.value = await getReportData()
