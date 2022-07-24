@@ -62,6 +62,7 @@ export default defineComponent({
         ]
         watch(() => user.value.userId, async () => {
             activityTask.value = await getReadTaskData()
+
             categoryOptions.value = await getCategoryName()
             providedOptions.value = await getProfileName()
         })

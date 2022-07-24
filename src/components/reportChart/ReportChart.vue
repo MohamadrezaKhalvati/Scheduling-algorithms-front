@@ -21,40 +21,42 @@
 
     <div class="filter">
 
-      <div class="category">
+      <div class="category px-1">
         <span>نوع دسته بندی</span>
 
         <div>
-          <q-input v-model="model"
+          <q-select v-model="model"
             class="q-field__control relative-position row no-wrap select-field"
             outlined
             dense
             bottom-slots
             :options="categoryOptions"
             label-color="white"
-            label="دسته بندی"
+            :label="categoryOptions[0]"
+            color="white"
             :options-dense="denseOpts">
             <template #prepend>
               <q-icon name="category"
                 color="white"
                 @click.stop.prevent />
             </template>
-          </q-input>
+          </q-select>
         </div>
 
       </div>
 
-      <div class="day">
+      <div class="day px-1">
         <span>واحد (روز)</span>
 
         <div>
-          <q-input v-model="model"
+          <q-select v-model="model"
             class="q-field__control relative-position row no-wrap"
             outlined
             bottom-slots
             :options="dayOptions"
             label-color="white"
-            label="۱"
+            :label="dayOptions[0]"
+            color="white"
             dense
             :options-dense="denseOpts">
             <template #prepend>
@@ -63,7 +65,7 @@
                 @click.stop.prevent />
 
             </template>
-          </q-input>
+          </q-select>
         </div>
 
       </div>

@@ -8,11 +8,13 @@ export type TaskType = {
     number: number,
     title: string,
     deadline: string,
+    deadlineColor?: string,
     status: string,
     project: string,
     category: string,
     categoryColor?: string,
-    statusColor?: string
+    statusColor?: string,
+    statusTextColor?: string
 }
 export type rawFilterTaskType = {
     dateFromInGeorgian?: string,
@@ -37,26 +39,32 @@ async function getReadTaskData() {
 
 
 
+
     let counter = 1
     for (const task of readTaskData.data) {
-        const categoryName = await convertCategoryIdToCategoryName(task.categoryId)
+        const category = await convertCategoryIdToCategoryName(task.categoryId)
         const projectName = await convertProjectIdToProjectName(task.metadata.projectId)
+        const deadlineColor = setDeadlineColor(task.deadline)
         const deadline = convertDateToJalali(task.deadline)
-        const status = convertStatus(task.status)
+        const status = setStatus(task.status)
+
         const obj: TaskType = {
             number: counter,
-            category: categoryName,
+            category: category.categoryName,
             project: projectName,
             deadline: deadline,
             title: task.title,
             status: status.status,
             statusColor: status.statusColor,
-            categoryColor: "#d0d2d6"
+            statusTextColor: status.statusTextColor,
+            deadlineColor: deadlineColor,
+            categoryColor: category.categoryColor
         }
 
         returnData.push(obj)
         counter++
     }
+
     return returnData
 }
 
@@ -95,19 +103,22 @@ async function getReadTaskDataByFilter(data: rawFilterTaskType) {
     let coutner = 1
     for (const data of readTaskData.data) {
 
-        const categoryName = await convertCategoryIdToCategoryName(data.categoryId)
+        const category = await convertCategoryIdToCategoryName(data.categoryId)
         const deadline = convertDateToJalali(data.deadline)
-        const status = convertStatus(data.status)
+        const deadlineColor = setDeadlineColor(data.deadline)
+        const status = setStatus(data.status)
         const projectName = await convertProjectIdToProjectName(data.metadata.projectId)
         const obj: TaskType = {
             number: coutner,
-            category: categoryName,
+            category: category.categoryName,
+            categoryColor: category.categoryColor,
             deadline: deadline,
+            deadlineColor: deadlineColor,
             status: status.status,
+            statusTextColor: status.statusTextColor,
+            statusColor: status.statusColor,
             title: data.title,
             project: projectName,
-            statusColor: status.statusColor,
-            categoryColor: "#d0d2d6"
 
         }
         returnData.push(obj)
@@ -131,7 +142,6 @@ async function convertProjectIdToProjectName(projectId: string) {
 async function convertCagetoryNameToCategoryId(rawData: rawFilterTaskType) {
     const { data: categoryNames } = await fetchService.category.readCategory({})
     let categortId = ""
-
     for (const category of categoryNames.data) {
         if (rawData.categoryName == category.title) {
             categortId = category.id
@@ -141,14 +151,17 @@ async function convertCagetoryNameToCategoryId(rawData: rawFilterTaskType) {
 }
 
 async function convertCategoryIdToCategoryName(categoryId: string) {
-    const { data: categroyIds } = await fetchService.category.readCategory({})
+    const { data: categoryIds } = await fetchService.category.readCategory({})
     let categoryName = ""
-    for (const category of categroyIds.data) {
+    let categoryColor = ""
+
+    for (const category of categoryIds.data) {
         if (categoryId == category.id) {
             categoryName = category.title
+            categoryColor = category.color
         }
     }
-    return categoryName
+    return { categoryName, categoryColor }
 }
 
 async function convertProfileNameToProfileId(rawData: rawFilterTaskType) {
@@ -164,27 +177,46 @@ async function convertProfileNameToProfileId(rawData: rawFilterTaskType) {
 function convertDateToJalali(date: string) {
     return moment(date, "YYYY/MM/DD").locale("fa").format("YYYY-MM-DD")
 }
+function setDeadlineColor(deadline: string) {
+    const deadlinee = moment(deadline)
+    let deadlineColor = ""
 
+    if (deadlinee.diff(moment()) > 0) {
+        deadlineColor = "#388E3C"
+    }
+    else if (deadlinee.diff(moment()) <= -110789889) {
+        deadlineColor = "#B71C1C"
+    }
+    else {
+        deadlineColor = "#F57F17"
+    }
+    return deadlineColor
+}
 
-function convertStatus(status) {
+function setStatus(status) {
     let statusColor = ""
+    let statusTextColor = ""
     if (status == "Doing") {
         status = "در حال انجام"
         statusColor = "#FCC97D"
+        statusTextColor = "#784902"
     }
     else if (status == "Done") {
         status = "انجام شده"
         statusColor = "#9cd39f"
+        statusTextColor = "#234D25"
     }
     else if (status == "Todo") {
         status = "انجام نشده"
         statusColor = "#C4C4C4"
+        statusTextColor = "#454545"
     }
     else if (status == "Blocked") {
         status = "بلاک شده"
         statusColor = "#F06694"
+        statusTextColor = "#4F0820"
     }
-    return { statusColor, status }
+    return { statusColor, status, statusTextColor }
 }
 
 async function getCategoryName() {

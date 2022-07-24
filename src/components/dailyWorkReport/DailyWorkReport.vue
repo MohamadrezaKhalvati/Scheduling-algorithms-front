@@ -38,7 +38,7 @@
             </q-td>
             <q-td key="validity"
               :props="props"
-              class="">
+              class="validity">
               <div v-if="props.row.isvalid">
                 <q-icon name="done" />
               </div>

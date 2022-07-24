@@ -30,14 +30,13 @@
             <q-td key="deadline"
               :props="props">
               <q-badge class="p-1"
-                rounded>
+                :style="'background-color:' +props.row.deadlineColor">
                 {{ props.row.deadline }}
               </q-badge>
             </q-td>
             <q-td key="status"
-              :props="props"
-              class="status ">
-              <q-badge :style="'background-color: ' + props.row.statusColor"
+              :props="props">
+              <q-badge :style="'background-color: ' + props.row.statusColor + '; color: ' + props.row.statusTextColor"
                 class="p-1">
                 {{ props.row.status }}
               </q-badge>
