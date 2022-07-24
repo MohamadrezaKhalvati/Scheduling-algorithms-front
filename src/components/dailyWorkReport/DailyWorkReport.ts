@@ -12,7 +12,14 @@ export default defineComponent({
         const filter = ref(false)
         const dateFrom = ref("")
         const dateTo = ref("")
-
+        const pagination = ref({
+            sortBy: "desc",
+            descending: false,
+            page: 1,
+            rowsNumber: 344,
+            rowsPerPage: 6,
+            rowsPerPagePageOptions: [6, 5, 10, 50]
+        })
         const columns = [
             { name: "number", align: "left", label: "شماره", field: "number" },
             { name: "reportDate", required: true, label: "تاریخ گزارش", align: "left", field: "reportDate", format: val => `${val}`, sortable: true },
@@ -42,6 +49,7 @@ export default defineComponent({
             filter,
             dateFrom,
             dateTo,
+            pagination,
             getReportDataByFilterr
         }
     }

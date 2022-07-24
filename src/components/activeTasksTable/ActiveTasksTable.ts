@@ -49,8 +49,9 @@ export default defineComponent({
             sortBy: "desc",
             descending: false,
             page: 1,
-            rowsPerPage: 5,
-            rowsNumber: 3
+            rowsNumber: 2,
+            rowsPerPage: 7,
+            rowsPerPagePageOptions: [7, 20, 50]
         })
         const columns = [
             { name: "number", align: "left", label: "شماره", field: "number" },
@@ -62,10 +63,14 @@ export default defineComponent({
         ]
         watch(() => user.value.userId, async () => {
             activityTask.value = await getReadTaskData()
-
             categoryOptions.value = await getCategoryName()
             providedOptions.value = await getProfileName()
         })
+
+        function watchTable() {
+            console.log(pagination.value.rowsPerPage)
+
+        }
         return {
             categoryOptions,
             getTaskDaTaByfilterr,
@@ -81,6 +86,7 @@ export default defineComponent({
             providedOptions,
             pagination,
             taskName,
+            watchTable
         }
     }
 })

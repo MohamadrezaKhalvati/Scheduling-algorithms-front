@@ -10,7 +10,9 @@
     </div>
 
     <div class="q-pa-md">
-      <q-table :rows="reportOptions"
+      <q-table v-model:pagination="pagination"
+        :rows-per-page-options="pagination.rowsPerPagePageOptions"
+        :rows="reportOptions"
         class=" no-shadow"
         card-class="table"
         :columns="columns"
