@@ -11,14 +11,13 @@
     <div class="q-pa-md">
 
       <q-table v-model:pagination="pagination"
-        :rows-per-page-options="pagination.rowsPerPagePageOptions"
-        :rowsPerPage="pagination.rowsPerPage"
+        :rowsPerPageOptions="pagination.rowsPerPageOptions"
         :rows="activityTask"
         class="table-text no-shadow  text-align"
         card-class="table"
         :columns="columns"
         row-key="name"
-        @request="watchTable">
+        @request="getTaskWithPagination">
 
         <template #body="props">
           <q-tr :props="props">

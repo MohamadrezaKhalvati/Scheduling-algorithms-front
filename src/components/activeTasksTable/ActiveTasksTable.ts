@@ -1,11 +1,23 @@
 import moment from "jalali-moment"
-import { readTask } from "src/composition/useTasks"
+import { readTask, TaskTableColumnsType, TaskTableRowType } from "src/composition/useTasks"
 import { userInformation } from "src/composition/useUserInformation"
 import { TaskModel } from "src/utils/swagger/Api"
-import { defineComponent, ref, watch } from "vue"
+import { defineComponent, PropType, ref, watch } from "vue"
 export default defineComponent({
+
+    props: {
+        propsRows: {
+            type: Array as PropType<TaskTableRowType[]>,
+            default: () => []
+        },
+        propsColumns: {
+            type: Array as PropType<TaskTableColumnsType[]>,
+            default: () => []
+        }
+    },
+
     setup() {
-        const { getReadTaskData, getCategoryName, getProfileName, getReadTaskDataByFilter } = readTask()
+        const { getReadTaskData, getCategoryName, getProfileName, getReadTaskDataByFilter, getTaskDataPagination } = readTask()
         const { user } = userInformation()
         const activityTask = ref<TaskModel[]>()
         const filter = ref(false)
@@ -23,6 +35,7 @@ export default defineComponent({
         let categoryName = null
         let title = null
         let providedName = null
+
         async function getTaskDaTaByfilterr() {
             if (dateTo.value) {
                 dateToInGeorgian = moment.from(dateTo.value, "fa", "YYYY/MM/DD").add(1, "days").format("YYYY-MM-DD")
@@ -51,26 +64,33 @@ export default defineComponent({
             page: 1,
             rowsNumber: 2,
             rowsPerPage: 7,
-            rowsPerPagePageOptions: [7, 20, 50]
+            rowsPerPageOptions: [7, 20, 50]
         })
-        const columns = [
+
+
+        const columns: TaskTableColumnsType[] = [
             { name: "number", align: "left", label: "شماره", field: "number" },
-            { name: "title", required: true, label: "نام تسک", align: "left", field: "title", format: val => `${val}`, sortable: true },
+            { name: "title", required: true, label: "نام تسک", align: "left", field: "title", sortable: true },
             { name: "deadline", label: "مهلت پایانی", align: "left", field: "deadline", sortable: true },
             { name: "status", label: "وضعیت", field: "status", sortable: true, align: "left" },
             { name: "project", label: "پروژه", field: "project", align: "left" },
             { name: "category", label: "دسته بندی", field: "category", sortable: true, align: "left" },
         ]
+
+
         watch(() => user.value.userId, async () => {
+
             activityTask.value = await getReadTaskData()
             categoryOptions.value = await getCategoryName()
             providedOptions.value = await getProfileName()
         })
 
-        function watchTable() {
-            console.log(pagination.value.rowsPerPage)
-
+        async function getTaskWithPagination(props) {
+            pagination.value.rowsPerPage = props.pagination.rowsPerPage
+            const taskData = await getTaskDataPagination(props.pagination)
+            activityTask.value = taskData
         }
+
         return {
             categoryOptions,
             getTaskDaTaByfilterr,
@@ -86,7 +106,7 @@ export default defineComponent({
             providedOptions,
             pagination,
             taskName,
-            watchTable
+            getTaskWithPagination
         }
     }
 })

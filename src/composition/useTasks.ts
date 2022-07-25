@@ -4,7 +4,25 @@ import { fetchService } from "src/boot/fetch-swagger"
 import { TaskWhereData } from "src/utils/swagger/Api"
 import { userInformation } from "./useUserInformation"
 
-export type TaskType = {
+
+export type TaskTableColumnsType = {
+    name: string,
+    align: string,
+    label: string,
+    field: string,
+    sortable?: boolean,
+    required?: boolean
+}
+
+export type Pagination = {
+    sortBy: string,
+    descending: boolean,
+    page: number,
+    rowsNumber: number,
+    rowsPerPage: number,
+    rowsPerPageOption: []
+}
+export type TaskTableRowType = {
     number: number,
     title: string,
     deadline: string,
@@ -27,19 +45,30 @@ export type rawFilterTaskType = {
 
 const { user } = userInformation()
 
-async function getReadTaskData() {
-
-    const returnData = []
+async function getTaskDataPagination(pagination: Pagination) {
     const { data: readTaskData } = await fetchService.task.readTask({
         where: {
             assigneeId: user.value.userId,
-            isFinished: false,
+            isFinished: false
         },
+        pagination: {
+            skip: 0,
+            take: pagination.rowsPerPage
+        },
+        sortBy: {
+            descending: pagination.descending,
+            field: "deadline"
+        }
     })
 
+    const mapedData = await mapTaskData(readTaskData)
+    return mapedData
 
 
+}
 
+async function mapTaskData(readTaskData) {
+    const returnData = []
     let counter = 1
     for (const task of readTaskData.data) {
         const category = await convertCategoryIdToCategoryName(task.categoryId)
@@ -48,7 +77,7 @@ async function getReadTaskData() {
         const deadline = convertDateToJalali(task.deadline)
         const status = setStatus(task.status)
 
-        const obj: TaskType = {
+        const obj: TaskTableRowType = {
             number: counter,
             category: category.categoryName,
             project: projectName,
@@ -64,8 +93,22 @@ async function getReadTaskData() {
         returnData.push(obj)
         counter++
     }
-
     return returnData
+}
+async function getReadTaskData() {
+
+
+    const { data: readTaskData } = await fetchService.task.readTask({
+        where: {
+            assigneeId: user.value.userId,
+            isFinished: false,
+        },
+    })
+
+    const mapedData = mapTaskData(readTaskData)
+
+
+    return mapedData
 }
 
 async function getReadTaskDataByFilter(data: rawFilterTaskType) {
@@ -108,7 +151,7 @@ async function getReadTaskDataByFilter(data: rawFilterTaskType) {
         const deadlineColor = setDeadlineColor(data.deadline)
         const status = setStatus(data.status)
         const projectName = await convertProjectIdToProjectName(data.metadata.projectId)
-        const obj: TaskType = {
+        const obj: TaskTableRowType = {
             number: coutner,
             category: category.categoryName,
             categoryColor: category.categoryColor,
@@ -245,7 +288,8 @@ export function readTask() {
         getCategoryName,
         getProfileName,
         convertDateToJalali,
-        getReadTaskDataByFilter
+        getReadTaskDataByFilter,
+        getTaskDataPagination
     }
 }
 
