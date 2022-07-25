@@ -17,6 +17,8 @@
         card-class="table"
         :columns="columns"
         row-key="name"
+        :loading="loading"
+        binary-state-sort
         @request="getTaskWithPagination">
 
         <template #body="props">

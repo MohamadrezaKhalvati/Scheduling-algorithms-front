@@ -1,11 +1,11 @@
 import moment from "jalali-moment"
 import { fetchService } from "src/boot/fetch-swagger"
-import { readTask } from "./useTasks"
+import { Pagination, readTask } from "./useTasks"
 import { userInformation } from "./useUserInformation"
 
 const { user } = userInformation()
 const { convertDateToJalali } = readTask()
-export type ReportType = {
+export type ReportTableRowType = {
     number: number,
     createDate: string,
     date: string,
@@ -13,7 +13,19 @@ export type ReportType = {
     totalHours: string
 }
 
+export type ReportTableColumnsType = {
+    name: string,
+    align: string,
+    label: string,
+    field: string,
+    sortable?: boolean,
+    required?: boolean
 
+}
+
+export type ReportTableRowsType = {
+
+}
 export type rawReportTimeDataClassified = {
     startDate: string,
     endDate: string,
@@ -25,7 +37,6 @@ export type GetWorkHoursClassifiedReportByFIlterType = {
     startDate: string,
     endDate: string
 }
-
 export type ReportTimeDataClassified = {
     name: string,
     data: []
@@ -54,21 +65,41 @@ async function getReportData() {
             field: "date"
         }
     })
-    const returnReport = createReportType(reportData)
+    const returnReport = mapReportData(reportData)
 
 
     return returnReport
 
 
 }
+async function GetReportDataPagination(pagination: Pagination) {
+    const { data: readReportData } = await fetchService.report.readReport({
+        where: {
+            userId: user.value.userId
+        },
+        pagination: {
+            skip: 0,
+            take: pagination.rowsPerPage
+        },
+        sortBy: {
+            descending: pagination.descending,
+            field: "date"
+        }
+    })
 
-function createReportType(reportData) {
+    const mapedData = mapReportData(readReportData)
+
+    console.log(mapedData)
+    return mapedData
+
+}
+function mapReportData(reportData) {
     const returnReport = []
 
     let counter = 1
     reportData.data.filter(report => {
 
-        const obj: ReportType = {
+        const obj: ReportTableRowType = {
             number: counter,
             createDate: report.createdDate,
             date: report.date,
@@ -85,6 +116,7 @@ function createReportType(reportData) {
     })
     return returnReport
 }
+
 async function getReportDataByFilter(startData: string, endDate: string) {
 
     const { data: reportData } = await fetchService.report.readReport({
@@ -101,10 +133,11 @@ async function getReportDataByFilter(startData: string, endDate: string) {
         }
     })
 
-    const returnData = createReportType(reportData)
+    const returnData = mapReportData(reportData)
     return returnData
 
 }
+
 function getReportTotalHours(report) {
     let totalHoursPerMinuts = 0
     for (const item of report.itemList) {
@@ -221,5 +254,6 @@ export function readReport() {
         getReportWorkHours,
         getWorkHoursClassifiedReport,
         getReportDataByFilter,
+        GetReportDataPagination
     }
 }

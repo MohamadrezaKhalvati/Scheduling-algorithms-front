@@ -14,13 +14,23 @@ export type TaskTableColumnsType = {
     required?: boolean
 }
 
-export type Pagination = {
+export type UiPagination = {
     sortBy: string,
     descending: boolean,
     page: number,
     rowsNumber: number,
     rowsPerPage: number,
     rowsPerPageOption: []
+}
+export type ApiPagination = {
+    pagination: {
+        skip: number,
+        take: number
+    },
+    sortBy: {
+        sortBy: string,
+        descending: boolean,
+    }
 }
 export type TaskTableRowType = {
     number: number,
@@ -45,19 +55,19 @@ export type rawFilterTaskType = {
 
 const { user } = userInformation()
 
-async function getTaskDataPagination(pagination: Pagination) {
+async function getTaskDataPagination(searchInput: ApiPagination) {
     const { data: readTaskData } = await fetchService.task.readTask({
         where: {
             assigneeId: user.value.userId,
             isFinished: false
         },
         pagination: {
-            skip: 0,
-            take: pagination.rowsPerPage
+            skip: searchInput.pagination.skip,
+            take: searchInput.pagination.take
         },
         sortBy: {
-            descending: pagination.descending,
-            field: "deadline"
+            descending: searchInput.sortBy.descending,
+            field: searchInput.sortBy.sortBy
         }
     })
 

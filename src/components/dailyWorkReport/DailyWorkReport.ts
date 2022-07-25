@@ -1,13 +1,26 @@
 import moment from "jalali-moment"
-import { readReport, ReportType } from "src/composition/useReport"
+import { readReport, ReportTableRowsType, ReportTableRowType } from "src/composition/useReport"
 import { userInformation } from "src/composition/useUserInformation"
-import { defineComponent, ref, watch } from "vue"
+import { defineComponent, PropType, ref, watch } from "vue"
 
 
 export default defineComponent({
+    props: {
+        propsRows: {
+            type: Array as PropType<ReportTableRowType[]>,
+            default: () => []
+        },
+        propsColumns: {
+            type: Array as PropType<ReportTableRowsType[]>,
+            default: () => []
+        }
+    },
+
     setup() {
 
-        const { getReportData, getReportDataByFilter } = readReport()
+
+
+        const { getReportData, getReportDataByFilter, GetReportDataPagination } = readReport()
         const { user } = userInformation()
         const filter = ref(false)
         const dateFrom = ref("")
@@ -22,13 +35,13 @@ export default defineComponent({
         })
         const columns = [
             { name: "number", align: "left", label: "شماره", field: "number" },
-            { name: "reportDate", required: true, label: "تاریخ گزارش", align: "left", field: "reportDate", format: val => `${val}`, sortable: true },
+            { name: "reportDate", required: true, label: "تاریخ گزارش", align: "left", field: "reportDate", sortable: true },
             { name: "createReportDate", label: "تاریخ ثبت گزارش", field: "createReportDate", align: "left" },
             { name: "totalHour", label: "مجموعه ساعت", field: "totalHour", align: "left" },
             { name: "validity", label: "اعتبار", field: "validity", align: "left" },
         ]
 
-        const reportOptions = ref<ReportType[]>([])
+        const reportOptions = ref<ReportTableRowType[]>([])
 
         async function getReportDataByFilterr() {
             const dateToInGeorgian = moment.from(dateTo.value, "fa", "YYYY/MM/DD").add(1, "days").format("YYYY/MM/DD")
@@ -38,6 +51,16 @@ export default defineComponent({
             filter.value = false
 
         }
+
+        async function getTaskWithPagination(props) {
+            const { pagination } = props
+            pagination.value.rowsPerPage = pagination.rowsPerPage
+
+            const startRow = (pagination.page - 1) * pagination.rowsPerPage
+            reportOptions.value = await GetReportDataPagination(pagination)
+
+        }
+
         watch(() => user.value.userId, async () => {
             reportOptions.value = await getReportData()
         })
@@ -50,7 +73,8 @@ export default defineComponent({
             dateFrom,
             dateTo,
             pagination,
-            getReportDataByFilterr
+            getReportDataByFilterr,
+            getTaskWithPagination
         }
     }
 }) 

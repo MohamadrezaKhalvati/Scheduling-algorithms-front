@@ -16,7 +16,8 @@
         class=" no-shadow"
         card-class="table"
         :columns="columns"
-        row-key="name">
+        row-key="name"
+        @request="getTaskWithPagination">
 
         <template #body="props">
           <q-tr :props="props">

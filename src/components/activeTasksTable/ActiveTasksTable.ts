@@ -1,5 +1,5 @@
 import moment from "jalali-moment"
-import { readTask, TaskTableColumnsType, TaskTableRowType } from "src/composition/useTasks"
+import { ApiPagination, readTask, TaskTableColumnsType, TaskTableRowType } from "src/composition/useTasks"
 import { userInformation } from "src/composition/useUserInformation"
 import { TaskModel } from "src/utils/swagger/Api"
 import { defineComponent, PropType, ref, watch } from "vue"
@@ -22,6 +22,7 @@ export default defineComponent({
         const activityTask = ref<TaskModel[]>()
         const filter = ref(false)
         const dense = ref(false)
+        const loading = ref(false)
         const denseOpts = ref(false)
         const categoryModel = ref(null)
         const providedModel = ref(null)
@@ -59,7 +60,7 @@ export default defineComponent({
 
         }
         const pagination = ref({
-            sortBy: "desc",
+            sortBy: "deadline",
             descending: false,
             page: 1,
             rowsNumber: 2,
@@ -86,9 +87,32 @@ export default defineComponent({
         })
 
         async function getTaskWithPagination(props) {
-            pagination.value.rowsPerPage = props.pagination.rowsPerPage
-            const taskData = await getTaskDataPagination(props.pagination)
+            const { page, rowsPerPage, sortBy, descending } = props.pagination
+
+            loading.value = true
+
+            const startRow = (page - 1) * rowsPerPage
+            const searchInput: ApiPagination = {
+                pagination: {
+                    take: rowsPerPage,
+                    skip: startRow
+                },
+                sortBy: {
+                    descending: descending,
+                    sortBy: sortBy
+                }
+            }
+
+            const taskData = await getTaskDataPagination(searchInput)
+
             activityTask.value = taskData
+
+            pagination.value.page = page
+            pagination.value.rowsPerPage = rowsPerPage
+            pagination.value.sortBy = sortBy
+            pagination.value.descending = descending
+
+            loading.value = false
         }
 
         return {
@@ -106,6 +130,7 @@ export default defineComponent({
             providedOptions,
             pagination,
             taskName,
+            loading,
             getTaskWithPagination
         }
     }
