@@ -18,21 +18,21 @@ export default defineComponent({
 
     setup() {
 
-
-
-        const { getReportData, getReportDataByFilter, GetReportDataPagination } = readReport()
+        const { getReportData, getReportDataByFilter } = readReport()
         const { user } = userInformation()
         const filter = ref(false)
         const dateFrom = ref("")
         const dateTo = ref("")
+        const loading = ref(false)
+
         const pagination = ref({
-            sortBy: "desc",
-            descending: false,
+            sortBy: "date",
+            descending: true,
             page: 1,
-            rowsNumber: 344,
             rowsPerPage: 6,
-            rowsPerPagePageOptions: [6, 5, 10, 50]
+            rowsPerPagePageOptions: [5, 10, 50]
         })
+
         const columns = [
             { name: "number", align: "left", label: "شماره", field: "number" },
             { name: "reportDate", required: true, label: "تاریخ گزارش", align: "left", field: "reportDate", sortable: true },
@@ -52,18 +52,45 @@ export default defineComponent({
 
         }
 
-        async function getTaskWithPagination(props) {
-            const { pagination } = props
-            pagination.value.rowsPerPage = pagination.rowsPerPage
 
-            const startRow = (pagination.page - 1) * pagination.rowsPerPage
-            reportOptions.value = await GetReportDataPagination(pagination)
+        function getReportDataWithPagination(props) {
+            console.log(props)
 
         }
+        // const { sortBy, descending, page, rowsPerPage } = props.pagination
+
+        // loading.value = true
+        // pagination.value.rowsPerPage = rowsPerPage
+
+        // const startRow = (page - 1) * rowsPerPage
+        // const searchInput: ApiPagination = {
+        //     pagination: {
+        //         take: rowsPerPage,
+        //         skip: startRow
+        //     },
+        //     sortBy: {
+        //         descending: descending,
+        //         sortBy: sortBy
+        //     }
+        // }
+        // console.log(searchInput)
+
+        // console.log(page)
+
+        // reportOptions.value = await GetReportDataPagination(searchInput)
+
+        // pagination.value.page = page
+        // pagination.value.rowsPerPage = rowsPerPage
+        // pagination.value.sortBy = sortBy
+        // pagination.value.descending = descending
+        // loading.value = false
+
 
         watch(() => user.value.userId, async () => {
             reportOptions.value = await getReportData()
+
         })
+
 
 
         return {
@@ -73,8 +100,10 @@ export default defineComponent({
             dateFrom,
             dateTo,
             pagination,
+            loading,
             getReportDataByFilterr,
-            getTaskWithPagination
+            getReportDataWithPagination
+
         }
     }
 }) 

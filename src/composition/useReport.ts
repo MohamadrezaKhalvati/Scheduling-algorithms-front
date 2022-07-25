@@ -1,6 +1,6 @@
 import moment from "jalali-moment"
 import { fetchService } from "src/boot/fetch-swagger"
-import { Pagination, readTask } from "./useTasks"
+import { ApiPagination, readTask } from "./useTasks"
 import { userInformation } from "./useUserInformation"
 
 const { user } = userInformation()
@@ -72,18 +72,18 @@ async function getReportData() {
 
 
 }
-async function GetReportDataPagination(pagination: Pagination) {
+async function GetReportDataPagination(searchInput: ApiPagination) {
     const { data: readReportData } = await fetchService.report.readReport({
         where: {
             userId: user.value.userId
         },
         pagination: {
-            skip: 0,
-            take: pagination.rowsPerPage
+            skip: searchInput.pagination.skip,
+            take: searchInput.pagination.take
         },
         sortBy: {
-            descending: pagination.descending,
-            field: "date"
+            descending: searchInput.sortBy.descending,
+            field: searchInput.sortBy.sortBy
         }
     })
 

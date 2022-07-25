@@ -61,7 +61,7 @@ export default defineComponent({
         }
         const pagination = ref({
             sortBy: "deadline",
-            descending: false,
+            descending: true,
             page: 1,
             rowsNumber: 2,
             rowsPerPage: 7,

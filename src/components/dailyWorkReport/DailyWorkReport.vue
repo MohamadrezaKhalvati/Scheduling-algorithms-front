@@ -10,14 +10,15 @@
     </div>
 
     <div class="q-pa-md">
+
       <q-table v-model:pagination="pagination"
-        :rows-per-page-options="pagination.rowsPerPagePageOptions"
+        :rowsPerPageOptions="pagination.rowsPerPagePageOptions"
         :rows="reportOptions"
         class=" no-shadow"
         card-class="table"
         :columns="columns"
         row-key="name"
-        @request="getTaskWithPagination">
+        :loading="loading">
 
         <template #body="props">
           <q-tr :props="props">
@@ -149,7 +150,7 @@
   </div>
 
 </template>
-<script src="./DailyWorkReport.ts">
+<script src="./DailyWorkReport.ts" lang="ts">
 </script>
 
 <style lang="scss" scoped  >
