@@ -19,6 +19,7 @@
     "clean-deep": "^3.4.0",
     "core-js": "^3.22.2",
     "jalali-moment": "^3.3.11",
+    "moment": "^2.29.4",
     "portal-vue": "3.0.0-beta.0",
     "postcss": "^8.4.12",
     "postcss-rtlcss": "^3.6.3",

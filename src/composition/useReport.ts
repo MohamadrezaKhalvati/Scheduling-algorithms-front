@@ -1,5 +1,6 @@
 import moment from "jalali-moment"
 import { fetchService } from "src/boot/fetch-swagger"
+import { DateRange } from "src/utils/swagger/Api"
 import { ref } from "vue"
 import { ApiPagination, readTask } from "./useTasks"
 import { userInformation } from "./useUserInformation"
@@ -48,6 +49,42 @@ export type ReportChartSeries = {
 export type ReportTimeAvgType = {
     number: number,
     time: number
+}
+
+export type ModeType = {
+    label: string,
+    value: "Category" | "Project"
+}
+
+const ModeIbj: ModeType[] = [
+    {
+        label: "دسته بندی",
+        value: "Category"
+    },
+    {
+        label: "پروژه",
+        value: "Project"
+    }
+]
+
+
+const searchInput = ref<GetReportDataHoursClassifiedInputType>({
+    mode: "Category",
+    operation: "sum",
+    unit: 1,
+    userId: user.value.userId,
+    duration: {
+        startDate: moment().add(-7, "days").format("YYYY-MM-DD"),
+        endDate: moment().add(-1, "days").format("YYYY-MM-DD")
+    }
+})
+
+export type GetReportDataHoursClassifiedInputType = {
+    operation: "sum" | "avg",
+    mode: "Category" | "Project",
+    unit: number,
+    userId: string,
+    duration: DateRange
 }
 
 const allReportNumber = ref(0)
@@ -181,17 +218,14 @@ async function getReportWorkHours() {
 
 
 async function getWorkHoursClassifiedReport() {
-    const returnedData: ReportChartSeries[] = []
-    const series = []
-    const dataa = []
-    const endDate = moment().add(-1, "days").format("YYYY-MM-DD")
-    const startDate = moment().add(-7, "days").format("YYYY-MM-DD")
+
+    const { duration: { endDate, startDate }, mode, unit, operation } = searchInput.value
 
     const { data: reportWorkHoursDataClassified } = await fetchService.report.getWorkHoursClassifiedReport({
         where: {
-            mode: "Category",
-            unit: 1,
-            operation: "avg",
+            mode: mode,
+            unit: unit,
+            operation: operation,
             userId: user.value.userId,
             duration: {
                 startDate: startDate,
@@ -200,8 +234,18 @@ async function getWorkHoursClassifiedReport() {
         }
     })
 
+    const mapedData = await mapReportClassifiedData(reportWorkHoursDataClassified.data, startDate, endDate)
+    return mapedData
+
+}
+
+
+async function mapReportClassifiedData(data, startDate, endDate) {
+    const series = []
+    const dataa = []
+
     const { data: categoryNames } = await fetchService.category.readCategory({})
-    reportWorkHoursDataClassified.data.forEach(report => {
+    data.forEach(report => {
 
         const rawObj: rawReportTimeDataClassified = {
             startDate: convertDateToJalali(report.startDate),
@@ -245,9 +289,7 @@ async function getWorkHoursClassifiedReport() {
     }
 
     return series
-
 }
-
 export function readReport() {
     return {
         getReportData,
@@ -255,6 +297,7 @@ export function readReport() {
         getWorkHoursClassifiedReport,
         getReportDataByFilter,
         GetReportDataPagination,
-        allReportNumber
+        allReportNumber,
+        searchInput
     }
 }

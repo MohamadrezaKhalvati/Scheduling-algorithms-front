@@ -1,3 +1,4 @@
+import moment from "jalali-moment"
 import { readReport } from "src/composition/useReport"
 import { userInformation } from "src/composition/useUserInformation"
 import { defineComponent, ref, watch } from "vue"
@@ -8,13 +9,16 @@ export default defineComponent({
         apexchart: VueApexCharts,
     },
     setup() {
-        const { getWorkHoursClassifiedReport } = readReport()
+        const { getWorkHoursClassifiedReport, searchInput } = readReport()
         const { user } = userInformation()
+        const category = ref(null)
+        const unit = ref(null)
+        const reportChartData = ref([])
 
         const apexChartOptions = ref({
             series: [],
             chart: {
-                id: "chartId",
+                id: "reportChartId",
                 type: "bar",
                 height: 250,
                 stacked: true,
@@ -32,7 +36,7 @@ export default defineComponent({
                 breakpoint: 480,
                 options: {
                     legend: {
-                        position: "bottom",
+                        position: "buttom",
                         offsetX: -10,
                         offsetY: 0
                     }
@@ -46,17 +50,40 @@ export default defineComponent({
                     borderRadius: 5,
                 }
             },
-            xaxis: {
-                type: "time",
-                categories: ["۱۳م تیر", "۱۴م تیر", "۱۵م تیر", "۱۶م تیر", "۱۷م تیر", "۱۸م تیر", "۱۹م تیر"],
+            legend: {
+                position: "top",
+                height: "30px",
                 labels: {
+                    colors: "#d0d2d6",
+                },
+                itemMargin: {
+                    horizontal: 10,
+                    vertical: 5
+                },
+                markers: {
+                    width: 20,
+                    height: 20,
+                    radius: 3,
+                    offsetX: 10,
+                },
+            },
+            xaxis: {
+                type: "string",
+                categories: [],
+                labels: {
+                    rotate: 0,
+                    show: true,
                     style: {
-                        colors: ["#d0d2d6", "#d0d2d6", "#d0d2d6", "#d0d2d6", "#d0d2d6", "#d0d2d6", "#d0d2d6"]
-                    }
+                        colors: "#d0d2d6",
+                        fontSize: "12px",
+                        fontFamily: "Vazir",
+                    },
+                    offsetX: 0,
+                    offsetY: 0,
                 },
                 axisBorder: {
                     show: true,
-                    color: "#d0d2d6"
+                    colors: "#d0d2d6"
                 }
             },
             yaxis: {
@@ -65,12 +92,24 @@ export default defineComponent({
                     show: true,
                 },
                 labels: {
+                    formatter: function (value) {
+                        if (value) {
+                            const text = `${value.toFixed(0)} ساعت`
+                            return text
+                        }
+                        return value
+
+                    },
                     show: true,
-                    type: "dateTime",
-                    categories: ["۰ ساعت", "۲ ساعت", "۴ ساعت", "۶ ساعت", "۸ ساعت", "۱۰ ساعت"],
+                    align: "center",
                     style: {
-                        colors: ["#d0d2d6", "#d0d2d6", "#d0d2d6", "#d0d2d6", "#d0d2d6", "#d0d2d6", "#d0d2d6"]
-                    }
+                        colors: "#d0d2d6",
+                        fontSize: "12px",
+                        fontFamily: "Vazir",
+
+                    },
+                    offsetX: 0,
+                    offsetY: 0,
                 },
                 axisBorder: {
                     show: false,
@@ -80,25 +119,49 @@ export default defineComponent({
         const categoryOptions = [
             "دسته بندی", "پروژه"
         ]
-        const dayOptions = [
-            "۱",
-            "۷",
-            "۳۰"
+        const unitOptions = [
+            1,
+            7,
+            30
         ]
 
         watch(() => user.value.userId, async () => {
-            apexChartOptions.value.series = await getWorkHoursClassifiedReport()
-            window["ApexCharts"].exec("chartId", "updateOptions", apexChartOptions.value)
+
+            reportChartData.value = await getWorkHoursClassifiedReport()
+            apexChartOptions.value.series = reportChartData.value
+            window["ApexCharts"].exec("reportChartId", "updateOptions", apexChartOptions.value)
+        })
+
+        watch(() => reportChartData.value, () => {
+            const buffTime = ref(searchInput.value.duration.endDate)
+
+            const series = []
+            if (reportChartData.value.length >= 0) {
+
+                for (let index = 0; index < 7; index++) {
+
+                    const jDate = (moment(buffTime.value).locale("fa").format("YYYY-MM-DD")).split("-")[2]
+                    const a = "تیر"
+                    const dateText = `${jDate}  ام ${a}`
+                    apexChartOptions.value.xaxis.categories.push(
+                        dateText
+                    )
+                    buffTime.value = moment(buffTime.value).add(-searchInput.value.unit, "days").format("YYYY-MM-DD")
+                }
+                apexChartOptions.value.xaxis.categories = apexChartOptions.value.xaxis.categories.reverse()
+
+            }
+
 
 
         })
         return {
-            dayOptions,
+            unitOptions,
             apexChartOptions,
             categoryOptions,
-            model: ref(null),
-            dense: ref(false),
-            denseOpts: ref(false),
+            category,
+            unit
+
         }
     }
 

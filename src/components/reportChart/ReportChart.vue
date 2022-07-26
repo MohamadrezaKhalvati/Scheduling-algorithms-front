@@ -25,16 +25,15 @@
         <span>نوع دسته بندی</span>
 
         <div>
-          <q-select v-model="model"
+          <q-select v-model="category"
             class="q-field__control relative-position row no-wrap select-field"
             outlined
             dense
             bottom-slots
             :options="categoryOptions"
             label-color="white"
-            :label="categoryOptions[0]"
-            color="white"
-            :options-dense="denseOpts">
+            label="دسته بندی"
+            color="white">
             <template #prepend>
               <q-icon name="category"
                 color="white"
@@ -49,16 +48,15 @@
         <span>واحد (روز)</span>
 
         <div>
-          <q-select v-model="model"
+          <q-select v-model="unit"
             class="q-field__control relative-position row no-wrap"
             outlined
             bottom-slots
-            :options="dayOptions"
+            :options="unitOptions"
             label-color="white"
-            :label="dayOptions[0]"
+            :label="unitOptions[0]"
             color="white"
-            dense
-            :options-dense="denseOpts">
+            dense>
             <template #prepend>
               <q-icon name="donut_small"
                 color="white"
