@@ -14,11 +14,14 @@
       <q-table v-model:pagination="pagination"
         :rowsPerPageOptions="pagination.rowsPerPagePageOptions"
         :rows="reportOptions"
-        class=" no-shadow"
+        class=" no-shadow table-style"
         card-class="table"
         :columns="columns"
         row-key="name"
-        :loading="loading">
+        :loading="loading"
+        binary-state-sort
+        virtual-scroll
+        @request="getReportDataWithPagination">
 
         <template #body="props">
           <q-tr :props="props">
@@ -213,6 +216,7 @@
   padding: 0px;
   background-color: #282f46;
   height: 420px;
+  overflow: auto;
 }
 
 .table-header-class {

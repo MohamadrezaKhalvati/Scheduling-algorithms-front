@@ -17,7 +17,15 @@ export default defineComponent({
     },
 
     setup() {
-        const { getReadTaskData, getCategoryName, getProfileName, getReadTaskDataByFilter, getTaskDataPagination } = readTask()
+        const {
+            getReadTaskData,
+            getCategoryName,
+            getProfileName,
+            getReadTaskDataByFilter,
+            getTaskDataPagination,
+            alltaskNumber
+        } = readTask()
+
         const { user } = userInformation()
         const activityTask = ref<TaskModel[]>()
         const filter = ref(false)
@@ -36,6 +44,22 @@ export default defineComponent({
         let categoryName = null
         let title = null
         let providedName = null
+        const pagination = ref({
+            sortBy: "deadline",
+            descending: true,
+            page: 1,
+            rowsNumber: 0,
+            rowsPerPage: 7,
+            rowsPerPageOptions: [7, 20, 50]
+        })
+        const columns: TaskTableColumnsType[] = [
+            { name: "number", align: "left", label: "شماره", field: "number" },
+            { name: "title", required: true, label: "نام تسک", align: "left", field: "title", sortable: true },
+            { name: "deadline", label: "مهلت پایانی", align: "left", field: "deadline", sortable: true },
+            { name: "status", label: "وضعیت", field: "status", sortable: true, align: "left" },
+            { name: "project", label: "پروژه", field: "project", align: "left" },
+            { name: "category", label: "دسته بندی", field: "category", sortable: true, align: "left" },
+        ]
 
         async function getTaskDaTaByfilterr() {
             if (dateTo.value) {
@@ -56,37 +80,19 @@ export default defineComponent({
 
             const taskDataByFilter = await getReadTaskDataByFilter({ dateFromInGeorgian, dateToInGeorgian, categoryName, providedName, title })
             activityTask.value = taskDataByFilter
+            pagination.value.rowsNumber = alltaskNumber.value
             filter.value = false
 
         }
-        const pagination = ref({
-            sortBy: "deadline",
-            descending: true,
-            page: 1,
-            rowsNumber: 2,
-            rowsPerPage: 7,
-            rowsPerPageOptions: [7, 20, 50]
-        })
-
-
-        const columns: TaskTableColumnsType[] = [
-            { name: "number", align: "left", label: "شماره", field: "number" },
-            { name: "title", required: true, label: "نام تسک", align: "left", field: "title", sortable: true },
-            { name: "deadline", label: "مهلت پایانی", align: "left", field: "deadline", sortable: true },
-            { name: "status", label: "وضعیت", field: "status", sortable: true, align: "left" },
-            { name: "project", label: "پروژه", field: "project", align: "left" },
-            { name: "category", label: "دسته بندی", field: "category", sortable: true, align: "left" },
-        ]
-
 
         watch(() => user.value.userId, async () => {
-
             activityTask.value = await getReadTaskData()
             categoryOptions.value = await getCategoryName()
             providedOptions.value = await getProfileName()
         })
 
         async function getTaskWithPagination(props) {
+
             const { page, rowsPerPage, sortBy, descending } = props.pagination
 
             loading.value = true
@@ -111,13 +117,13 @@ export default defineComponent({
             pagination.value.rowsPerPage = rowsPerPage
             pagination.value.sortBy = sortBy
             pagination.value.descending = descending
+            pagination.value.rowsNumber = alltaskNumber.value
 
             loading.value = false
         }
 
         return {
             categoryOptions,
-            getTaskDaTaByfilterr,
             categoryModel,
             denseOpts,
             columns,
@@ -131,6 +137,7 @@ export default defineComponent({
             pagination,
             taskName,
             loading,
+            getTaskDaTaByfilterr,
             getTaskWithPagination
         }
     }

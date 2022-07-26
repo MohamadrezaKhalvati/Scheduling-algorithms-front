@@ -1,10 +1,12 @@
 import moment from "jalali-moment"
 import { fetchService } from "src/boot/fetch-swagger"
+import { ref } from "vue"
 import { ApiPagination, readTask } from "./useTasks"
 import { userInformation } from "./useUserInformation"
 
 const { user } = userInformation()
 const { convertDateToJalali } = readTask()
+
 export type ReportTableRowType = {
     number: number,
     createDate: string,
@@ -12,17 +14,15 @@ export type ReportTableRowType = {
     isvalid: boolean,
     totalHours: string
 }
-
 export type ReportTableColumnsType = {
     name: string,
-    align: string,
     label: string,
-    field: string,
-    sortable?: boolean,
-    required?: boolean
-
+    required: boolean,
+    align: string,
+    field: any,
+    format?: any,
+    sortable?: boolean
 }
-
 export type ReportTableRowsType = {
 
 }
@@ -50,6 +50,8 @@ export type ReportTimeAvgType = {
     time: number
 }
 
+const allReportNumber = ref(0)
+
 async function getReportData() {
 
     const { data: reportData } = await fetchService.report.readReport({
@@ -65,11 +67,10 @@ async function getReportData() {
             field: "date"
         }
     })
-    const returnReport = mapReportData(reportData)
+    const mapedReport = mapReportData(reportData, 1)
+    allReportNumber.value = reportData.count
 
-
-    return returnReport
-
+    return mapedReport
 
 }
 async function GetReportDataPagination(searchInput: ApiPagination) {
@@ -87,16 +88,15 @@ async function GetReportDataPagination(searchInput: ApiPagination) {
         }
     })
 
-    const mapedData = mapReportData(readReportData)
-
-    console.log(mapedData)
-    return mapedData
+    const mapedReport = mapReportData(readReportData, searchInput.pagination.skip)
+    allReportNumber.value = readReportData.count
+    return mapedReport
 
 }
-function mapReportData(reportData) {
+function mapReportData(reportData, startRowNumber: number) {
     const returnReport = []
 
-    let counter = 1
+    let counter = startRowNumber
     reportData.data.filter(report => {
 
         const obj: ReportTableRowType = {
@@ -116,7 +116,6 @@ function mapReportData(reportData) {
     })
     return returnReport
 }
-
 async function getReportDataByFilter(startData: string, endDate: string) {
 
     const { data: reportData } = await fetchService.report.readReport({
@@ -133,8 +132,9 @@ async function getReportDataByFilter(startData: string, endDate: string) {
         }
     })
 
-    const returnData = mapReportData(reportData)
-    return returnData
+    const mapedReport = mapReportData(reportData, 1)
+    allReportNumber.value = reportData.count
+    return mapedReport
 
 }
 
@@ -254,6 +254,7 @@ export function readReport() {
         getReportWorkHours,
         getWorkHoursClassifiedReport,
         getReportDataByFilter,
-        GetReportDataPagination
+        GetReportDataPagination,
+        allReportNumber
     }
 }

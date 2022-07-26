@@ -2,6 +2,7 @@ import cleanDeep from "clean-deep"
 import moment from "jalali-moment"
 import { fetchService } from "src/boot/fetch-swagger"
 import { TaskWhereData } from "src/utils/swagger/Api"
+import { ref } from "vue"
 import { userInformation } from "./useUserInformation"
 
 
@@ -52,7 +53,7 @@ export type rawFilterTaskType = {
     title?: string,
 
 }
-
+const alltaskNumber = ref(0)
 const { user } = userInformation()
 
 async function getTaskDataPagination(searchInput: ApiPagination) {
@@ -71,6 +72,7 @@ async function getTaskDataPagination(searchInput: ApiPagination) {
         }
     })
 
+    alltaskNumber.value = readTaskData.count
     const mapedData = await mapTaskData(readTaskData)
     return mapedData
 
@@ -115,6 +117,7 @@ async function getReadTaskData() {
         },
     })
 
+    alltaskNumber.value = readTaskData.count
     const mapedData = mapTaskData(readTaskData)
 
 
@@ -122,7 +125,6 @@ async function getReadTaskData() {
 }
 
 async function getReadTaskDataByFilter(data: rawFilterTaskType) {
-    const returnData = []
     const categoryId = await convertCagetoryNameToCategoryId(data)
     const responsibeId = await convertProfileNameToProfileId(data)
     const startDate = data.dateFromInGeorgian
@@ -153,32 +155,10 @@ async function getReadTaskDataByFilter(data: rawFilterTaskType) {
         }
     })
 
-    let coutner = 1
-    for (const data of readTaskData.data) {
+    const mapedTask = mapTaskData(readTaskData)
+    alltaskNumber.value = readTaskData.count
 
-        const category = await convertCategoryIdToCategoryName(data.categoryId)
-        const deadline = convertDateToJalali(data.deadline)
-        const deadlineColor = setDeadlineColor(data.deadline)
-        const status = setStatus(data.status)
-        const projectName = await convertProjectIdToProjectName(data.metadata.projectId)
-        const obj: TaskTableRowType = {
-            number: coutner,
-            category: category.categoryName,
-            categoryColor: category.categoryColor,
-            deadline: deadline,
-            deadlineColor: deadlineColor,
-            status: status.status,
-            statusTextColor: status.statusTextColor,
-            statusColor: status.statusColor,
-            title: data.title,
-            project: projectName,
-
-        }
-        returnData.push(obj)
-        coutner++
-    }
-
-    return returnData
+    return mapedTask
 }
 
 
@@ -294,6 +274,7 @@ async function getProfileName() {
 
 export function readTask() {
     return {
+        alltaskNumber,
         getReadTaskData,
         getCategoryName,
         getProfileName,

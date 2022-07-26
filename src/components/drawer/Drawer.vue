@@ -1,12 +1,12 @@
 <template>
-  <div class="root .col-1">
+  <div class="root .col-1 ">
     <q-drawer v-model="drawer"
       show-if-above
       :mini="!drawer || miniState"
       :width="200"
       :breakpoint="500"
       bordered
-      class="drawer"
+      style="background-color : #282f46 "
       @click.capture="changeMiniStateValue">
 
       <div class="drawer-header">
@@ -21,118 +21,116 @@
           @click="miniState = true" />
       </div>
 
-      <q-scroll-area class="fit">
-        <q-list padding>
+      <q-list padding>
 
-          <div>
-            <q-item v-ripple
-              clickable>
-              <q-item-section avatar>
-                <q-icon name="dashboard"
-                  color="white" />
-              </q-item-section>
+        <div>
+          <q-item v-ripple
+            clickable>
+            <q-item-section avatar>
+              <q-icon name="dashboard"
+                color="white" />
+            </q-item-section>
 
-              <q-item-section class="section-name">
-                صفحه اصلی
-              </q-item-section>
-            </q-item>
-          </div>
+            <q-item-section class="section-name">
+              صفحه اصلی
+            </q-item-section>
+          </q-item>
+        </div>
 
-          <div>
-            <q-item v-ripple
-              clickable>
-              <q-item-section avatar>
-                <q-icon name="pending_actions"
-                  color="white" />
-              </q-item-section>
+        <div>
+          <q-item v-ripple
+            clickable>
+            <q-item-section avatar>
+              <q-icon name="pending_actions"
+                color="white" />
+            </q-item-section>
 
-              <q-item-section class="section-name">
-                گزارش
-              </q-item-section>
-            </q-item>
-          </div>
+            <q-item-section class="section-name">
+              گزارش
+            </q-item-section>
+          </q-item>
+        </div>
 
-          <p v-if="miniState"
-            class="dot-line">
-            . . . .
-          </p>
-          <p v-if="!miniState"
-            class="category-label">
-            تسک ها
-          </p>
+        <p v-if="miniState"
+          class="dot-line">
+          . . . .
+        </p>
+        <p v-if="!miniState"
+          class="category-label">
+          تسک ها
+        </p>
 
-          <div>
-            <q-item v-ripple
-              clickable>
-              <q-item-section avatar>
-                <q-icon name="task_alt"
-                  color="white" />
-              </q-item-section>
+        <div>
+          <q-item v-ripple
+            clickable>
+            <q-item-section avatar>
+              <q-icon name="task_alt"
+                color="white" />
+            </q-item-section>
 
-              <q-item-section class="section-name">
-                تسک ها
-              </q-item-section>
-            </q-item>
-          </div>
+            <q-item-section class="section-name">
+              تسک ها
+            </q-item-section>
+          </q-item>
+        </div>
 
-          <div>
-            <q-item v-ripple
-              clickable>
-              <q-item-section avatar>
-                <q-icon name="sell"
-                  color="white" />
-              </q-item-section>
+        <div>
+          <q-item v-ripple
+            clickable>
+            <q-item-section avatar>
+              <q-icon name="sell"
+                color="white" />
+            </q-item-section>
 
-              <q-item-section class="section-name">
-                تگ ها
-              </q-item-section>
-            </q-item>
-          </div>
+            <q-item-section class="section-name">
+              تگ ها
+            </q-item-section>
+          </q-item>
+        </div>
 
-          <p v-if="miniState"
-            class="dot-line">
-            . . . .
-          </p>
-          <p v-if="!miniState"
-            class="category-label">
-            پروژه ها
-          </p>
+        <p v-if="miniState"
+          class="dot-line">
+          . . . .
+        </p>
+        <p v-if="!miniState"
+          class="category-label">
+          پروژه ها
+        </p>
 
-          <div>
-            <q-item v-ripple
-              clickable>
-              <q-item-section avatar>
-                <q-icon name="work"
-                  color="white" />
-              </q-item-section>
+        <div>
+          <q-item v-ripple
+            clickable>
+            <q-item-section avatar>
+              <q-icon name="work"
+                color="white" />
+            </q-item-section>
 
-              <q-item-section class="section-name">
-                پروژه ها
-              </q-item-section>
-            </q-item>
-          </div>
+            <q-item-section class="section-name">
+              پروژه ها
+            </q-item-section>
+          </q-item>
+        </div>
 
-          <div>
-            <q-item v-ripple
-              clickable>
-              <q-item-section avatar>
-                <q-icon name="sell"
-                  color="white" />
-              </q-item-section>
+        <div>
+          <q-item v-ripple
+            clickable>
+            <q-item-section avatar>
+              <q-icon name="sell"
+                color="white" />
+            </q-item-section>
 
-              <q-item-section class="section-name">
-                تگ ها
-              </q-item-section>
-            </q-item>
-          </div>
+            <q-item-section class="section-name">
+              تگ ها
+            </q-item-section>
+          </q-item>
+        </div>
 
-          <p v-if="!miniState"
-            class="category-label">
-            مدیریت
-          </p>
+        <p v-if="!miniState"
+          class="category-label">
+          مدیریت
+        </p>
 
-        </q-list>
-      </q-scroll-area>
+      </q-list>
 
     </q-drawer>
 
@@ -141,7 +139,7 @@
 <script src="./Drawer.ts">
 </script>
 
-<style>
+<style lang="scss" scoped>
 @font-face {
   font-family: "Vazir";
   src: url("../../../public/fonts/Vazir.woff") format("woff");
@@ -149,9 +147,6 @@
 
 .root {
   display: flex;
-}
-.drawer {
-  background-color: #282f46;
 }
 
 .section-name {
@@ -187,13 +182,5 @@
   justify-content: center;
   color: #a6a4b0;
   font-size: 13px;
-}
-
-.scroll {
-  overflow: hidden;
-}
-
-.q-drawer {
-  background: #282f46;
 }
 </style>
