@@ -126,7 +126,6 @@ export default defineComponent({
         ]
 
         watch(() => user.value.userId, async () => {
-
             reportChartData.value = await getWorkHoursClassifiedReport()
             apexChartOptions.value.series = reportChartData.value
             window["ApexCharts"].exec("reportChartId", "updateOptions", apexChartOptions.value)
@@ -140,27 +139,36 @@ export default defineComponent({
 
                 for (let index = 0; index < 7; index++) {
 
-                    const jDate = (moment(buffTime.value).locale("fa").format("YYYY-MM-DD")).split("-")[2]
-                    const a = "تیر"
-                    const dateText = `${jDate}  ام ${a}`
+                    const jDate = (moment(buffTime.value).locale("fa").format("DD"))
+                    const jMonth = moment(buffTime.value).locale("fa").format("jMMMM")
+
+                    const dateText = `${jDate}  ام ${jMonth}`
                     apexChartOptions.value.xaxis.categories.push(
                         dateText
                     )
                     buffTime.value = moment(buffTime.value).add(-searchInput.value.unit, "days").format("YYYY-MM-DD")
                 }
                 apexChartOptions.value.xaxis.categories = apexChartOptions.value.xaxis.categories.reverse()
-
             }
-
-
-
         })
+
+        function getReportDataWithFilter() {
+            searchInput.value.mode = category.value || searchInput.value.mode
+            searchInput.value.unit = unit.value || searchInput.value.unit
+
+            console.log(searchInput.value)
+
+            // reportChartData.value = await getWorkHoursClassifiedReport()
+
+        }
+
         return {
             unitOptions,
             apexChartOptions,
             categoryOptions,
             category,
-            unit
+            unit,
+            getReportDataWithFilter
 
         }
     }

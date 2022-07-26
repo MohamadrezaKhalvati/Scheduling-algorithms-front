@@ -79,7 +79,8 @@
 
     <div class="button-div">
       <q-btn class="button px-2"
-        dense>
+        dense
+        @click="getReportDataWithFilter">
         ثبت
       </q-btn>
     </div>
