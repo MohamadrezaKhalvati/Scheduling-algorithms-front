@@ -200,7 +200,7 @@
               </div>
 
               <div class="button-div">
-                <q-btn class="button"
+                <q-btn class="button "
                   @click="getTaskDaTaByfilterr">
                   جستجو
                 </q-btn>

@@ -126,16 +126,38 @@ export default defineComponent({
         ]
 
         watch(() => user.value.userId, async () => {
+            searchInput.value.userId = user.value.userId
             reportChartData.value = await getWorkHoursClassifiedReport()
+            mapReportChartSeries(reportChartData.value)
             apexChartOptions.value.series = reportChartData.value
             window["ApexCharts"].exec("reportChartId", "updateOptions", apexChartOptions.value)
+
         })
 
         watch(() => reportChartData.value, () => {
+            mapReportChartSeries(reportChartData.value)
+            apexChartOptions.value.series = reportChartData.value
+        })
+
+        async function getReportDataWithFilter() {
+            searchInput.value.mode = category.value || searchInput.value.mode
+            searchInput.value.unit = unit.value || searchInput.value.unit
+            searchInput.value.duration.startDate = moment().add(-(setEndDate(searchInput.value.unit)), "days").format("YYYY-MM-DD")
+            searchInput.value.duration.endDate = moment().add(-1, "days").format("YYYY-MM-DD")
+
+            reportChartData.value = await getWorkHoursClassifiedReport()
+
+            mapReportChartSeries(reportChartData.value)
+            console.log(reportChartData.value)
+
+            window["ApexCharts"].exec("reportChartId", "updateOptions", apexChartOptions.value)
+        }
+
+        function mapReportChartSeries(reportChartData) {
             const buffTime = ref(searchInput.value.duration.endDate)
 
             const series = []
-            if (reportChartData.value.length >= 0) {
+            if (reportChartData.length >= 0) {
 
                 for (let index = 0; index < 7; index++) {
 
@@ -143,25 +165,29 @@ export default defineComponent({
                     const jMonth = moment(buffTime.value).locale("fa").format("jMMMM")
 
                     const dateText = `${jDate}  ام ${jMonth}`
-                    apexChartOptions.value.xaxis.categories.push(
+                    series.push(
                         dateText
                     )
                     buffTime.value = moment(buffTime.value).add(-searchInput.value.unit, "days").format("YYYY-MM-DD")
                 }
-                apexChartOptions.value.xaxis.categories = apexChartOptions.value.xaxis.categories.reverse()
+                console.log(series)
+
+                apexChartOptions.value.xaxis.categories = series.reverse()
+
             }
-        })
-
-        function getReportDataWithFilter() {
-            searchInput.value.mode = category.value || searchInput.value.mode
-            searchInput.value.unit = unit.value || searchInput.value.unit
-
-            console.log(searchInput.value)
-
-            // reportChartData.value = await getWorkHoursClassifiedReport()
-
         }
 
+        function setEndDate(unit: number) {
+            let number = 1
+            if (unit == 1) {
+                number = 7
+            } else if (unit == 7) {
+                number = 28
+            } else if (unit == 30) {
+                number = 90
+            }
+            return number
+        }
         return {
             unitOptions,
             apexChartOptions,

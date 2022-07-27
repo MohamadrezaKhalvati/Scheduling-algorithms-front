@@ -70,7 +70,6 @@
             style="padding-bottom: 13px;">
             فرم جستجو
           </div>
-          <q-space />
           <q-btn v-close-popup
             style="padding-bottom: 13px; font-size:13px"
             icon="close"
@@ -140,7 +139,7 @@
           </div>
         </q-card-section>
 
-        <div class="body-part2 center">
+        <div class="body-part2 center py-1">
           <q-btn class="button"
             @click="getReportDataByFilterr">
             جستجو
@@ -184,6 +183,7 @@
 .button {
   background-color: $purple-4;
   font-size: 14px;
+  color: white;
 }
 .validity {
   .q-icon {

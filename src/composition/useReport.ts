@@ -8,6 +8,9 @@ import { userInformation } from "./useUserInformation"
 const { user } = userInformation()
 const { convertDateToJalali } = readTask()
 
+
+
+
 export type ReportTableRowType = {
     number: number,
     createDate: string,
@@ -32,8 +35,8 @@ export type rawReportTimeDataClassified = {
     endDate: string,
     value: number,
     category: string
-
 }
+
 export type GetWorkHoursClassifiedReportByFIlterType = {
     startDate: string,
     endDate: string
@@ -51,21 +54,6 @@ export type ReportTimeAvgType = {
     time: number
 }
 
-export type ModeType = {
-    label: string,
-    value: "Category" | "Project"
-}
-
-const ModeIbj: ModeType[] = [
-    {
-        label: "دسته بندی",
-        value: "Category"
-    },
-    {
-        label: "پروژه",
-        value: "Project"
-    }
-]
 
 
 const searchInput = ref<GetReportDataHoursClassifiedInputType>({
@@ -79,9 +67,10 @@ const searchInput = ref<GetReportDataHoursClassifiedInputType>({
     }
 })
 
+
 export type GetReportDataHoursClassifiedInputType = {
-    operation: "sum" | "avg",
-    mode: "Category" | "Project",
+    operation: string,
+    mode: string,
     unit: number,
     userId: string,
     duration: DateRange
@@ -175,6 +164,17 @@ async function getReportDataByFilter(startData: string, endDate: string) {
 
 }
 
+
+function convertMode(category: string) {
+    let convertedCategory = ""
+    if (category == "پروژه") {
+        convertedCategory = "Project"
+    }
+    else if (category == "دسته بندی") {
+        convertedCategory = "Category"
+    }
+    return convertedCategory
+}
 function getReportTotalHours(report) {
     let totalHoursPerMinuts = 0
     for (const item of report.itemList) {
@@ -221,24 +221,19 @@ async function getWorkHoursClassifiedReport() {
 
     const { duration: { endDate, startDate }, mode, unit, operation } = searchInput.value
 
+    searchInput.value.mode = convertMode(mode) || searchInput.value.mode
+
+
+
     const { data: reportWorkHoursDataClassified } = await fetchService.report.getWorkHoursClassifiedReport({
-        where: {
-            mode: mode,
-            unit: unit,
-            operation: operation,
-            userId: user.value.userId,
-            duration: {
-                startDate: startDate,
-                endDate: endDate
-            }
-        }
+        where: searchInput.value
     })
 
     const mapedData = await mapReportClassifiedData(reportWorkHoursDataClassified.data, startDate, endDate)
+
     return mapedData
 
 }
-
 
 async function mapReportClassifiedData(data, startDate, endDate) {
     const series = []
@@ -288,6 +283,7 @@ async function mapReportClassifiedData(data, startDate, endDate) {
         }
     }
 
+
     return series
 }
 export function readReport() {
@@ -298,6 +294,6 @@ export function readReport() {
         getReportDataByFilter,
         GetReportDataPagination,
         allReportNumber,
-        searchInput
+        searchInput,
     }
 }
