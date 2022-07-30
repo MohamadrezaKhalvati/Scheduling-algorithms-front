@@ -76,7 +76,6 @@ export default defineComponent({
             pagination.value.rowsPerPage = rowsPerPage
             pagination.value.sortBy = sortBy
             pagination.value.descending = descending
-            console.log(reportOptions.value)
 
             pagination.value.rowsNumber = allReportNumber.value
             loading.value = false

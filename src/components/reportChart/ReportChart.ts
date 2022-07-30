@@ -130,6 +130,7 @@ export default defineComponent({
             reportChartData.value = await getWorkHoursClassifiedReport()
             mapReportChartSeries(reportChartData.value)
             apexChartOptions.value.series = reportChartData.value
+
             window["ApexCharts"].exec("reportChartId", "updateOptions", apexChartOptions.value)
 
         })
@@ -140,19 +141,23 @@ export default defineComponent({
         })
 
         async function getReportDataWithFilter() {
+            apexChartOptions.value.series = []
+            apexChartOptions.value.xaxis.categories = []
+
             searchInput.value.mode = category.value || searchInput.value.mode
             searchInput.value.unit = unit.value || searchInput.value.unit
-            searchInput.value.duration.startDate = moment().add(-(setEndDate(searchInput.value.unit)), "days").format("YYYY-MM-DD")
+            searchInput.value.duration.startDate = moment().add(-(searchInput.value.unit * 7), "days").format("YYYY-MM-DD")
             searchInput.value.duration.endDate = moment().add(-1, "days").format("YYYY-MM-DD")
+
 
             reportChartData.value = await getWorkHoursClassifiedReport()
 
             mapReportChartSeries(reportChartData.value)
-            console.log(reportChartData.value)
+            apexChartOptions.value.series = reportChartData.value
 
             window["ApexCharts"].exec("reportChartId", "updateOptions", apexChartOptions.value)
         }
-
+        // 
         function mapReportChartSeries(reportChartData) {
             const buffTime = ref(searchInput.value.duration.endDate)
 
@@ -170,32 +175,57 @@ export default defineComponent({
                     )
                     buffTime.value = moment(buffTime.value).add(-searchInput.value.unit, "days").format("YYYY-MM-DD")
                 }
-                console.log(series)
 
                 apexChartOptions.value.xaxis.categories = series.reverse()
 
             }
         }
 
-        function setEndDate(unit: number) {
-            let number = 1
-            if (unit == 1) {
-                number = 7
-            } else if (unit == 7) {
-                number = 28
-            } else if (unit == 30) {
-                number = 90
+        async function nextPage() {
+            apexChartOptions.value.series = []
+            apexChartOptions.value.xaxis.categories = []
+            searchInput.value.duration.startDate = moment(searchInput.value.duration.startDate).add(7, "days").format("YYYY-MM-DD")
+            searchInput.value.duration.endDate = moment(searchInput.value.duration.endDate).add(7, "days").format("YYYY-MM-DD")
+
+            reportChartData.value = await getWorkHoursClassifiedReport()
+            mapReportChartSeries(reportChartData.value)
+
+            if (Object.keys(reportChartData.value).length > 0) {
+                apexChartOptions.value.series = reportChartData.value
+            } else {
+                apexChartOptions.value.series = [{ name: "", data: [] }]
             }
-            return number
+
+            window["ApexCharts"].exec("reportChartId", "updateOptions", apexChartOptions.value)
+
+
         }
+        async function previousPage() {
+            apexChartOptions.value.series = []
+            apexChartOptions.value.xaxis.categories = []
+            searchInput.value.duration.startDate = moment(searchInput.value.duration.startDate).add(-7, "days").format("YYYY-MM-DD")
+            searchInput.value.duration.endDate = moment(searchInput.value.duration.endDate).add(-7, "days").format("YYYY-MM-DD")
+
+            reportChartData.value = await getWorkHoursClassifiedReport()
+            mapReportChartSeries(reportChartData.value)
+            if (Object.keys(reportChartData.value).length > 0) {
+                apexChartOptions.value.series = reportChartData.value
+            } else {
+                apexChartOptions.value.series = [{ name: "", data: [] }]
+            }
+
+            window["ApexCharts"].exec("reportChartId", "updateOptions", apexChartOptions.value)
+        }
+
         return {
             unitOptions,
             apexChartOptions,
             categoryOptions,
             category,
             unit,
-            getReportDataWithFilter
-
+            getReportDataWithFilter,
+            nextPage,
+            previousPage
         }
     }
 

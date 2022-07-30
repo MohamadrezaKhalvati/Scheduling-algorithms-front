@@ -283,6 +283,17 @@ async function mapReportClassifiedData(data, startDate, endDate) {
         }
     }
 
+    for (const object of series) {
+        const avg = []
+        for (let i = 0; i < Object.keys(object.data).length; i = i + searchInput.value.unit) {
+            let sum = 0
+            for (let j = i; j < i + searchInput.value.unit; j++) {
+                sum = sum + object.data[j]
+            }
+            avg.push(sum)
+        }
+        object.data = avg
+    }
 
     return series
 }

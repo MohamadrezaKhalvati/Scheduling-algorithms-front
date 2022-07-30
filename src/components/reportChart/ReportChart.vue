@@ -10,11 +10,13 @@
         <q-btn round
           class="q-btn q-btn-item non-selectable no-outline q-btn--outline q-btn--round text-primary q-btn--actionable q-focusable q-hoverable q-btn--dense mx-1 buttons button-size"
           color="#282f46"
-          icon="keyboard_arrow_right" />
+          icon="keyboard_arrow_right"
+          @click="nextPage" />
         <q-btn round
           class="q-btn q-btn-item non-selectable no-outline q-btn--outline q-btn--round text-primary q-btn--actionable q-focusable q-hoverable q-btn--dense mx-1 buttons button-size"
           color="#282f46"
-          icon="keyboard_arrow_left" />
+          icon="keyboard_arrow_left"
+          @click="previousPage" />
 
       </div>
     </div>
