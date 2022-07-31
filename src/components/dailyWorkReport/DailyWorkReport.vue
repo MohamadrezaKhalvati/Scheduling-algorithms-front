@@ -26,6 +26,14 @@
         virtual-scroll
         @request="getReportDataWithPagination">
 
+        <template #no-data="{ icon, filter }">
+          <div class="full-width column flex-center  m-2 p-2 no-data  ">
+
+            <q-icon size="2em"
+              :name="filter ? 'filter_b_and_w' : icon" />
+            <div>هیچ دیتایی برای نمایش موجود نمی باشد.</div>
+          </div>
+        </template>
         <template #body="props">
           <q-tr :props="props">
             <q-td key="number"

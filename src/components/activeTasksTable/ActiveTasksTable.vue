@@ -21,17 +21,16 @@
         :columns="columns"
         row-key="name"
         :loading="loading"
+        loading-color="white"
         binary-state-sort
         @request="getTaskWithPagination">
 
-        <template>
-          <div v-if="noData"
-            class="full-width row flex-center text-accent q-gutter-sm">
+        <template #no-data="{ icon, filter }">
+          <div class="full-width column flex-center  m-2 p-2 full-height ">
 
-            <span>
-              Well this is sad...
-            </span>
-
+            <q-icon size="2em"
+              :name="filter ? 'filter_b_and_w' : icon" />
+            <div>هیچ دیتایی برای نمایش موجود نمی باشد.</div>
           </div>
         </template>
 
