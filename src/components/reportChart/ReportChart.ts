@@ -35,11 +35,7 @@ export default defineComponent({
             responsive: [{
                 breakpoint: 480,
                 options: {
-                    legend: {
-                        position: "buttom",
-                        offsetX: -10,
-                        offsetY: 0
-                    }
+
                 }
             }],
             dataLabels: {

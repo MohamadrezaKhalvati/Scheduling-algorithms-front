@@ -25,7 +25,7 @@ export default defineComponent({
             getTaskDataPagination,
             alltaskNumber
         } = readTask()
-
+        const noData = ref(true)
         const { user } = userInformation()
         const activityTask = ref<TaskModel[]>()
         const filter = ref(false)
@@ -87,6 +87,7 @@ export default defineComponent({
 
         watch(() => user.value.userId, async () => {
             activityTask.value = await getReadTaskData()
+            noData.value = false
             categoryOptions.value = await getCategoryName()
             providedOptions.value = await getProfileName()
         })
@@ -110,7 +111,9 @@ export default defineComponent({
             }
 
             const taskData = await getTaskDataPagination(searchInput)
-
+            if (!taskData) {
+                noData.value = true
+            }
             activityTask.value = taskData
 
             pagination.value.page = page
@@ -136,6 +139,7 @@ export default defineComponent({
             providedOptions,
             pagination,
             taskName,
+            noData,
             loading,
             getTaskDaTaByfilterr,
             getTaskWithPagination

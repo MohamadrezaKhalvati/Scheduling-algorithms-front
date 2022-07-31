@@ -190,7 +190,8 @@ async function getReportWorkHours() {
     const returnReportData = []
     const chartLabelTimeData = []
     const endDate = moment().add(-2, "days").format("YYYY-MM-DD")
-    const startDate = moment().add(1, "days").add(-1, "months").format("YYYY-MM-DD")
+    const startDate = moment().add(-29, "days").format("YYYY-MM-DD")
+
 
     const { data: reportWorkHoursData } = await fetchService.report.getWorkHoursReport({
         where: {
@@ -209,6 +210,7 @@ async function getReportWorkHours() {
 
         returnReportData.push(Math.round(report.value))
         chartLabelTimeData.push((Math.round(report.value) / 60).toFixed(2))
+
     })
     return {
         returnReportData,

@@ -3,10 +3,13 @@
 
     <div class="p-2 text-primary huge-title between">
       <span style="color: #d0d2d6">جدول گزارش روزانه</span>
-      <q-icon name="search"
-        style="color: #d0d2d6"
-        class="img"
-        @click="filter = true" />
+      <q-btn class="aaa q-btn q-btn-item non-selectable no-outline q-btn--flat q-btn--round q-btn--actionable q-focusable q-hoverable q-btn--dense ">
+        <q-icon name="search"
+          style="color: #d0d2d6"
+          class="img"
+          @click="filter = true" />
+      </q-btn>
+
     </div>
 
     <div class="q-pa-md">

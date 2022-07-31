@@ -7,7 +7,7 @@
       <apexchart type="line"
         height="169"
         :options="chartOptions"
-        :series="series" />
+        :series="chartOptions.series" />
     </div>
   </q-card>
 </template>

@@ -27,8 +27,6 @@
 .layout {
   display: flex;
   background-color: #282f46;
-  height: 50px;
-  border-radius: 8px;
 }
 
 .toolbar {

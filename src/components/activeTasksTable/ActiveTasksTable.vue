@@ -2,10 +2,13 @@
   <q-card class="active-tasks ">
     <div class="p-2 text-primary huge-title between">
       <span style="color : #d0d4d6">جدول تسک های فعال</span>
-      <q-icon name="search"
-        style="color : #d0d4d6"
-        class="img"
-        @click="filter = true" />
+      <q-btn class=" q-btn q-btn-item non-selectable no-outline q-btn--flat q-btn--round q-btn--actionable q-focusable q-hoverable q-btn--dense ">
+        <q-icon name="search"
+          style="color : #d0d4d6"
+          class="img"
+          @click="filter = true" />
+
+      </q-btn>
     </div>
 
     <div class="q-pa-md">
@@ -20,6 +23,17 @@
         :loading="loading"
         binary-state-sort
         @request="getTaskWithPagination">
+
+        <template>
+          <div v-if="noData"
+            class="full-width row flex-center text-accent q-gutter-sm">
+
+            <span>
+              Well this is sad...
+            </span>
+
+          </div>
+        </template>
 
         <template #body="props">
           <q-tr :props="props">
@@ -240,6 +254,9 @@
   justify-content: center;
 }
 
+.aaa {
+  padding: 0px;
+}
 .button {
   background-color: $purple-4;
   font-size: 14px;
@@ -261,7 +278,7 @@
 }
 
 .img {
-  font-size: 22.28px;
+  font-size: 21.28px;
 }
 .table {
   background-color: #282f46;

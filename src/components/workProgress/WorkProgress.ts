@@ -15,13 +15,14 @@ export default defineComponent({
         const { getReportWorkHours } = readReport()
         const { user } = userInformation()
         const chartLabelData = ref([])
-        const series = ref([{
-            name: "series1",
-            data: []
-        }])
 
         const chartOptions = ref({
+            series: [{
+                name: "series1",
+                data: [2, 3, 4, 5]
+            }],
             chart: {
+                id: "workProgressId",
                 type: "line",
                 zoom: {
                     enabled: false
@@ -107,12 +108,14 @@ export default defineComponent({
 
         watch(() => user.value.userId, async () => {
             const { returnReportData, chartLabelTimeData } = await getReportWorkHours()
-            series.value[0].data = chartLabelTimeData
+            chartOptions.value.series[0].data = chartLabelTimeData
+
+            window["ApexCharts"].exec("workProgressId", "updateOptions", chartOptions.value)
+
 
         })
 
         return {
-            series,
             chartOptions
         }
 
