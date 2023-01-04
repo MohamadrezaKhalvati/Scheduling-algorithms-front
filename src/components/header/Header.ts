@@ -1,15 +1,11 @@
-import { useDrawer } from "src/composition/useDrawer"
-import { userInformation } from "src/composition/useUserInformation"
-import { defineComponent } from "vue"
+import { useDrawer } from "src/composition/useDrawer";
+import { defineComponent } from "vue";
 
 export default defineComponent({
-    setup() {
-        const { changeDrawerValue } = useDrawer()
-        const { user } = userInformation()
-        return {
-            changeDrawerValue,
-            user
-        }
-    }
-
-})
+  setup() {
+    const { changeDrawerValue } = useDrawer();
+    return {
+      changeDrawerValue,
+    };
+  },
+});

@@ -1,134 +1,72 @@
 <template>
   <div class="root .col-1 ">
-    <q-drawer v-model="drawer"
-      show-if-above
-      :mini="!drawer || miniState"
-      :width="200"
-      :breakpoint="500"
-      bordered
-      style="background-color : #282f46 "
-      @click.capture="changeMiniStateValue">
+    <q-drawer v-model="drawer" show-if-above :mini="!drawer || miniState" :width="200" :breakpoint="500" bordered
+      style="background-color : #282f46 " @click.capture="changeMiniStateValue">
 
       <div class="drawer-header">
-        <span v-if="!miniState"
-          class="shanks-header-label">
-          Shanks
+        <span v-if="!miniState" class="shanks-header-label">
+          scheduling algorithms
         </span>
 
-        <q-icon :style="[!miniState ? {'transform': 'rotate(180deg)' } : null]"
-          name="arrow_back_ios"
-          class="arrow-icon"
-          @click="miniState = true" />
+        <q-icon :style="[!miniState ? { 'transform': 'rotate(180deg)' } : null]" name="arrow_back_ios"
+          class="arrow-icon" @click="miniState = true" />
       </div>
 
       <q-list padding>
 
         <div>
-          <q-item v-ripple
-            clickable>
+          <q-item v-ripple clickable>
             <q-item-section avatar>
-              <q-icon name="dashboard"
-                color="white" />
+              <q-icon name="dashboard" color="white" />
             </q-item-section>
 
             <q-item-section class="section-name">
-              صفحه اصلی
+              FCFS
             </q-item-section>
           </q-item>
         </div>
 
-        <div>
-          <q-item v-ripple
-            clickable>
-            <q-item-section avatar>
-              <q-icon name="pending_actions"
-                color="white" />
-            </q-item-section>
-
-            <q-item-section class="section-name">
-              گزارش
-            </q-item-section>
-          </q-item>
-        </div>
-
-        <p v-if="miniState"
-          class="dot-line">
+        <p v-if="miniState" class="dot-line">
           . . . .
         </p>
-        <p v-if="!miniState"
-          class="category-label">
-          تسک ها
-        </p>
-
         <div>
-          <q-item v-ripple
-            clickable>
+          <q-item v-ripple clickable>
             <q-item-section avatar>
-              <q-icon name="task_alt"
-                color="white" />
+              <q-icon name="pending_actions" color="white" />
             </q-item-section>
 
             <q-item-section class="section-name">
-              تسک ها
+              SJF
             </q-item-section>
           </q-item>
         </div>
 
-        <div>
-          <q-item v-ripple
-            clickable>
-            <q-item-section avatar>
-              <q-icon name="sell"
-                color="white" />
-            </q-item-section>
-
-            <q-item-section class="section-name">
-              تگ ها
-            </q-item-section>
-          </q-item>
-        </div>
-
-        <p v-if="miniState"
-          class="dot-line">
+        <p v-if="miniState" class="dot-line">
           . . . .
         </p>
-        <p v-if="!miniState"
-          class="category-label">
-          پروژه ها
-        </p>
 
         <div>
-          <q-item v-ripple
-            clickable>
+          <q-item v-ripple clickable>
             <q-item-section avatar>
-              <q-icon name="work"
-                color="white" />
+              <q-icon name="dashboard" color="white" />
             </q-item-section>
 
             <q-item-section class="section-name">
-              پروژه ها
+              SRTF
             </q-item-section>
           </q-item>
         </div>
 
-        <div>
-          <q-item v-ripple
-            clickable>
-            <q-item-section avatar>
-              <q-icon name="sell"
-                color="white" />
-            </q-item-section>
 
-            <q-item-section class="section-name">
-              تگ ها
-            </q-item-section>
-          </q-item>
-        </div>
 
-        <p v-if="!miniState"
-          class="category-label">
-          مدیریت
-        </p>
+
+
+
+
+
+
+
+
 
       </q-list>
 
@@ -142,7 +80,7 @@
 <style lang="scss" scoped>
 @font-face {
   font-family: "Vazir";
-  src: url("../../../public/fonts/Vazir.woff") format("woff");
+  src: url("/fonts/Vazir.woff") format("woff");
 }
 
 .root {
@@ -164,7 +102,8 @@
 }
 
 .shanks-header-label {
-  font-size: 1.8rem;
+  margin: 10px 0px 10px 0px;
+  font-size: 0.8rem;
 }
 
 .arrow-icon {

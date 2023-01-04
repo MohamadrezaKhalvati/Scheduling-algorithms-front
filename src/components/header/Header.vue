@@ -2,18 +2,11 @@
   <div class="q-pa-md">
     <q-header class="layout">
       <q-toolbar class="toolbar">
-        <q-btn flat
-          round
-          dense
-          icon="menu"
-          class="q-mr-sm"
-          @click="changeDrawerValue" />
-        <q-avatar>
-          <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
-        </q-avatar>
+        <q-btn flat round dense icon="menu" class="q-mr-sm" @click="changeDrawerValue" />
+
 
         <q-toolbar-title style="font-size : 15px">
-          {{ user.fullname }}
+          Mohamadreza khalvati
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
