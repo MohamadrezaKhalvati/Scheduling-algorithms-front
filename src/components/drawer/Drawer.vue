@@ -17,7 +17,7 @@
         <div>
           <q-item v-ripple clickable>
             <q-item-section avatar>
-              <q-icon name="dashboard" color="white" />
+              <q-icon name="looks_one" color="white" />
             </q-item-section>
 
             <q-item-section class="section-name">
@@ -32,7 +32,7 @@
         <div>
           <q-item v-ripple clickable>
             <q-item-section avatar>
-              <q-icon name="pending_actions" color="white" />
+              <q-icon name="looks_two" color="white" />
             </q-item-section>
 
             <q-item-section class="section-name">
@@ -48,7 +48,7 @@
         <div>
           <q-item v-ripple clickable>
             <q-item-section avatar>
-              <q-icon name="dashboard" color="white" />
+              <q-icon name="looks_3" color="white" />
             </q-item-section>
 
             <q-item-section class="section-name">
