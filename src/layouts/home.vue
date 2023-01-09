@@ -4,7 +4,15 @@
     <Header />
 
 
-    <q-page-container style="padding-top:35px" />
+    <q-page-container style="padding-top:35px">
+
+      <q-page>
+        <div>
+          <FcfsAlgorithms />
+
+        </div>
+      </q-page>
+    </q-page-container>
 
   </q-layout>
 
