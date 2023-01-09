@@ -1,18 +1,21 @@
-import { useDrawer } from "src/composition/useDrawer"
-import { defineComponent } from "vue"
+import { useDrawer } from "src/composition/useDrawer";
+import { defineComponent, ref } from "vue";
+
+type NavigationLinkType = {
+  label: string;
+  icon: string;
+  link: string;
+};
 
 export default defineComponent({
+  setup() {
+    const { changeMiniStateValue, miniState, drawer } = useDrawer();
+    const navigationLinks = ref<NavigationLinkType[]>([]);
 
-
-    setup() {
-        const { changeMiniStateValue, miniState, drawer } = useDrawer()
-
-        return {
-            changeMiniStateValue,
-            miniState,
-            drawer
-        }
-    }
-
-})
-
+    return {
+      changeMiniStateValue,
+      miniState,
+      drawer,
+    };
+  },
+});

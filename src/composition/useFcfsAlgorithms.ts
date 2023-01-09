@@ -50,5 +50,9 @@ function findavgTime(processes, n, bt) {
 findavgTime(processes, n, burst_time);
 
 export default function useFcfs() {
-  return {};
+  return {
+    findTurnAroundTime,
+    findWaitingTime,
+    findavgTime,
+  };
 }
