@@ -1,5 +1,5 @@
 <template>
-  <q-card class="column no-shadow no-wrap" style="background-color :#227C70">
+  <q-card class="column no-shadow no-wrap" style="background-color :#d0d2d6">
     <slot name="header">
       <div>
         <div v-if="containerConfig.title" class="header text-left mr-2">

@@ -1,6 +1,7 @@
 <template>
-  <FormContainer :container="container" :form="form">
-    <span>asdas</span>
+  <FormContainer :form="form" :container="container" @submit="submit">
+
+    <span style="background-color : antiquewhite">asdasdada</span>
   </FormContainer>
 </template>
 
