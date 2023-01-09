@@ -1,11 +1,10 @@
 <template>
-  <q-card class="column no-shadow no-wrap">
+  <q-card class="column no-shadow no-wrap" style="background-color :#227C70">
     <slot name="header">
       <div>
-        <div v-if="containerConfig.title"
-          class="header text-left mr-2">
+        <div v-if="containerConfig.title" class="header text-left mr-2">
           <span style="color : black">
-          {{ containerConfig.title }}
+            {{ containerConfig.title }}
           </span>
         </div>
 
@@ -13,25 +12,16 @@
       </div>
     </slot>
 
-    <FormMaker ref="formMaker"
-      :form="form"
-      class="column p-1 full-width no-wrap col"
-      v-bind="$attrs"
+    <FormMaker ref="formMaker" :form="form" class="column p-1 full-width no-wrap col" v-bind="$attrs"
       :loading="containerConfig.loading">
 
-      <template v-for="(_, name) in $slots"
-        #[name]="slotData">
-        <slot :name="name"
-          v-bind="slotData || {}" />
+      <template v-for="(_, name) in $slots" #[name]="slotData">
+        <slot :name="name" v-bind="slotData || {}" />
       </template>
 
       <template #button>
         <div class="center mt-3">
-          <q-btn :loading="containerConfig.loading"
-            label="ثبت"
-            type="submit"
-            text-color="white"
-            color="primary" />
+          <q-btn :loading="containerConfig.loading" label="ثبت" type="submit" text-color="white" color="primary" />
         </div>
       </template>
     </FormMaker>

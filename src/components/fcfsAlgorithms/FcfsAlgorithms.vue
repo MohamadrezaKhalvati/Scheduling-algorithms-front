@@ -1,5 +1,5 @@
 <template>
-  <FormContainer :form="form">
+  <FormContainer :container="container" :form="form">
     <span>asdas</span>
   </FormContainer>
 </template>

@@ -1,7 +1,8 @@
 import FormContainer from "src/components/core/form/FormContainer/FormContainer.vue"
 import { Validators } from "src/utils/validator"
-import { defineComponent, ref } from "vue"
+import { defineComponent, Ref, ref } from "vue"
 import { Field, Form } from "../core/form"
+import { ContainerData } from "../core/form/FormContainer/FormContainer"
 
 export default defineComponent({
     components: {
@@ -11,6 +12,11 @@ export default defineComponent({
     setup() {
         const stringOptions = []
         const filterOptions = ref()
+
+        const container: Ref<ContainerData> = ref({
+            title: "Fcfs algorithm input",
+            loading: false,
+        })
 
         const form = new Form({
             processNames: {
@@ -57,6 +63,7 @@ export default defineComponent({
 
         return {
             form,
+            container,
         }
     },
 })
