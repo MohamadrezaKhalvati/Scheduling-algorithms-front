@@ -1,7 +1,18 @@
 <template>
   <FormContainer :form="form" :container="container" @submit="submit">
 
-    <span style="background-color : antiquewhite">asdasdada</span>
+    <template #button>
+
+      <div class="row  button-zone">
+        <div>
+          <q-btn :loading="container.loading" label="submit" type="submit" color="primary" @click="submit" />
+        </div>
+        <div>
+          <q-btn :loading="container.loading" label="add another process" type="submit" color="primary"
+            @click="submit" />
+        </div>
+      </div>
+    </template>
   </FormContainer>
 </template>
 
@@ -10,5 +21,8 @@
 
 
 <style scoped lang="scss">
-
+.button-zone {
+  display: flex;
+  justify-content: center;
+}
 </style>

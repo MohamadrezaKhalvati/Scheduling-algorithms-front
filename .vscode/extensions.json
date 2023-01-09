@@ -13,7 +13,8 @@
     "coenraads.bracket-pair-colorizer",
     "kisstkondoros.vscode-gutter-preview",
     "wayou.vscode-todo-highlight",
-    "mrmlnc.vscode-scss"
+    "mrmlnc.vscode-scss",
+    "Vue.volar", "Vue.vscode-typescript-vue-plugin"
   ],
   "unwantedRecommendations": [
     "hookyqr.beautify",
