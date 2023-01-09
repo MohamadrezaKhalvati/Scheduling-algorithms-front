@@ -3,12 +3,8 @@
 
     <Header />
 
-    <Drawer />
 
-    <q-page-container style="padding-top:35px">
-
-
-    </q-page-container>
+    <q-page-container style="padding-top:35px" />
 
   </q-layout>
 
