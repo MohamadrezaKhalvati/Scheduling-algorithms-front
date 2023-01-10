@@ -9,32 +9,14 @@ export default defineComponent({
     },
 
     setup() {
-        const stringOptions = []
-        const filterOptions = ref()
+        const arrivatlTimeData = ref([])
+        const burstTimeData = ref([])
+        const processNameData = ref([])
 
         const container: Ref<ContainerData> = ref({
             title: "Fcfs algorithm input",
             loading: false,
         })
-
-        // const form = new Form({
-        //     processNames: {
-        //         component: Field.Select,
-        //         options: [],
-        //         icon: "tag",
-        //         label: "process name",
-        //         class: "col-md-6 col-12",
-        //         rules: [Validators.required],
-        //         useInput: true,
-        //         useChips: true,
-        //         multiple: true,
-        //         inputDebounce: 0,
-        //         events: {
-        //             "new-value": createValue,
-        //             filter: filterFn,
-        //         },
-        //     },
-        // })
 
         const form = new Form({
             processName: {
@@ -64,10 +46,20 @@ export default defineComponent({
             console.log("submit clicked")
         }
 
+        function addAnotherValue() {
+            const formVal = form.modelValue.value
+            arrivatlTimeData.value.push(parseInt(formVal.arrivalTime))
+            processNameData.value.push(formVal.processName)
+            burstTimeData.value.push(parseInt(formVal.burstTime))
+            console.log(arrivatlTimeData.value)
+            console.log(burstTimeData.value)
+            console.log(processNameData.value)
+        }
         return {
             form,
             container,
             submit,
+            addAnotherValue,
         }
     },
 })

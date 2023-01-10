@@ -3,14 +3,13 @@
 
     <template #button>
 
-      <div class="row  button-zone">
-        <div>
-          <q-btn :loading="container.loading" label="submit" type="submit" color="primary" @click="submit" />
-        </div>
-        <div>
-          <q-btn :loading="container.loading" label="add another process" type="submit" color="primary"
-            @click="submit" />
-        </div>
+      <div>
+        <q-btn :loading="container.loading" label="submit" dense type="submit" color="primary" class="button-zone"
+          @click="submit" />
+      </div>
+      <div>
+        <q-btn :loading="container.loading" label="add another process" dense type="submit" color="primary" center
+          @click="addAnotherValue" />
       </div>
     </template>
   </FormContainer>
@@ -24,5 +23,6 @@
 .button-zone {
   display: flex;
   justify-content: center;
+  background-color: red;
 }
 </style>
