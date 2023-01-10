@@ -10,14 +10,24 @@ export type dataType = {
 }
 
 const inputData = ref([])
+const avgResponseTimeResult = ref()
+const avgWaitingTimeResult = ref()
 
 function waitingTime() {
-    inputData.value.forEach((element: dataType) => {
-        element.waitingTime = element.serviceTime - element.arrivalTime
-    })
+    if (inputData.value.length == 1) {
+        inputData.value[0].waitingTime = 0
+    } else {
+        let sum = 0
+        for (let i = 0; i < inputData.value.length; i++) {
+            sum += inputData.value[i].executeTime
+        }
+        inputData.value[inputData.value.length - 1].waitingTime =
+            sum - inputData.value[inputData.value.length - 1].arrivalTime
+    }
 }
 
 function avgWaitingTime() {
+    generateServiceTime()
     let sum = 0
     inputData.value.forEach((element: dataType) => {
         sum = sum + element.waitingTime
@@ -27,34 +37,53 @@ function avgWaitingTime() {
 }
 
 function resposneTime() {
-    // inputData.value.forEach((element: dataType) =>{
-    //   element.responseTime =
-    // })
+    inputData.value.forEach((element: dataType) => {
+        element.responseTime = element.serviceTime
+    })
 }
 
+function avgResponseTime() {
+    let avg = 0
+    inputData.value.forEach((element: dataType) => {
+        avg = avg + element.responseTime
+    })
+
+    const avgResponseTime = avg / inputData.value.length
+    return avgResponseTime
+}
 function generateServiceTime() {
-    console.log(inputData.value)
-    let i, j
-    for (i = 0; i <= inputData.value.length; i++) {
+    for (let i = 0; i < inputData.value.length; i++) {
         if (i == 0) {
-            inputData.value[i].serviceTime = 0
+            inputData.value[i]["serviceTime"] = 0
         } else if (i == 1) {
-            inputData.value[1].serviceTime = inputData.value[0].executeTime
+            inputData.value[i]["serviceTime"] =
+                inputData.value[0]["executeTime"]
         } else {
             let sum = 0
-            for (j = i - 1; j >= 0; j--) {
+            for (let j = i - 1; j >= 0; j--) {
                 sum = sum + inputData.value[j].executeTime
             }
-            inputData.value[i].serviceTime = sum
+            inputData.value[i]["serviceTime"] = sum
         }
     }
-    console.log(inputData.value)
+}
+
+function initialAll() {
+    resposneTime()
+    waitingTime()
+    avgResponseTimeResult.value = avgResponseTime()
+    avgWaitingTimeResult.value = avgWaitingTime()
 }
 export default function useFcfs() {
     return {
-        waitingTime,
-        avgWaitingTime,
+        initialAll,
         generateServiceTime,
+        avgResponseTime,
+        resposneTime,
+        avgWaitingTime,
+        waitingTime,
         inputData,
+        avgResponseTimeResult,
+        avgWaitingTimeResult,
     }
 }

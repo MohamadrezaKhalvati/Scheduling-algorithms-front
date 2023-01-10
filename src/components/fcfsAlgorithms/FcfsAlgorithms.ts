@@ -12,7 +12,7 @@ export default defineComponent({
     },
 
     setup() {
-        const { waitingTime, inputData, generateServiceTime } = useFcfs()
+        const { inputData, initialAll } = useFcfs()
         const container: Ref<ContainerData> = ref({
             title: "Fcfs algorithm input",
             loading: false,
@@ -43,7 +43,7 @@ export default defineComponent({
         })
 
         function submit(e) {
-            generateServiceTime()
+            initialAll()
         }
 
         function addAnotherValue(e) {

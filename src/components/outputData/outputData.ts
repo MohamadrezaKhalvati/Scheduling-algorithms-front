@@ -1,5 +1,5 @@
 import useFcfs from "src/composition/useFcfsAlgorithms"
-import { defineComponent, ref, Ref } from "vue"
+import { defineComponent, ref, Ref, watch } from "vue"
 import TableContainer, {
     TableConfig,
 } from "../core/table/TableContainer/TableContainer.vue"
@@ -10,7 +10,8 @@ export default defineComponent({
         TableContainer,
     },
     setup() {
-        const { processNameData } = useFcfs()
+        const { inputData, avgWaitingTimeResult, avgResponseTimeResult } =
+            useFcfs()
 
         const container: Ref<any> = ref({
             title: "Fcfs algorithm results",
@@ -36,22 +37,23 @@ export default defineComponent({
                     label: "waiting time",
                 },
                 {
-                    key: "responseTime",
+                    key: "serviceTime",
                     label: "response time",
-                },
-                {
-                    key: "AverageWaitingTime",
-                    label: " average waiting time",
-                },
-                {
-                    key: "AverageTurnAroundTime",
-                    label: "average turn around time",
                 },
             ],
         })
+
+        watch(
+            () => avgWaitingTimeResult.value,
+            () => {
+                table.value.rows = inputData.value
+            },
+        )
         return {
             table,
             container,
+            avgWaitingTimeResult,
+            avgResponseTimeResult,
         }
     },
 })

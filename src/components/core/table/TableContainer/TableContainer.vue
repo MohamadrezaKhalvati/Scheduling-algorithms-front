@@ -6,7 +6,7 @@
 
     <div class="body column flex-grow">
       <q-table v-bind="computedAttrs" v-model:selected="internalSelected" v-model:pagination="internalPagination"
-        style="background-color : #696969" :loading="$attrs.loading" class="flex-grow sticky-table no-shadow"
+        style="background-color : #d0d2d6" :loading="$attrs.loading" class="flex-grow sticky-table no-shadow"
         table-header-class="table-header" separator="horizontal" :columns="transformedColumns" v-on="childEvents">
         <template #header-selection="scope">
           <q-checkbox v-model="scope.selected" dense color="primary" />
