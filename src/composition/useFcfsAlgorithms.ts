@@ -1,59 +1,60 @@
 import { ref } from "vue"
 
-const processNameData = ref([])
-
-function findWaitingTime(processes, n, bt, wt) {
-    wt[0] = 0
-
-    for (let i = 1; i < n; i++) {
-        wt[i] = bt[i - 1] + wt[i - 1]
-    }
+export type dataType = {
+    processName: String
+    arrivalTime: number
+    executeTime: number
+    serviceTime?: number
+    waitingTime?: number
+    responseTime?: number
 }
 
-function findTurnAroundTime(processes, n, bt, wt, tat) {
-    for (let i = 0; i < n; i++) {
-        tat[i] = bt[i] + wt[i]
-    }
+const inputData = ref([])
+
+function waitingTime() {
+    inputData.value.forEach((element: dataType) => {
+        element.waitingTime = element.serviceTime - element.arrivalTime
+    })
 }
 
-function findavgTime(processes, n, bt) {
-    const wt = new Array(n),
-        tat = new Array(n)
-    for (let i = 0; i < n; i++) {
-        wt[i] = 0
-        tat[i] = 0
-    }
-    let total_wt = 0,
-        total_tat = 0
-
-    findWaitingTime(processes, n, bt, wt)
-
-    findTurnAroundTime(processes, n, bt, wt, tat)
-
-    document.write(
-        "Processes Burst time Waiting" + " time Turn around time<br>",
-    )
-
-    for (let i = 0; i < n; i++) {
-        total_wt = total_wt + wt[i]
-        total_tat = total_tat + tat[i]
-        document.write("    ", i + 1 + " ")
-        document.write("     " + bt[i] + " ")
-        document.write("     " + wt[i])
-        document.write("     " + tat[i] + "<br>")
-    }
-    const s = total_wt / n
-    const t = Math.floor(total_tat / n)
-    document.write("Average waiting time = " + s)
-    document.write("<br>")
-    document.write("Average turn around time = ", t + " ")
+function avgWaitingTime() {
+    let sum = 0
+    inputData.value.forEach((element: dataType) => {
+        sum = sum + element.waitingTime
+    })
+    const avgWaitingTime = sum / inputData.value.length
+    return avgWaitingTime
 }
 
+function resposneTime() {
+    // inputData.value.forEach((element: dataType) =>{
+    //   element.responseTime =
+    // })
+}
+
+function generateServiceTime() {
+    console.log(inputData.value)
+    let i, j
+    for (i = 0; i <= inputData.value.length; i++) {
+        if (i == 0) {
+            inputData.value[i].serviceTime = 0
+        } else if (i == 1) {
+            inputData.value[1].serviceTime = inputData.value[0].executeTime
+        } else {
+            let sum = 0
+            for (j = i - 1; j >= 0; j--) {
+                sum = sum + inputData.value[j].executeTime
+            }
+            inputData.value[i].serviceTime = sum
+        }
+    }
+    console.log(inputData.value)
+}
 export default function useFcfs() {
     return {
-        findTurnAroundTime,
-        processNameData,
-        findWaitingTime,
-        findavgTime,
+        waitingTime,
+        avgWaitingTime,
+        generateServiceTime,
+        inputData,
     }
 }

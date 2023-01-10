@@ -32,6 +32,14 @@ export default defineComponent({
                     label: "process name",
                 },
                 {
+                    key: "waitingTime",
+                    label: "waiting time",
+                },
+                {
+                    key: "responseTime",
+                    label: "response time",
+                },
+                {
                     key: "AverageWaitingTime",
                     label: " average waiting time",
                 },
