@@ -7,9 +7,13 @@
     <q-page-container style="padding-top:35px">
 
       <q-page>
-        <div>
-          <FcfsAlgorithms />
-
+        <div class="m-1">
+          <div class="col-lg-12 col-mid-6 md-2">
+            <FcfsAlgorithms />
+          </div>
+          <div class="col-lg-12 col-mid-6 mt-2">
+            <outputData />
+          </div>
         </div>
       </q-page>
     </q-page-container>

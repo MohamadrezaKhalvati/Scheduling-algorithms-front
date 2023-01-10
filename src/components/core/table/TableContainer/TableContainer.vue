@@ -5,36 +5,20 @@
     </div>
 
     <div class="body column flex-grow">
-      <q-table v-bind="computedAttrs"
-        v-model:selected="internalSelected"
-        v-model:pagination="internalPagination"
-        :loading="$attrs.loading"
-        class="flex-grow sticky-table no-shadow"
-        table-header-class="table-header"
-        separator="horizontal"
-        :columns="transformedColumns"
-        v-on="childEvents">
+      <q-table v-bind="computedAttrs" v-model:selected="internalSelected" v-model:pagination="internalPagination"
+        style="background-color : #696969" :loading="$attrs.loading" class="flex-grow sticky-table no-shadow"
+        table-header-class="table-header" separator="horizontal" :columns="transformedColumns" v-on="childEvents">
         <template #header-selection="scope">
-          <q-checkbox v-model="scope.selected"
-            dense
-            color="primary" />
+          <q-checkbox v-model="scope.selected" dense color="primary" />
         </template>
 
-        <template v-for="(_, name) in $slots"
-          #[name]="slotData">
-          <slot :name="name"
-            v-bind="slotData"
-            class="table-header" />
+        <template v-for="(_, name) in $slots" #[name]="slotData">
+          <slot :name="name" v-bind="slotData" class="table-header" />
         </template>
 
       </q-table>
 
-      <div v-if="isEmpty"
-        class="column no-data mid center no-wrap ">
-        <img src="/images/empty.svg"
-          class="block no-drag"
-          alt="no data">
-
+      <div v-if="isEmpty" class="column no-data mid center no-wrap " style="background-color : #d0d2d6">
         <div class="mt-3">
           هیچ داده ای برای نمایش وجود ندارد.
         </div>
@@ -47,14 +31,17 @@
 
 <style lang="scss" scoped>
 $header-height: 48px;
+
 .text-left {
   font-size: 12px !important;
   font-weight: 500 !important;
 }
+
 .table-header {
   font-size: 1rem;
   font-weight: 300;
 }
+
 .table-container {
   max-width: 100%;
   max-height: 100%;
@@ -62,7 +49,7 @@ $header-height: 48px;
   border-bottom-right-radius: 8px;
   overflow: hidden;
   position: relative;
-  background-color: var(--front-color);
+  background-color: #d0d2d6;
 
   .sticky-table {
     min-height: 350px;
@@ -71,16 +58,20 @@ $header-height: 48px;
     // essential part to make header sticky
     overflow: auto;
     padding-top: 0 !important;
+
     thead tr th {
       position: sticky;
       z-index: 2;
-    } /* this will be the loading indicator */
+    }
+
+    /* this will be the loading indicator */
     thead tr:last-child th {
       /* height of all previous header rows */
       top: 0px;
     }
+
     thead tr:first-child th {
-      background-color: var(--front-color);
+      background-color: #d0d2d6;
       top: 0;
       font-weight: bold;
     }
@@ -98,7 +89,7 @@ $header-height: 48px;
     left: 0px;
     bottom: 0px;
 
-    & > * {
+    &>* {
       z-index: 4;
     }
 
@@ -112,26 +103,29 @@ $header-height: 48px;
     th {
       font-size: var(--font-size);
     }
+
     th,
     td {
-      border-color: var(--table-border-color);
+      border-color: #d0d2d6;
     }
+
     tbody tr {
       &:nth-child(even) {
-        background-color: var(--front-color);
+        background-color: #d0d2d6;
       }
+
       &:nth-child(odd) {
-        background-color: var(--table-strip-color);
+        background-color: #d0d2d6;
       }
 
       &:hover {
-        background-color: var(--table-strip-color);
+        background-color: #d0d2d6;
       }
     }
   }
 
-  .q-table__container > div:last-child {
-    background: var(--front-color);
+  .q-table__container>div:last-child {
+    background: #d0d2d6;
   }
 }
 </style>

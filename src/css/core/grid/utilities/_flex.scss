@@ -1,0 +1,126 @@
+.start {
+	@include make-row();
+	justify-content: flex-start;
+}
+
+.center {
+	@include make-row();
+	justify-content: center;
+}
+
+.end {
+	@include make-row();
+	justify-content: flex-end;
+}
+
+.top {
+	@include make-row();
+	align-items: flex-start;
+}
+
+.mid {
+	@include make-row();
+	align-items: center;
+}
+
+.bot {
+	@include make-row();
+	align-items: flex-end;
+}
+
+.around {
+	@include make-row();
+	justify-content: space-around;
+}
+
+.between {
+	@include make-row();
+	justify-content: space-between;
+}
+
+.evenly {
+	@include make-row();
+	justify-content: space-evenly;
+}
+
+.baseline {
+	@include make-row();
+	align-items: baseline;
+}
+
+.stretch {
+	@include make-row();
+	align-items: stretch;
+}
+
+@each $breakpoint in $grid-breakpoints {
+	$name: nth($breakpoint, 1);
+	$size: nth($breakpoint, 2);
+
+	@media only screen and (min-width: #{$size}) {
+		.column-#{$name} {
+			flex-direction: column;
+			display: flex;
+		}
+
+		.row-#{$name} {
+			@include make-row();
+			flex-direction: row;
+		}
+
+		.start-#{$name} {
+			@include make-row();
+			justify-content: flex-start;
+		}
+
+		.center-#{$name} {
+			@include make-row();
+			justify-content: center;
+		}
+
+		.end-#{$name} {
+			@include make-row();
+			justify-content: flex-end;
+		}
+
+		.top-#{$name} {
+			@include make-row();
+			align-items: flex-start;
+		}
+
+		.mid-#{$name} {
+			@include make-row();
+			align-items: center;
+		}
+
+		.bot-#{$name} {
+			@include make-row();
+			align-items: flex-end;
+		}
+
+		.around-#{$name} {
+			@include make-row();
+			justify-content: space-around;
+		}
+
+		.between-#{$name} {
+			@include make-row();
+			justify-content: space-between;
+		}
+
+		.evenly-#{$name} {
+			@include make-row();
+			justify-content: space-evenly;
+		}
+
+		.baseline-#{$name} {
+			@include make-row();
+			align-items: baseline;
+		}
+
+		.stretch-#{$name} {
+			@include make-row();
+			align-items: stretch;
+		}
+	}
+}

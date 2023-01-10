@@ -1,0 +1,51 @@
+@import "./grid/variables";
+@import "./quasar/quasar.input";
+@import "src/css/core/_mixin.scss";
+@import 'plyr/dist/plyr.css';
+// @import "~@/plyr/src/sass/plyr.scss";
+// @import "~/../../../node_modules/plyr/src/sass/plyr.scss";
+// Insert Your classes here.
+
+.max-container {
+	max-width: 1400px;
+	margin: auto;
+}
+
+// Animations
+
+.zoom-fade-enter-active,
+.zoom-fade-leave-active {
+	transition: transform 0.35s, opacity 0.28s ease-in-out;
+}
+
+.zoom-fade-enter-from {
+	transform: scale(0.97);
+	opacity: 0;
+}
+
+.zoom-fade-leave-to {
+	transform: scale(1.03);
+	opacity: 0;
+}
+
+// Utility Classes
+
+.mwt {
+	max-width: 40rem;
+}
+
+.relative {
+	position: relative;
+}
+
+.ltr {
+	direction: ltr;
+}
+
+.rtl {
+	direction: rtl;
+}
+
+.clickable {
+	cursor: pointer;
+}

@@ -1,0 +1,161 @@
+@import "./quasar/quasar-variables";
+@import "./grid/variables";
+
+:root {
+	--font-size: 14px;
+	--header-height: 64px;
+
+	body {
+		--text-color: #6e6b7b;
+		--back-color: #f7f7f7;
+		--front-color: #ffffff;
+
+		--drawer-bg: white;
+
+		--table-strip-color: #f7f7f7;
+		--table-border-color: #00000033;
+
+		&.body--dark {
+			--text-color: #EEEEEE;
+			--back-color: #1f1f31;
+			--front-color: #282f46;
+
+			--drawer-bg: #282f46;
+
+			--table-strip-color: #282f46;
+			--table-border-color: #fafafa33;
+		}
+	}
+}
+
+@font-face {
+	font-family: "Vazir";
+	src: url("/fonts/Vazir.woff") format("woff");
+}
+
+@font-face {
+	font-family: "BHoma";
+	src: url("./Fonts/BHoma.woff") format("woff");
+}
+
+body *, html * {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	font-family: "Vazir", sans-serif;
+	font-size: var(--font-size);
+	color: var(--text-color);
+	background-color: var(--back-color) !important;
+	scroll-behavior: smooth;
+}
+
+html,
+body,
+#q-app {
+	direction: rtl;
+}
+
+body {
+	overflow-x: hidden;
+	-webkit-text-size-adjust: 100%;
+	-webkit-font-smoothing: antialiased;
+
+}
+
+img {
+	max-width: 100%;
+	max-width: 100%;
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+a {
+	text-decoration: none;
+	color: unset;
+}
+
+
+// Required Classes
+
+.q-card,
+.card {
+	color: var(--text-color);
+	background: var(--front-color);
+}
+
+.page {
+	height: 1px;
+	min-height: 100%;
+}
+
+.text-texting {
+	color: var(--text-color);
+}
+
+.bg-texting {
+	background-color: var(--text-color);
+}
+
+.english {
+	font-family: Arial;
+	text-align: left;
+}
+
+.english-input {
+	font-family: Arial;
+	text-align: right;
+	direction: ltr;
+}
+
+.normalize {
+	padding-bottom: 20px !important;
+}
+
+.fix-height {
+	height: 1px;
+}
+
+.loading {
+	position: relative;
+	transition: position 1000ms ease;
+
+	&::before {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		background: rgba(59, 59, 59, 0.301);
+		content: "";
+		z-index: 2;
+		cursor: progress;
+	}
+}
+
+
+// Quasar style override
+
+.q-drawer {
+	// drawer should cover header when transitining.
+	z-index: 3200;
+}
+
+.q-date__today {
+	box-shadow: 0 0 2px 0 currentColor;
+}
+
+// .q-timeline__dot {
+// 	right: 0px !important;
+// }
+
+.body--dark {
+	.q-date__header {
+		color: black
+	}
+}
